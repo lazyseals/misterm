@@ -58,8 +58,18 @@ Margins
 }
 
 /************************************
-Bootstrap Select
+Select Form
 ************************************/
 .form-control {
     border: 1px solid #DDDDDD!important;
+}
+
+/************************************
+Card
+************************************/
+.card:hover {
+    transform: translateY(0px)!important;
+    -webkit-transform: translateY(0px)!important;
+    -ms-transform: translateY(0px)!important;
+    -moz-transform: translateY(0px)!important;
 }
