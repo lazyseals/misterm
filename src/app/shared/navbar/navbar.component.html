@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg fixed-top navbar-default" color-on-scroll="500">
     <div class="container-fluid">
         <div class="navbar-translate">
-            <a class="navbar-brand" href="https://www.creative-tim.com">Mister M</a>
+            <a class="navbar-brand" href="#" [routerLink]="['/']" routerLinkActive="router-link-active">Mister M</a>
             <button class="navbar-toggler navbar-burger" type="button" data-toggle="collapse"
                 data-target="#navbarToggler" aria-controls="navbarTogglerDemo02" aria-expanded="false"
                 aria-label="Toggle navigation" (click)="sidebarToggle()">
@@ -15,37 +15,48 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <div ngbDropdown class="d-inline-block dropdown">
-                        <a ngbDropdownToggle class="btn btn btn-lg btn-neutral btn-round" id="proteine"
-                            href="#">Proteine</a>
+                        <button ngbDropdownToggle class="btn btn btn-lg btn-neutral btn-round"
+                            id="proteine">Proteine</button>
                         <div ngbDropdownMenu aria-labelledby="proteine" class="dropdown-primary" style="width: 800px">
                             <div class="row mb-3">
                                 <div class="col-xl-3 column">
-                                    <h3><a href="#"
+                                    <h3><a href="#" [routerLink]="['/category', 'Milchproteine']"
                                             class="submenu-header btn btn-neutral btn-round my-0">Milchproteine</a></h3>
                                     <ul class="submenu pl-1">
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Whey Protein</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Casein Protein</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Protein Mischungen</a>
+                                        <li><a href="#" [routerLink]="['/category', 'Whey Protein']"
+                                                class="btn btn-neutral btn-round my-0">Whey Protein</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Casein Protein']"
+                                                class="btn btn-neutral btn-round my-0">Casein Protein</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Protein Mischungen']"
+                                                class="btn btn-neutral btn-round my-0">Protein Mischungen</a>
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="col-xl-3 column">
-                                    <h3><a href="#" class="submenu-header btn btn-neutral btn-round my-0">Pflanzliches
+                                    <h3><a href="#" [routerLink]="['/category', 'Pflanzliches Protein']"
+                                            class="submenu-header btn btn-neutral btn-round my-0">Pflanzliches
                                             Protein</a></h3>
                                     <ul class="submenu pl-1">
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Sojaprotein</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Reisprotein</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Erbsenprotein</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Veganes Protein</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Superfood Protein</a>
+                                        <li><a href="#" [routerLink]="['/category', 'Sojaprotein']"
+                                                class="btn btn-neutral btn-round my-0">Sojaprotein</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Reisprotein']"
+                                                class="btn btn-neutral btn-round my-0">Reisprotein</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Erbsenprotein']"
+                                                class="btn btn-neutral btn-round my-0">Erbsenprotein</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Veganes Protein']"
+                                                class="btn btn-neutral btn-round my-0">Veganes Protein</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Superfood Protein']"
+                                                class="btn btn-neutral btn-round my-0">Superfood Protein</a>
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="col-xl-3 column">
-                                    <h3><a href="#" class="submenu-header btn btn-neutral btn-round my-0">Weitere</a>
+                                    <h3><a href="#" [routerLink]="['/category', 'Weitere Proteine']"
+                                            class="submenu-header btn btn-neutral btn-round my-0">Weitere Proteine</a>
                                     </h3>
                                     <ul class="submenu pl-1">
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Eiprotein</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Eiprotein']"
+                                                class="btn btn-neutral btn-round my-0">Eiprotein</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -54,96 +65,139 @@
                 </li>
                 <li class="nav-item">
                     <div ngbDropdown class="d-inline-block dropdown">
-                        <a ngbDropdownToggle class="btn btn-lg btn-neutral btn-round" id="supplements"
-                            href="#">Supplements</a>
+                        <button ngbDropdownToggle class="btn btn-lg btn-neutral btn-round"
+                            id="supplements">Supplements</button>
                         <div ngbDropdownMenu aria-labelledby="supplements" class="dropdown-primary"
                             style="width: 800px">
                             <div class="row mr-6">
                                 <div class="col-xl-3 column">
-                                    <h3><a href="#"
+                                    <h3><a href="#" [routerLink]="['/category', 'Aminosäuren']"
                                             class="submenu-header btn btn-neutral btn-round my-0">Aminosäuren</a></h3>
                                     <ul class="submenu pl-1">
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">BCAA</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Aminosäuren Getränke</a>
+                                        <li><a href="#" [routerLink]="['/category', 'BCAA']"
+                                                class="btn btn-neutral btn-round my-0">BCAA</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Aminosäuren Getränke']"
+                                                class="btn btn-neutral btn-round my-0">Aminosäuren Getränke</a>
                                         </li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Aminosäuren Komplex</a>
+                                        <li><a href="#" [routerLink]="['/category', 'Aminosäuren Komplex']"
+                                                class="btn btn-neutral btn-round my-0">Aminosäuren Komplex</a>
                                         </li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Glutamin</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">HMB</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Arginin</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">AAKG</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Beta Alanin</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Glutamin']"
+                                                class="btn btn-neutral btn-round my-0">Glutamin</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'HMB']"
+                                                class="btn btn-neutral btn-round my-0">HMB</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Arginin']"
+                                                class="btn btn-neutral btn-round my-0">Arginin</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'AAKG']"
+                                                class="btn btn-neutral btn-round my-0">AAKG</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Beta Alanin']"
+                                                class="btn btn-neutral btn-round my-0">Beta Alanin</a></li>
                                     </ul>
                                 </div>
                                 <div class="col-xl-3 column">
                                     <h3><span>&nbsp;</span></h3>
                                     <ul class="submenu pl-1">
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Citrullin</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Gaba</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Lysin</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Ornithin</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Taurin</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Tyrosin</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">EAA</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Citrullin']"
+                                                class="btn btn-neutral btn-round my-0">Citrullin</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Gaba']"
+                                                class="btn btn-neutral btn-round my-0">Gaba</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Lysin']"
+                                                class="btn btn-neutral btn-round my-0">Lysin</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Ornithin']"
+                                                class="btn btn-neutral btn-round my-0">Ornithin</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Taurin']"
+                                                class="btn btn-neutral btn-round my-0">Taurin</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Tyrosin']"
+                                                class="btn btn-neutral btn-round my-0">Tyrosin</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'EAA']"
+                                                class="btn btn-neutral btn-round my-0">EAA</a></li>
                                     </ul>
                                 </div>
                                 <div class="col-xl-3 column">
-                                    <h3><a href="#"
+                                    <h3><a href="#" [routerLink]="['/category', 'Vitalstoffe']"
                                             class="submenu-header btn btn-neutral btn-round my-0">Vitalstoffe</a></h3>
                                     <ul class="submenu pl-1">
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Vitamin B</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Vitamin C</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Vitamin D</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Vitamin E</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Multivitamine</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Mineralstoffe</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Zink</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Magnesium</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">ZMA</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Vitamin B']"
+                                                class="btn btn-neutral btn-round my-0">Vitamin B</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Vitamin C']"
+                                                class="btn btn-neutral btn-round my-0">Vitamin C</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Vitamin D']"
+                                                class="btn btn-neutral btn-round my-0">Vitamin D</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Vitamin E']"
+                                                class="btn btn-neutral btn-round my-0">Vitamin E</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Multivitamine']"
+                                                class="btn btn-neutral btn-round my-0">Multivitamine</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Mineralstoffe']"
+                                                class="btn btn-neutral btn-round my-0">Mineralstoffe</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Zink']"
+                                                class="btn btn-neutral btn-round my-0">Zink</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Magnesium']"
+                                                class="btn btn-neutral btn-round my-0">Magnesium</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'ZMA']"
+                                                class="btn btn-neutral btn-round my-0">ZMA</a></li>
                                     </ul>
                                 </div>
                                 <div class="col-xl-3 column">
                                     <h3><span>&nbsp;</span></h3>
                                     <ul class="submenu pl-1">
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Antioxidantien</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Fischöl</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Omega-3</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">MCT-Fette</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Glucosamin</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Enzyme</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Probiotika</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0 text-left">Pflanzliche
+                                        <li><a href="#" [routerLink]="['/category', 'Antioxidantien']"
+                                                class="btn btn-neutral btn-round my-0">Antioxidantien</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Fischöl']"
+                                                class="btn btn-neutral btn-round my-0">Fischöl</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Omega-3']"
+                                                class="btn btn-neutral btn-round my-0">Omega-3</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'MCT-Fette']"
+                                                class="btn btn-neutral btn-round my-0">MCT-Fette</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Glucosamin']"
+                                                class="btn btn-neutral btn-round my-0">Glucosamin</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Enzyme']"
+                                                class="btn btn-neutral btn-round my-0">Enzyme</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Probiotika']"
+                                                class="btn btn-neutral btn-round my-0">Probiotika</a></li>
+                                        <li><a href="#"
+                                                [routerLink]="['/category', 'Pflanzliche Nahrungsergänzungsmittel']"
+                                                class="btn btn-neutral btn-round my-0 text-left">Pflanzliche
                                                 <br>
                                                 Nahrungsergänzungsmittel</a></li>
                                     </ul>
                                 </div>
                                 <div class="col-xl-3 column">
-                                    <h3><a href="#"
+                                    <h3><a href="#" [routerLink]="['/category', 'Pre-Workout']"
                                             class="submenu-header btn btn-neutral btn-round my-0">Pre-Workout</a></h3>
                                     <ul class="submenu pl-1">
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Trainingsbooster</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Energy Drinks</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Koffein</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Trainingsbooster']"
+                                                class="btn btn-neutral btn-round my-0">Trainingsbooster</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Energy Drinks']"
+                                                class="btn btn-neutral btn-round my-0">Energy Drinks</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Koffein']"
+                                                class="btn btn-neutral btn-round my-0">Koffein</a></li>
                                     </ul>
                                 </div>
                                 <div class="col-xl-3 column">
-                                    <h3><a href="#"
+                                    <h3><a href="#" [routerLink]="['/category', 'Diätnahrung']"
                                             class="submenu-header btn btn-neutral btn-round my-0">Diätnahrung</a></h3>
                                     <ul class="submenu pl-1">
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Fatburner</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Carnitin</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">CLA</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Fatburner']"
+                                                class="btn btn-neutral btn-round my-0">Fatburner</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Carnitin']"
+                                                class="btn btn-neutral btn-round my-0">Carnitin</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'CLA']"
+                                                class="btn btn-neutral btn-round my-0">CLA</a></li>
                                     </ul>
                                 </div>
                                 <div class="col-xl-3 column mb-3">
-                                    <h3><a href="#"
+                                    <h3><a href="#" [routerLink]="['/category', 'Masseaufbau']"
                                             class="submenu-header btn btn-neutral btn-round my-0">Masseaufbau</a></h3>
                                     <ul class="submenu pl-1">
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Weight Gainer</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Kohlenhydratpulver</a>
+                                        <li><a href="#" [routerLink]="['/category', 'Weight Gainer']"
+                                                class="btn btn-neutral btn-round my-0">Weight Gainer</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Kohlenhydratpulver']"
+                                                class="btn btn-neutral btn-round my-0">Kohlenhydratpulver</a>
                                         </li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Maltrodextrin</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Dextrose</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Maltrodextrin']"
+                                                class="btn btn-neutral btn-round my-0">Maltrodextrin</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Dextrose']"
+                                                class="btn btn-neutral btn-round my-0">Dextrose</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -152,71 +206,105 @@
                 </li>
                 <li class="nav-item">
                     <div ngbDropdown class="d-inline-block dropdown">
-                        <a ngbDropdownToggle class="btn btn-lg btn-neutral btn-round" id="food" href="#">Food</a>
+                        <button ngbDropdownToggle class="btn btn-lg btn-neutral btn-round" id="food">Food</button>
                         <div ngbDropdownMenu aria-labelledby="food" class="dropdown-primary" style="width: 800px">
                             <div class="row">
                                 <div class="col-xl-3 column">
-                                    <h3><a href="#" class="submenu-header btn btn-neutral btn-round my-0">Alltägliche
+                                    <h3><a href="#" [routerLink]="['/category', 'Alltägliche Lebensmittel']"
+                                            class="submenu-header btn btn-neutral btn-round my-0">Alltägliche
                                             Lebensmittel</a></h3>
                                     <ul class="submenu pl-1">
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Butter</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Aufstriche</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Fleisch</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Mealprep Boxen</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Gewürze &amp; Saucen</a>
+                                        <li><a href="#" [routerLink]="['/category', 'Butter']"
+                                                class="btn btn-neutral btn-round my-0">Butter</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Aufstriche']"
+                                                class="btn btn-neutral btn-round my-0">Aufstriche</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Fleisch']"
+                                                class="btn btn-neutral btn-round my-0">Fleisch</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Mealprep Boxen']"
+                                                class="btn btn-neutral btn-round my-0">Mealprep Boxen</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Gewürze & Saucen']"
+                                                class="btn btn-neutral btn-round my-0">Gewürze &amp; Saucen</a>
                                         </li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Tiefkühl</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Brot</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Jerkey</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Tiefkühl']"
+                                                class="btn btn-neutral btn-round my-0">Tiefkühl</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Brot']"
+                                                class="btn btn-neutral btn-round my-0">Brot</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Jerkey']"
+                                                class="btn btn-neutral btn-round my-0">Jerkey</a></li>
                                     </ul>
                                 </div>
                                 <div class="col-xl-3 column">
                                     <h3><span>&nbsp;</span></h3>
                                     <ul class="submenu pl-1">
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Aromen und Süßstoffe</a>
+                                        <li><a href="#" [routerLink]="['/category', 'Aromen und Süßstoffe']"
+                                                class="btn btn-neutral btn-round my-0">Aromen und Süßstoffe</a>
                                         </li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Proteineis</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Pizza &amp; Pasta</a>
+                                        <li><a href="#" [routerLink]="['/category', 'Proteineis']"
+                                                class="btn btn-neutral btn-round my-0">Proteineis</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Pizza & Pasta']"
+                                                class="btn btn-neutral btn-round my-0">Pizza &amp; Pasta</a>
                                         </li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Syrup</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Speiseöle</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Getreide</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Pudding</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Syrup']"
+                                                class="btn btn-neutral btn-round my-0">Syrup</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Speiseöle']"
+                                                class="btn btn-neutral btn-round my-0">Speiseöle</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Getreide']"
+                                                class="btn btn-neutral btn-round my-0">Getreide</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Pudding']"
+                                                class="btn btn-neutral btn-round my-0">Pudding</a></li>
                                     </ul>
                                 </div>
                                 <div class="col-xl-3 column">
-                                    <h3><a href="#" class="submenu-header btn btn-neutral btn-round my-0">Riegel &amp;
+                                    <h3><a href="#" [routerLink]="['/category', 'Riegel & Snacks']"
+                                            class="submenu-header btn btn-neutral btn-round my-0">Riegel &amp;
                                             Snacks</a></h3>
                                     <ul class="submenu pl-1">
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Proteinriegel</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Chips</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Schokolade</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Energieriegel</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Cookies &amp; Muffins</a>
+                                        <li><a href="#" [routerLink]="['/category', 'Proteinriegel']"
+                                                class="btn btn-neutral btn-round my-0">Proteinriegel</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Chips']"
+                                                class="btn btn-neutral btn-round my-0">Chips</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Schokolade']"
+                                                class="btn btn-neutral btn-round my-0">Schokolade</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Energieriegel']"
+                                                class="btn btn-neutral btn-round my-0">Energieriegel</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Cookies & Muffins']"
+                                                class="btn btn-neutral btn-round my-0">Cookies &amp; Muffins</a>
                                         </li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Müsliriegel</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Süßigkeiten</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Müsliriegel']"
+                                                class="btn btn-neutral btn-round my-0">Müsliriegel</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Süßigkeiten']"
+                                                class="btn btn-neutral btn-round my-0">Süßigkeiten</a></li>
                                     </ul>
                                 </div>
                                 <div class="col-xl-3 column">
-                                    <h3><a href="#" class="submenu-header btn btn-neutral btn-round my-0">Superfoods</a>
+                                    <h3><a href="#" [routerLink]="['/category', 'Superfoods']"
+                                            class="submenu-header btn btn-neutral btn-round my-0">Superfoods</a>
                                     </h3>
                                     <ul class="submenu pl-1">
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Chia</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Spirulina</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Nüsse &amp; Samen</a>
+                                        <li><a href="#" [routerLink]="['/category', 'Chia']"
+                                                class="btn btn-neutral btn-round my-0">Chia</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Spirulina']"
+                                                class="btn btn-neutral btn-round my-0">Spirulina</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Nüsse & Samen']"
+                                                class="btn btn-neutral btn-round my-0">Nüsse &amp; Samen</a>
                                         </li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Beeren</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Bohnen</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Beeren']"
+                                                class="btn btn-neutral btn-round my-0">Beeren</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Bohnen']"
+                                                class="btn btn-neutral btn-round my-0">Bohnen</a></li>
                                     </ul>
                                 </div>
                                 <div class="col-xl-3 column">
-                                    <h3><a href="#" class="submenu-header btn btn-neutral btn-round my-0">Backen</a>
+                                    <h3><a href="#" [routerLink]="['/category', 'Backen']"
+                                            class="submenu-header btn btn-neutral btn-round my-0">Backen</a>
                                     </h3>
                                     <ul class="submenu pl-1">
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Mehl</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Backmischungen</a></li>
-                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Eiklar</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Mehl']"
+                                                class="btn btn-neutral btn-round my-0">Mehl</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Backmischungen']"
+                                                class="btn btn-neutral btn-round my-0">Backmischungen</a></li>
+                                        <li><a href="#" [routerLink]="['/category', 'Eiklar']"
+                                                class="btn btn-neutral btn-round my-0">Eiklar</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -225,15 +313,19 @@
                 </li>
                 <li class="nav-item">
                     <div ngbDropdown class="dropdown">
-                        <a ngbDropdownToggle class="btn btn-lg btn-neutral btn-round" id="getraenke"
-                            href="#">Getränke</a>
+                        <button ngbDropdownToggle class="btn btn-lg btn-neutral btn-round"
+                            id="getraenke">Getränke</button>
                         <div ngbDropdownMenu aria-labelledby="getraenke" class="dropdown-primary">
-                            <a href="#" class="submenu-header btn btn-neutral btn-round my-0">Protein Drinks</a>
-                            <a href="#"
-                                class="submenu-header btn btn-neutral btn-round my-0">Mahlzeitenersatz-Shakes</a>
-                            <a href="#" class="submenu-header btn btn-neutral btn-round my-0">Isotonische Getränke</a>
-                            <a href="#" class="submenu-header btn btn-neutral btn-round my-0">Ohne Kalorien</a>
-                            <a href="#" class="submenu-header btn btn-neutral btn-round my-0">Tee &amp; Kaffee</a>
+                            <a href="#" [routerLink]="['/category', 'Protein Drinks']"
+                                class="submenu-header btn btn-neutral btn-round my-2 mt-4">Protein Drinks</a>
+                            <a href="#" [routerLink]="['/category', 'Mahlzeitenersatz-Shakes']"
+                                class="submenu-header btn btn-neutral btn-round my-2">Mahlzeitenersatz-Shakes</a>
+                            <a href="#" [routerLink]="['/category', 'Isotonische Getränke']"
+                                class="submenu-header btn btn-neutral btn-round my-2">Isotonische Getränke</a>
+                            <a href="#" [routerLink]="['/category', 'Ohne Kalorien']"
+                                class="submenu-header btn btn-neutral btn-round my-2">Ohne Kalorien</a>
+                            <a href="#" [routerLink]="['/category', 'Tee & Kaffee']"
+                                class="submenu-header btn btn-neutral btn-round my-2 mb-4">Tee &amp; Kaffee</a>
                         </div>
                     </div>
                 </li>

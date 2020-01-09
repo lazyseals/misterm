@@ -47,3 +47,19 @@ Margins
 .mr-10 {
     margin-right: 10rem!important;
 }
+.mt-8 {
+    margin-top: 8rem!important;
+}
+.mt-9 {
+    margin-top: 9rem!important;
+}
+.mt-10 {
+    margin-top: 10rem!important;
+}
+
+/************************************
+Bootstrap Select
+************************************/
+.form-control {
+    border: 1px solid #DDDDDD!important;
+}

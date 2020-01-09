@@ -1,0 +1,351 @@
+<div class="container-fluid">
+
+  <div class="row px-5">
+    <div class="col-lg-6 mt-8">
+      <h1 class="my-4">{{ category_name }}</h1>
+    </div>
+    <div class="col-lg-6 mt-8">
+      <div class="row">
+        <form style="margin-top: 35px;" class="form-inline ml-auto mr-3">
+          <div class="form-group">
+            <label for="sort">Sortieren nach</label>
+            <select (change)="onSort($event)" class="form-control form-control-sm ml-2" id="sort">
+              <option id="popularity" selected>Beliebteste zuerst</option>
+              <option id="priceAsc">Preis: Günstigster zuerst</option>
+              <option id="priceDesc">Preis: Höchster zuerst</option>
+              <option id="proteinDesc">Nährwerte: Höchster Proteingehalt zuerst</option>
+              <option id="calorieAsc">Nährwerte: Niedrigste Kalorien zuerst</option>
+            </select> </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="row px-5">
+
+    <div class="col-lg-2">
+      <div class="list-group shadow">
+        <li class="list-group-item">
+          <div class="row mb-2">
+            <div class="col">
+              <span style="font-weight: bold;">Preis</span>
+            </div>
+            <div class="col text-right">
+              <span (click)="onPreisReset()" class="zurueck text-success">Zurücksetzen</span>
+            </div>
+          </div>
+          <form>
+            <div class="form-row">
+              <div class="form-group col-md-5">
+                <input type="text" class="form-control" id="inputMin" placeholder="0€">
+              </div>
+              <div class="col-md-2 text-center">
+                <p class="pt-2">-</p>
+              </div>
+              <div class="form-group col-md-5 text-right">
+                <input type="text" class="form-control" id="inputMax" placeholder="1.000€">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col">
+                <button style="width:100%" class="btn btn-success">Anwenden</button>
+              </div>
+            </div>
+            <div class="form-row mt-3">
+              <div class="col">
+                <div class="form-check-radio">
+                  <label class="form-check-label" for="bisZwanzig">
+                    <input type="radio" (click)="onPriceSelected(0)" [name]="priceRadioName" class="form-check-input"
+                      id="bisZwanzig" #bisZwanzig>
+                    bis 20€
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col">
+                <div class="form-check-radio">
+                  <label class="form-check-label" for="ZwanzigBisVierzig">
+                    <input type="radio" (click)="onPriceSelected(20)" [name]="priceRadioName" class="form-check-input"
+                      id="ZwanzigBisVierzig" #ZwanzigBisVierzig>
+                    20€ bis 40€
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col">
+                <div class="form-check-radio">
+                  <label class="form-check-label" for="VierzigBisSechzig">
+                    <input type="radio" (click)="onPriceSelected(40)" [name]="priceRadioName" class="form-check-input"
+                      id="VierzigBisSechzig" #VierzigBisSechzig>
+                    40€ bis 60€
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col">
+                <div class="form-check-radio">
+                  <label class="form-check-label" for="SechzigBisAchtzig">
+                    <input type="radio" (click)="onPriceSelected(60)" [name]="priceRadioName" class="form-check-input"
+                      id="SechzigBisAchtzig" #SechzigBisAchtzig>
+                    60€ bis 80€
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col">
+                <div class="form-check-radio">
+                  <label class="form-check-label" for="AbAchtzig">
+                    <input type="radio" (click)="onPriceSelected(80)" [name]="priceRadioName" class="form-check-input"
+                      id="AbAchtzig" #AbAchtzig>
+                    ab 80€
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </form>
+        </li>
+        <li *ngIf="isMainCategory()" class="list-group-item">
+          <div class="mb-1">
+            <span style="font-weight: bold;">Produkttyp</span>
+          </div>
+          <div class="form">
+            <div class="form-row">
+              <div class="col">
+                <div *ngFor="let subCategory of category.subCategories" class="form-check">
+                  <label class="form-check-label">
+                    <input (click)="onCategorySelected(subCategory)" type="checkbox" class="form-check-input" value="">
+                    {{ subCategory.name }}
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="mb-1">
+            <span style="font-weight: bold;">Geschmack</span>
+          </div>
+          <div class="form">
+            <div class="form-row">
+              <div class="col">
+                <div *ngFor="let geschmack of geschmackInCategory" class="form-check">
+                  <label class="form-check-label">
+                    <input (click)="onGeschmackSelected(geschmack)" type="checkbox" class="form-check-input" value="">
+                    {{ geschmack }}
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="mb-1">
+            <span style="font-weight: bold;">Hersteller</span>
+          </div>
+          <div class="form">
+            <div class="form-row">
+              <div class="col">
+                <div *ngFor="let shop of shopsInCategory" class="form-check">
+                  <label class="form-check-label">
+                    <input (click)="onHerstellerSelected(shop.id)" type="checkbox" class="form-check-input" value="">
+                    {{ shop.name }}
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="mb-1">
+            <span style="font-weight: bold;">Allergene (nicht enthalten)</span>
+          </div>
+          <div class="form">
+            <div class="form-row">
+              <div class="col">
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input (click)="onAllergeneSelected('eier')" type="checkbox" class="form-check-input">
+                    Ei
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col">
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input (click)="onAllergeneSelected('erdnuesse')" type="checkbox" class="form-check-input">
+                    Erdnüsse
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col">
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input (click)="onAllergeneSelected('fisch')" type="checkbox" class="form-check-input">
+                    Fisch
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col">
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input (click)="onAllergeneSelected('gluten')" type="checkbox" class="form-check-input">
+                    Gluten
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col">
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input (click)="onAllergeneSelected('krebs')" type="checkbox" class="form-check-input">
+                    Krebstiere
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col">
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input (click)="onAllergeneSelected('lupine')" type="checkbox" class="form-check-input">
+                    Lupine
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col">
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input (click)="onAllergeneSelected('milch')" type="checkbox" class="form-check-input">
+                    Milch
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col">
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input (click)="onAllergeneSelected('schalenfruechte')" type="checkbox" class="form-check-input">
+                    Schalenfrüchte
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col">
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input (click)="onAllergeneSelected('schwefeloxid')" type="checkbox" class="form-check-input">
+                    Schwefeloxid
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col">
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input (click)="onAllergeneSelected('sellerie')" type="checkbox" class="form-check-input">
+                    Sellerie
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col">
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input (click)="onAllergeneSelected('senf')" type="checkbox" class="form-check-input">
+                    Senf
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col">
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input (click)="onAllergeneSelected('sesam')" type="checkbox" class="form-check-input">
+                    Sesam
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col">
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input (click)="onAllergeneSelected('soja')" type="checkbox" class="form-check-input">
+                    Soja
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col">
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input (click)="onAllergeneSelected('weichtiere')" type="checkbox" class="form-check-input">
+                    Weichtiere
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      </div>
+    </div>
+    <!-- /.col-lg-3 -->
+
+    <div class="col-lg-10">
+
+      <div class="row">
+
+        <div *ngFor="let item of items" class="col-lg-3 col-md-6 mb-4">
+          <app-item-list-item [item]=item></app-item-list-item>
+        </div>
+
+      </div>
+      <!-- /.row -->
+
+    </div>
+    <!-- /.col-lg-9 -->
+
+  </div>
+  <!-- /.row -->
+
+</div>

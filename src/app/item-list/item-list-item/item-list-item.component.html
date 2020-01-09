@@ -2,12 +2,11 @@
   <img class="card-img-top p-3 mx-auto" [src]="item.imagePath" alt="">
   <div class="card-body">
     <p class="card-title">
-      <a [routerLink]="['/category', item.category.name, item.id]" class="my-card-header" href="#">{{ item.name }}</a>
+      <a [routerLink]="item.id" class="my-card-header" href="#">{{ item.name }}</a>
     </p>
     <p class="card-text"> {{ item.description_short }}</p>
     <span class="d-inline-block"><strong>Ab&nbsp;</strong></span>
     <h5 class="d-inline-block ml-1">{{ item.price }}0€</h5>
-    <a [routerLink]="['/category', item.category.name, item.id]" class="btn btn-sm btn-success btn-round pull-right"
-      href="#">Details</a>
+    <a [routerLink]="item.id" class="btn btn-sm btn-success btn-round pull-right" href="#">Details</a>
   </div>
 </div>

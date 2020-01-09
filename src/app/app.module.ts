@@ -13,6 +13,10 @@ import { ComponentsModule } from './components/components.module';
 import { ExamplesModule } from './examples/examples.module';
 import { HomeComponent } from './home/home.component';
 import { ItemCardComponent } from './item-card/item-card.component';
+import { ItemDetailComponent } from './item-detail/item-detail.component';
+import { ItemListComponent } from './item-list/item-list.component';
+import { ItemListItemComponent } from './item-list/item-list-item/item-list-item.component';
+import { AccordionTogglerDirective } from './shared/accordionToggler.directive';
 
 
 @NgModule({
@@ -21,7 +25,11 @@ import { ItemCardComponent } from './item-card/item-card.component';
     NavbarComponent,
     FooterComponent,
     HomeComponent,
-    ItemCardComponent
+    ItemCardComponent,
+    ItemDetailComponent,
+    ItemListComponent,
+    ItemListItemComponent,
+    AccordionTogglerDirective
   ],
   imports: [
     BrowserModule,
