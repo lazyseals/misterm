@@ -1,0 +1,259 @@
+<nav class="navbar navbar-expand-lg fixed-top navbar-default" color-on-scroll="500">
+    <div class="container-fluid">
+        <div class="navbar-translate">
+            <a class="navbar-brand" href="https://www.creative-tim.com">Mister M</a>
+            <button class="navbar-toggler navbar-burger" type="button" data-toggle="collapse"
+                data-target="#navbarToggler" aria-controls="navbarTogglerDemo02" aria-expanded="false"
+                aria-label="Toggle navigation" (click)="sidebarToggle()">
+                <span class="navbar-toggler-bar"></span>
+                <span class="navbar-toggler-bar"></span>
+                <span class="navbar-toggler-bar"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse" id="navbarToggler">
+
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <div ngbDropdown class="d-inline-block dropdown">
+                        <a ngbDropdownToggle class="btn btn btn-lg btn-neutral btn-round" id="proteine"
+                            href="#">Proteine</a>
+                        <div ngbDropdownMenu aria-labelledby="proteine" class="dropdown-primary" style="width: 800px">
+                            <div class="row mb-3">
+                                <div class="col-xl-3 column">
+                                    <h3><a href="#"
+                                            class="submenu-header btn btn-neutral btn-round my-0">Milchproteine</a></h3>
+                                    <ul class="submenu pl-1">
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Whey Protein</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Casein Protein</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Protein Mischungen</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-xl-3 column">
+                                    <h3><a href="#" class="submenu-header btn btn-neutral btn-round my-0">Pflanzliches
+                                            Protein</a></h3>
+                                    <ul class="submenu pl-1">
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Sojaprotein</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Reisprotein</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Erbsenprotein</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Veganes Protein</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Superfood Protein</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-xl-3 column">
+                                    <h3><a href="#" class="submenu-header btn btn-neutral btn-round my-0">Weitere</a>
+                                    </h3>
+                                    <ul class="submenu pl-1">
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Eiprotein</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <div ngbDropdown class="d-inline-block dropdown">
+                        <a ngbDropdownToggle class="btn btn-lg btn-neutral btn-round" id="supplements"
+                            href="#">Supplements</a>
+                        <div ngbDropdownMenu aria-labelledby="supplements" class="dropdown-primary"
+                            style="width: 800px">
+                            <div class="row mr-6">
+                                <div class="col-xl-3 column">
+                                    <h3><a href="#"
+                                            class="submenu-header btn btn-neutral btn-round my-0">Aminosäuren</a></h3>
+                                    <ul class="submenu pl-1">
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">BCAA</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Aminosäuren Getränke</a>
+                                        </li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Aminosäuren Komplex</a>
+                                        </li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Glutamin</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">HMB</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Arginin</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">AAKG</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Beta Alanin</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-xl-3 column">
+                                    <h3><span>&nbsp;</span></h3>
+                                    <ul class="submenu pl-1">
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Citrullin</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Gaba</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Lysin</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Ornithin</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Taurin</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Tyrosin</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">EAA</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-xl-3 column">
+                                    <h3><a href="#"
+                                            class="submenu-header btn btn-neutral btn-round my-0">Vitalstoffe</a></h3>
+                                    <ul class="submenu pl-1">
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Vitamin B</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Vitamin C</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Vitamin D</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Vitamin E</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Multivitamine</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Mineralstoffe</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Zink</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Magnesium</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">ZMA</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-xl-3 column">
+                                    <h3><span>&nbsp;</span></h3>
+                                    <ul class="submenu pl-1">
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Antioxidantien</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Fischöl</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Omega-3</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">MCT-Fette</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Glucosamin</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Enzyme</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Probiotika</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0 text-left">Pflanzliche
+                                                <br>
+                                                Nahrungsergänzungsmittel</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-xl-3 column">
+                                    <h3><a href="#"
+                                            class="submenu-header btn btn-neutral btn-round my-0">Pre-Workout</a></h3>
+                                    <ul class="submenu pl-1">
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Trainingsbooster</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Energy Drinks</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Koffein</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-xl-3 column">
+                                    <h3><a href="#"
+                                            class="submenu-header btn btn-neutral btn-round my-0">Diätnahrung</a></h3>
+                                    <ul class="submenu pl-1">
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Fatburner</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Carnitin</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">CLA</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-xl-3 column mb-3">
+                                    <h3><a href="#"
+                                            class="submenu-header btn btn-neutral btn-round my-0">Masseaufbau</a></h3>
+                                    <ul class="submenu pl-1">
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Weight Gainer</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Kohlenhydratpulver</a>
+                                        </li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Maltrodextrin</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Dextrose</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <div ngbDropdown class="d-inline-block dropdown">
+                        <a ngbDropdownToggle class="btn btn-lg btn-neutral btn-round" id="food" href="#">Food</a>
+                        <div ngbDropdownMenu aria-labelledby="food" class="dropdown-primary" style="width: 800px">
+                            <div class="row">
+                                <div class="col-xl-3 column">
+                                    <h3><a href="#" class="submenu-header btn btn-neutral btn-round my-0">Alltägliche
+                                            Lebensmittel</a></h3>
+                                    <ul class="submenu pl-1">
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Butter</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Aufstriche</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Fleisch</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Mealprep Boxen</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Gewürze &amp; Saucen</a>
+                                        </li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Tiefkühl</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Brot</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Jerkey</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-xl-3 column">
+                                    <h3><span>&nbsp;</span></h3>
+                                    <ul class="submenu pl-1">
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Aromen und Süßstoffe</a>
+                                        </li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Proteineis</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Pizza &amp; Pasta</a>
+                                        </li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Syrup</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Speiseöle</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Getreide</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Pudding</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-xl-3 column">
+                                    <h3><a href="#" class="submenu-header btn btn-neutral btn-round my-0">Riegel &amp;
+                                            Snacks</a></h3>
+                                    <ul class="submenu pl-1">
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Proteinriegel</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Chips</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Schokolade</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Energieriegel</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Cookies &amp; Muffins</a>
+                                        </li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Müsliriegel</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Süßigkeiten</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-xl-3 column">
+                                    <h3><a href="#" class="submenu-header btn btn-neutral btn-round my-0">Superfoods</a>
+                                    </h3>
+                                    <ul class="submenu pl-1">
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Chia</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Spirulina</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Nüsse &amp; Samen</a>
+                                        </li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Beeren</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Bohnen</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-xl-3 column">
+                                    <h3><a href="#" class="submenu-header btn btn-neutral btn-round my-0">Backen</a>
+                                    </h3>
+                                    <ul class="submenu pl-1">
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Mehl</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Backmischungen</a></li>
+                                        <li><a href="#" class="btn btn-neutral btn-round my-0">Eiklar</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <div ngbDropdown class="dropdown">
+                        <a ngbDropdownToggle class="btn btn-lg btn-neutral btn-round" id="getraenke"
+                            href="#">Getränke</a>
+                        <div ngbDropdownMenu aria-labelledby="getraenke" class="dropdown-primary">
+                            <a href="#" class="submenu-header btn btn-neutral btn-round my-0">Protein Drinks</a>
+                            <a href="#"
+                                class="submenu-header btn btn-neutral btn-round my-0">Mahlzeitenersatz-Shakes</a>
+                            <a href="#" class="submenu-header btn btn-neutral btn-round my-0">Isotonische Getränke</a>
+                            <a href="#" class="submenu-header btn btn-neutral btn-round my-0">Ohne Kalorien</a>
+                            <a href="#" class="submenu-header btn btn-neutral btn-round my-0">Tee &amp; Kaffee</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <!--<a href="#" class="btn btn-outline-success btn-round">Anmelden</a>-->
+                    <button type="button" class="btn btn-outline-success btn-round" placement="bottom"
+                        ngbPopover="Der Mitgliederbereich ist zur Zeit in der Entwicklung. 
+                        Freue dich auf weitere tolle Features, die dein Erlebnis mit Mister M auf das nächste Level bringen." popoverTitle="Kommt Bald!">Anmelden</button>
+                </li>
+                <li class="nav-item">
+                    <!--<a href="#" class="btn btn-success btn-round">Registrieren</a>-->
+                    <button type="button" class="btn btn-success btn-round" placement="bottom"
+                        ngbPopover="Der Mitgliederbereich ist zur Zeit in der Entwicklung. 
+                        Freue dich auf weitere tolle Features, die dein Erlebnis mit Mister M auf das nächste Level bringen." popoverTitle="Kommt Bald!"
+                        container="body">Registrieren</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

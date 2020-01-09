@@ -1,0 +1,68 @@
+<!-- Jumbotron -->
+<div class="jumbotron mb-0 pb-5">
+  <span class="helper"></span>
+  <div class="row jumbo-row pb-5">
+    <div class="col-xl-9 mx-auto">
+      <h1 class="mt-5">Finde dein perfektes Fitnessnahrungsmittel!</h1>
+      <p class="text-justify">Mister M durchsucht für dich über 1000 verschiedene Shop Hersteller und findet
+        garantiert das passende Fitness Produkt für dich und deine Bedürfnisse! All Produkte in unserem Sortiment
+        haben den Anspruch für eine bewusste fitnessgerechte Ernährung geeignet zu sein.</p>
+    </div>
+    <div class="col-xl-9 mx-auto mt-5">
+      <form>
+        <div class="form-row">
+          <div class="col-xl-4">
+            <input type="search" class="form-control form-control-round form-control-lg" placeholder="Ich suche...">
+          </div>
+          <div class="col-xl-2">
+            <button type="submit" class="btn btn-lg btn-block btn-round btn-success">Suchen</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- /. Jumbotron -->
+
+<!-- Benefits -->
+<div class="container-fluid">
+  <div class="row bg-success text-white">
+    <div class="col-xl-4 text-center mb-3">
+      <h3>10.000 verschiedene Produkte</h3>
+      <p>Riesenauswahl an Fitnessprodukten</p>
+    </div>
+    <div class="col-xl-4 text-center">
+      <h3>1.000 verschiedene Hersteller</h3>
+      <p>Riesenauswahl an Herstellern</p>
+    </div>
+    <div class="col-xl-4 text-center">
+      <h3>1 Plattform</h3>
+      <p>Alles in einer Plattform</p>
+    </div>
+  </div>
+</div>
+<!-- /. Benefits -->
+
+<!-- Beliebteste -->
+<div class="container-fluid pt-3">
+  <div class="row">
+    <div class="col-xl-12 text-center">
+      <h2>Beliebteste</h2>
+    </div>
+  </div>
+  <div class="row pt-5">
+    <div class="col-xl-10 offset-xl-1">
+      <div class="row">
+        <div *ngFor="let item of items" class="col-xl-3">
+          <app-item-card [item]=item></app-item-card>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row pt-5">
+    <div class="col-xl-12 text-center">
+      <a href="#" class="btn btn-lg btn-outline-success btn-round">Alle ansehen</a>
+    </div>
+  </div>
+</div>
+<!-- /. Beliebteste -->
