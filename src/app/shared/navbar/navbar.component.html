@@ -14,12 +14,13 @@
 
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <div ngbDropdown class="d-inline-block dropdown">
-                        <button ngbDropdownToggle class="btn btn btn-lg btn-neutral btn-round"
-                            id="proteine">Proteine</button>
-                        <div ngbDropdownMenu aria-labelledby="proteine" class="dropdown-primary" style="width: 800px">
+                    <div ngbDropdown #myDropProtein="ngbDropdown" class="d-inline-block"> 
+                        <button ngbDropdownAnchor class="btn btn btn-lg btn-neutral btn-round menubtn"
+                            id="proteine" (mouseenter)="handleMenuOpen($event, 'protein')" (mouseleave)="closeAll($event, 'protein')">Proteine</button>
+                        <div ngbDropdownMenu aria-labelledby="proteine" class="dropdown-primary" 
+                        style="width: 600px;" (mouseleave)="handleMenuClose($event, 'protein')"> 
                             <div class="row mb-3">
-                                <div class="col-xl-3 column">
+                                <div class="col-xl-4 column">
                                     <h3><a href="#" [routerLink]="['/category', 'Milchproteine']"
                                             class="submenu-header btn btn-neutral btn-round my-0">Milchproteine</a></h3>
                                     <ul class="submenu pl-1">
@@ -32,7 +33,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="col-xl-3 column">
+                                <div class="col-xl-4 column">
                                     <h3><a href="#" [routerLink]="['/category', 'Pflanzliches Protein']"
                                             class="submenu-header btn btn-neutral btn-round my-0">Pflanzliches
                                             Protein</a></h3>
@@ -50,7 +51,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="col-xl-3 column">
+                                <div class="col-xl-4 column">
                                     <h3><a href="#" [routerLink]="['/category', 'Weitere Proteine']"
                                             class="submenu-header btn btn-neutral btn-round my-0">Weitere Proteine</a>
                                     </h3>
@@ -64,11 +65,11 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <div ngbDropdown class="d-inline-block dropdown">
-                        <button ngbDropdownToggle class="btn btn-lg btn-neutral btn-round"
-                            id="supplements">Supplements</button>
-                        <div ngbDropdownMenu aria-labelledby="supplements" class="dropdown-primary"
-                            style="width: 800px">
+                        <div ngbDropdown #myDropSupp="ngbDropdown" class="d-inline-block">
+                                <button ngbDropdownAnchor class="btn btn btn-lg btn-neutral btn-round menubtn"
+                                    id="supplements" (mouseenter)="handleMenuOpen($event, 'supp')" (mouseleave)="closeAll($event, 'supp')">Supplements</button>
+                                <div ngbDropdownMenu aria-labelledby="supplements" class="dropdown-primary" 
+                                style="width: 800px;" (mouseleave)="handleMenuClose($event, 'supp')"> 
                             <div class="row mr-6">
                                 <div class="col-xl-3 column">
                                     <h3><a href="#" [routerLink]="['/category', 'Aminosäuren']"
@@ -205,9 +206,11 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <div ngbDropdown class="d-inline-block dropdown">
-                        <button ngbDropdownToggle class="btn btn-lg btn-neutral btn-round" id="food">Food</button>
-                        <div ngbDropdownMenu aria-labelledby="food" class="dropdown-primary" style="width: 800px">
+                        <div ngbDropdown #myDropFood="ngbDropdown" class="d-inline-block">
+                                <button ngbDropdownAnchor class="btn btn btn-lg btn-neutral btn-round menubtn"
+                                    id="food" (mouseenter)="handleMenuOpen($event, 'food')" (mouseleave)="closeAll($event, 'food')">Food</button>
+                                <div ngbDropdownMenu aria-labelledby="food" class="dropdown-primary" 
+                                style="width: 800px;" (mouseleave)="handleMenuClose($event, 'food')"> 
                             <div class="row">
                                 <div class="col-xl-3 column">
                                     <h3><a href="#" [routerLink]="['/category', 'Alltägliche Lebensmittel']"
@@ -312,10 +315,10 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <div ngbDropdown class="dropdown">
-                        <button ngbDropdownToggle class="btn btn-lg btn-neutral btn-round"
-                            id="getraenke">Getränke</button>
-                        <div ngbDropdownMenu aria-labelledby="getraenke" class="dropdown-primary">
+                        <div ngbDropdown #myDropGetraenke="ngbDropdown" class="d-inline-block">
+                                <button ngbDropdownAnchor class="btn btn btn-lg btn-neutral btn-round menubtn"
+                                    id="getraenke" (mouseenter)="handleMenuOpen($event, 'getraenke')" (mouseleave)="closeAll($event, 'getraenke')">Getränke</button>
+                                <div ngbDropdownMenu aria-labelledby="getraenke" class="dropdown-primary" (mouseleave)="handleMenuClose($event, 'getraenke')"> 
                             <a href="#" [routerLink]="['/category', 'Protein Drinks']"
                                 class="submenu-header btn btn-neutral btn-round my-2 mt-4">Protein Drinks</a>
                             <a href="#" [routerLink]="['/category', 'Mahlzeitenersatz-Shakes']"

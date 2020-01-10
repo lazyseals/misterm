@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid mb-5">
 
   <div class="row px-5">
     <div class="col-lg-6 mt-8">
@@ -23,8 +23,8 @@
   <div class="row px-5">
 
     <div class="col-lg-2">
-      <div class="list-group shadow">
-        <li class="list-group-item">
+      <div class="list-group">
+        <li class="list-group-item filter-panel">
           <div class="row mb-2">
             <div class="col">
               <span style="font-weight: bold;">Preis</span>
@@ -112,7 +112,7 @@
             </div>
           </form>
         </li>
-        <li *ngIf="isMainCategory()" class="list-group-item">
+        <li *ngIf="isMainCategory()" class="list-group-item filter-panel">
           <div class="mb-1">
             <span style="font-weight: bold;">Produkttyp</span>
           </div>
@@ -130,7 +130,7 @@
             </div>
           </div>
         </li>
-        <li class="list-group-item">
+        <li class="list-group-item filter-panel">
           <div class="mb-1">
             <span style="font-weight: bold;">Geschmack</span>
           </div>
@@ -148,7 +148,7 @@
             </div>
           </div>
         </li>
-        <li class="list-group-item">
+        <li class="list-group-item filter-panel">
           <div class="mb-1">
             <span style="font-weight: bold;">Hersteller</span>
           </div>
@@ -166,9 +166,12 @@
             </div>
           </div>
         </li>
-        <li class="list-group-item">
+        <li class="list-group-item filter-panel">
           <div class="mb-1">
             <span style="font-weight: bold;">Allergene (nicht enthalten)</span>
+            <span class="ml-1" placement="right"
+              ngbTooltip="Allergene sind nicht vollständig erfasst! Keine Garantie für falsche Angaben."><i
+                class="fa fa-question"></i></span>
           </div>
           <div class="form">
             <div class="form-row">
