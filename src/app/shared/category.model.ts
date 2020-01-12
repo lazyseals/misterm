@@ -1,11 +1,6 @@
 export interface Category {
+  cid: string;
   name: string;
-}
-
-export class MainCategory implements Category {
-  constructor(public name: string, public subCategories: Category[]) { }
-}
-
-export class SubCategory implements Category {
-  constructor(public name: string) { }
-}
+  main: boolean;
+  subCategories: string[];
+};

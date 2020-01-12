@@ -11,14 +11,14 @@
           <!-- col-sm-4 -->
           <div class="col-sm-4 text-center">
             <h1><span>&nbsp;</span></h1>
-            <img style="width:300px" class="card-img-top img-fluid" [src]="item.imagePath" alt="">
+            <img style="width:300px" class="card-img-top img-fluid" [src]="item.img" alt="">
           </div>
           <!-- /. col-sm-4  -->
           <!-- col-sm-8 -->
           <div class="col-sm-8">
             <h1>{{ item.name }}</h1>
             <hr style="height: 1px;">
-            <p>{{item.description_long}}</p>
+            <p>{{item.descriptionLong}}</p>
             <div class="input-group my-3 px-1">
               <select class="form-control px-1">
                 <option selected>Größe</option>
@@ -38,7 +38,7 @@
             <div class="row">
               <div class="text-left col-sm-6 ">
                 <p class="d-inline">Günstigster Preis: </p>
-                <h4 class="text-success d-inline">{{ item.price }}0€</h4>
+                <h4 class="text-success d-inline">{{ item.minPrice }}€</h4>
               </div>
               <div class="text-right col-sm-6">
                 <button class="btn btn-success">Zum Shop</button>
@@ -73,7 +73,7 @@
             <h2>Bewertungen</h2>
             <div class="stars">
               <span class="text-warning" [innerHTML]="stars"></span>
-              {{ durchschnittsBewertung }} / 5.0
+              {{ item.averageBewertung }} / 5.0
             </div>
           </div>
           <!-- /. col-lg-12 header -->
@@ -114,7 +114,7 @@
           <!-- col-lg-12 img-row -->
           <div class="col-lg-11 offset-lg-1">
             <hr>
-            <img class="img-fluid" [src]="item.labelImagePath" alt="">
+            <img class="img-fluid" [src]="item.nutritionImg" alt="">
           </div>
           <!-- /. col-lg-12 img row -->
         </div>
@@ -149,22 +149,22 @@
             <div *ngFor="let shop of shops; let lastItem = last;">
               <div class="row">
                 <div class="col-md-2">
-                  <img style="height:100px;" class="img-fluid" [src]="shop.imagePath" alt="">
+                  <img style="height:100px;" class="img-fluid" [src]="shop.img" alt="">
                 </div>
                 <div class="col-md-2 text-center">
                   <p class="mb-0" style="font-size:150%; font-weight:bold;">
-                    {{ getShopItemPriceByShopID(shop.id) }}0€ </p>
-                  <p>{{ getShopItemPriceByShopID(shop.id) }}0€ / kg</p>
+                    {{ getShopItemPriceBy(shop.sid) }}0€ </p>
+                  <p>{{ getShopItemPriceBy(shop.sid) }}0€ / kg</p>
                 </div>
                 <div class="col-md-3 text-center">
-                  <p class="mb-1 pt-1">Versandkosten: 5€</p>
-                  <p>Ab 30€ Bestellwert frei</p>
+                  <p class="mb-1 pt-1">Versandkosten: {{ shop.shipping }}</p>
+                  <p>Ab {{ shop.shippingFree }}€ Bestellwert frei</p>
                 </div>
                 <div class="col-md-3 text-center">
-                  <p class="pt-1">Lieferzeit: 1-3 Werktage</p>
+                  <p class="pt-1">Lieferzeit: {{ shop.deliveryTime }}</p>
                 </div>
                 <div class="col-md-2 text-right">
-                  <button (click)="onShopClick(shop)" class="btn btn-success mt-1">Zum
+                  <button (click)="onShopClick(shop.sid)" class="btn btn-success mt-1">Zum
                     Shop</button>
                 </div>
               </div>

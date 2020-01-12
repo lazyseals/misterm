@@ -1,24 +1,29 @@
-import { Component, OnInit } from '@angular/core';
-import { Item } from 'app/shared/item.model';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ItemService } from 'app/shared/item.service';
+import { Item } from 'app/shared/item.model';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
-  private items: Item[];
+export class HomeComponent implements OnInit, OnDestroy {
+  private items: Item[] = [];
+  private itemsSub: Subscription;
 
-  constructor(private itemService: ItemService) { }
+  constructor(private itemService: ItemService) { };
 
   ngOnInit() {
-    this.items = this.getMostPopularItems(this.itemService.getItems());
-  }
+    this.itemService.getItemsInCategory('c1001');
+    this.itemsSub = this.itemService.getItemsListener()
+      .subscribe((items: Item[]) => {
+        this.items = items.slice(0, 4);
+      });
+  };
 
-  private getMostPopularItems(items: Item[]) {
-    items.sort((a, b) => (a.popularity < b.popularity) ? 1 : -1);
-    return items.slice(0, 4);
-  }
+  ngOnDestroy() {
+    this.itemsSub.unsubscribe();
+  };
 
 }

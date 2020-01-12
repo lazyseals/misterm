@@ -2,7 +2,7 @@
 
   <div class="row px-5">
     <div class="col-lg-6 mt-8">
-      <h1 class="my-4">{{ category_name }}</h1>
+      <h1 class="my-4">{{ category.name }}</h1>
     </div>
     <div class="col-lg-6 mt-8">
       <div class="row">
@@ -30,24 +30,24 @@
               <span style="font-weight: bold;">Preis</span>
             </div>
             <div class="col text-right">
-              <span (click)="onPreisReset()" class="zurueck text-success">Zurücksetzen</span>
+              <span (click)="onPriceReset()" class="zurueck text-success">Zurücksetzen</span>
             </div>
           </div>
-          <form>
+          <form (submit)="onSetPrice(setPrice)" #setPrice="ngForm">
             <div class="form-row">
               <div class="form-group col-md-5">
-                <input type="text" class="form-control" id="inputMin" placeholder="0€">
+                <input type="text" class="form-control" name="inputMin" placeholder="0€" ngModel>
               </div>
               <div class="col-md-2 text-center">
                 <p class="pt-2">-</p>
               </div>
               <div class="form-group col-md-5 text-right">
-                <input type="text" class="form-control" id="inputMax" placeholder="1.000€">
+                <input type="text" class="form-control" name="inputMax" placeholder="1.000€" ngModel>
               </div>
             </div>
             <div class="form-row">
               <div class="col">
-                <button style="width:100%" class="btn btn-success">Anwenden</button>
+                <button style="width:100%" class="btn btn-success" type="submit">Anwenden</button>
               </div>
             </div>
             <div class="form-row mt-3">
@@ -119,9 +119,10 @@
           <div class="form">
             <div class="form-row">
               <div class="col">
-                <div *ngFor="let subCategory of category.subCategories" class="form-check">
+                <div *ngFor="let subCategory of subCategories" class="form-check">
                   <label class="form-check-label">
-                    <input (click)="onCategorySelected(subCategory)" type="checkbox" class="form-check-input" value="">
+                    <input (click)="onCategorySelected(subCategory.cid)" type="checkbox" class="form-check-input"
+                      value="">
                     {{ subCategory.name }}
                     <span class="form-check-sign"></span>
                   </label>
@@ -137,10 +138,10 @@
           <div class="form">
             <div class="form-row">
               <div class="col">
-                <div *ngFor="let geschmack of geschmackInCategory" class="form-check">
+                <div *ngFor="let flavour of flavoursInCategory" class="form-check">
                   <label class="form-check-label">
-                    <input (click)="onGeschmackSelected(geschmack)" type="checkbox" class="form-check-input" value="">
-                    {{ geschmack }}
+                    <input (click)="onFlavourSelected(flavour)" type="checkbox" class="form-check-input" value="">
+                    {{ flavour }}
                     <span class="form-check-sign"></span>
                   </label>
                 </div>
@@ -157,7 +158,7 @@
               <div class="col">
                 <div *ngFor="let shop of shopsInCategory" class="form-check">
                   <label class="form-check-label">
-                    <input (click)="onHerstellerSelected(shop.id)" type="checkbox" class="form-check-input" value="">
+                    <input (click)="onHerstellerSelected(shop.sid)" type="checkbox" class="form-check-input" value="">
                     {{ shop.name }}
                     <span class="form-check-sign"></span>
                   </label>
@@ -171,7 +172,7 @@
             <span style="font-weight: bold;">Allergene (nicht enthalten)</span>
             <span class="ml-1" placement="right"
               ngbTooltip="Allergene sind nicht vollständig erfasst! Keine Garantie für falsche Angaben."><i
-                class="fa fa-question"></i></span>
+                class="fa fa-question-circle"></i></span>
           </div>
           <div class="form">
             <div class="form-row">

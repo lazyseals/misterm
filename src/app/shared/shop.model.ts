@@ -1,5 +1,13 @@
-import { Item } from './item.model';
+import { Item } from "./item.model";
 
-export class Shop {
-  constructor(public id: number, public name: string, public items: Map<number, number>, public imagePath: string, public url: string) { }
+export interface Shop {
+  sid: string;
+  name: string;
+  img: string;
+  shipping: number;
+  shippingFree: number;
+  deliveryTime: string;
+  affiliateLink: string;
+  itemPrices: Map<string, number>;
+  itemUrls: Map<string, string>;
 }

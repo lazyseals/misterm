@@ -1,11 +1,12 @@
-import { Component, OnInit, Renderer2, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Renderer2, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Item } from '../shared/item.model';
 import { ItemService } from '../shared/item.service';
 import { CategoryService } from '../shared/category.service';
-import { SubCategory, Category, MainCategory } from '../shared/category.model';
+import { Category } from '../shared/category.model';
 import { Shop } from '../shared/shop.model';
 import { ShopService } from '../shared/shop.service';
+import { Subscription } from 'rxjs';
 
 /**
  * Displays all items in a category. Offers filtering and sorting options.
@@ -13,9 +14,9 @@ import { ShopService } from '../shared/shop.service';
 @Component({
   selector: 'app-item-list',
   templateUrl: './item-list.component.html',
-  styleUrls: ['./item-list.component.scss']
+  styleUrls: ['./item-list.component.css']
 })
-export class ItemListComponent implements OnInit {
+export class ItemListComponent implements OnInit, OnDestroy {
 
   /**************************************************************************************************************
    * Class variables
@@ -48,32 +49,38 @@ export class ItemListComponent implements OnInit {
   /**************************************************************************************************************
    * Global category properties
    **************************************************************************************************************/
-  // Name of the category to be displayed. Is fetched from the route link
-  private category_name: string;
   // Category to be displayed
+  private cid: string;
   private category: Category;
+  private categorySub: Subscription;
+  // Subcategories for filter
+  private subCids: Array<string>;
+  private subCategories: Array<Category>;
+  private subCategorySub: Subscription;
   // All shops in the category to be displayed
-  private shopsInCategory: Set<Shop>;
+  private shopsInCategory: Array<Shop>;
+  private shopsSub: Subscription;
   // All geschmack in the category to be displayed
-  private geschmackInCategory: Set<string>;
+  private flavoursInCategory: Array<string>;
   // All items in the category to be displayed
   private items: Item[];
+  private itemsSub: Subscription;
 
   /**************************************************************************************************************
    * Filter properties
    **************************************************************************************************************/
   // Selected subcategories filter from all subcategories in category
-  private selectedCategories = new Set<Category>([]);
+  private selectedCategories = new Set<string>([]);
   // True if a price filter is adapted
   private isPriceFilterSelected = false;
   // Selected min price of selected price range (Not dependend on selected category. Always display all price ranges)
   private selectedMinPrice: number = 0;
   // Selected geschmack filter from all geschmack in category
-  private selectedGeschmack = new Set<string>([]);
+  private selectedFlavour = new Set<string>([]);
   // Selected shop filter from all shop in category
-  private selectedShop = new Set<number>([]);
+  private selectedShop = new Set<string>([]);
   // Selected allergen filter from all allergene (Not dependend on selected category. Always display 14 allergenes)
-  private selectedAllergene = new Set<string>([]);
+  private selectedAllergens = new Set<string>([]);
 
   /**************************************************************************************************************
    * Constructors
@@ -91,57 +98,88 @@ export class ItemListComponent implements OnInit {
     private categoryService: CategoryService,
     private shopService: ShopService,
     private renderer: Renderer2
-  ) { }
+  ) { };
 
   /**
-   * Initialisations
+   * Load items, shops and category from server
    */
   ngOnInit() {
-    this.category_name = this.route.snapshot.params['category_name'];
+    this.cid = this.route.snapshot.params['cid'];
     this.route.params.subscribe(
       (params: Params) => {
-        this.category_name = params['category_name'];
-        this.category = this.getCategoryType(this.category_name);
-        let shopIDsInCategory: number[] = this.itemService.getShopsInCategory(this.category);
-        this.shopsInCategory = new Set<Shop>(this.shopService.getShopsByShopIDs(shopIDsInCategory));
-        this.geschmackInCategory = new Set<string>(this.itemService.getGeschmackInCategory(this.category));
-        this.items = this.sortItems(this.sortProperty, this.itemService.getCategoryItems(this.category));
-      }
-    );
-    this.category = this.getCategoryType(this.category_name);
-    let shopIDsInCategory: number[] = this.itemService.getShopsInCategory(this.category);
-    this.shopsInCategory = new Set<Shop>(this.shopService.getShopsByShopIDs(shopIDsInCategory));
-    this.geschmackInCategory = new Set<string>(this.itemService.getGeschmackInCategory(this.category));
-    this.items = this.sortItems(this.sortProperty, this.itemService.getCategoryItems(this.category));
-  }
+        this.cid = params['cid'];
+        this.categoryService.getCategories([this.cid]);
+        this.categorySub = this.categoryService.getCategoriesListener()
+          .subscribe((categories: Category[]) => {
+            this.category = categories[0];
+          });
+        if (this.isMainCategory()) {
+          this.categoryService.getCategories(this.category.subCategories);
+          this.subCategorySub = this.categoryService.getCategoriesListener()
+            .subscribe((subCategories: Category[]) => {
+              this.subCategories = subCategories;
+            });
+        }
+        this.itemService.getItemsInCategory(this.cid);
+        this.itemsSub = this.itemService.getItemsListener()
+          .subscribe((items: Item[]) => {
+            this.items = items;
+          });
+        this.shopService.getShops(this.itemService.getShopsInItems());
+        this.shopsSub = this.shopService.getShopsListener()
+          .subscribe((shops: Shop[]) => {
+            this.shopsInCategory = shops;
+          });
+        this.flavoursInCategory = this.itemService.getFlavoursInItems();
+      });
+    this.categoryService.getCategories([this.cid]);
+    this.categorySub = this.categoryService.getCategoriesListener()
+      .subscribe((categories: Category[]) => {
+        this.category = categories[0];
+      });
+    if (this.isMainCategory()) {
+      this.categoryService.getCategories(this.category.subCategories);
+      this.subCategorySub = this.categoryService.getCategoriesListener()
+        .subscribe((subCategories: Category[]) => {
+          this.subCategories = subCategories;
+        });
+    }
+    this.itemService.getItemsInCategory(this.cid);
+    this.itemsSub = this.itemService.getItemsListener()
+      .subscribe((items: Item[]) => {
+        this.items = items;
+      });
+    this.shopService.getShops(this.itemService.getShopsInItems());
+    this.shopsSub = this.shopService.getShopsListener()
+      .subscribe((shops: Shop[]) => {
+        this.shopsInCategory = shops;
+      });
+    this.flavoursInCategory = this.itemService.getFlavoursInItems();
+  };
+
+  /**
+   * Unsubscribe from all subscriptions
+   */
+  ngOnDestroy() {
+    this.itemsSub.unsubscribe();
+    this.shopsSub.unsubscribe();
+    this.categorySub.unsubscribe();
+  };
 
   /**************************************************************************************************************
    * General helper methods
    **************************************************************************************************************/
 
   /**
-   * Returns category type by category name.
-   * @param category_name 
-   */
-  getCategoryType(category_name: string) {
-    for (var category of this.categoryService.getMainCategories()) {
-      if (category_name === category.name) {
-        return category;
-      }
-    }
-    return new SubCategory(category_name);
-  }
-
-  /**
    * Returns true, if class property category is of type MainCategory. Else it returns false.
    */
   isMainCategory() {
-    if (this.category instanceof MainCategory) {
+    if (this.category.main) {
       return true;
     } else {
       return false;
     }
-  }
+  };
 
   /**************************************************************************************************************
    * Sort items methods
@@ -160,7 +198,7 @@ export class ItemListComponent implements OnInit {
       case "proteinDesc": return this.sortItemsByProteinDesc(items);
       case "caloriesAsc": return this.sortItemsByCaloriesAsc(items);
     }
-  }
+  };
 
   /**
    * Returns items sorted by popularity descending
@@ -169,43 +207,43 @@ export class ItemListComponent implements OnInit {
   sortItemsByPopularityDesc(items: Item[]) {
     items.sort((a, b) => (a.popularity < b.popularity) ? 1 : -1);
     return items;
-  }
+  };
 
   /**
    * Returns items sorted by price descending
    * @param items 
    */
   sortItemsByPriceDesc(items: Item[]) {
-    items.sort((a, b) => (a.price < b.price) ? 1 : -1);
+    items.sort((a, b) => (a.minPrice < b.minPrice) ? 1 : -1);
     return items;
-  }
+  };
 
   /**
    * Returns items sorted by price ascending
    * @param items 
    */
   sortItemsByPriceAsc(items: Item[]) {
-    items.sort((a, b) => (a.price > b.price) ? 1 : -1);
+    items.sort((a, b) => (a.minPrice > b.minPrice) ? 1 : -1);
     return items;
-  }
+  };
 
   /**
    * Returns items sorted by protein descending
    * @param items 
    */
   sortItemsByProteinDesc(items: Item[]) {
-    items.sort((a, b) => (a.naehrwerte.proteins < b.naehrwerte.proteins) ? 1 : -1);
+    items.sort((a, b) => (a.nutritionText.proteins < b.nutritionText.proteins) ? 1 : -1);
     return items;
-  }
+  };
 
   /**
    * Returns items sorted by calories ascending
    * @param items 
    */
   sortItemsByCaloriesAsc(items: Item[]) {
-    items.sort((a, b) => (a.naehrwerte.calories > b.naehrwerte.calories) ? 1 : -1);
+    items.sort((a, b) => (a.nutritionText.calories > b.nutritionText.calories) ? 1 : -1);
     return items;
-  }
+  };
 
   /**************************************************************************************************************
    * Filter methods to filter global categories
@@ -214,18 +252,21 @@ export class ItemListComponent implements OnInit {
   /**
    * Invoked by all click listener methods. Applies all filters and updates items that are seen by user.
    */
-  updateItemsOnSelectedFitler() {
-    console.log(this.selectedGeschmack);
+  updateItemsOnSelectedFilter() {
     // Save the filtered items
     let filtered_items = [];
 
     // 1. Filter on selected Categories
     if (this.selectedCategories.size === 0) {
-      filtered_items = this.itemService.getCategoryItems(this.getCategoryType(this.category_name));
+      filtered_items = this.items;
     } else {
       filtered_items = [];
-      for (var category of Array.from(this.selectedCategories.values())) {
-        filtered_items = filtered_items.concat(this.itemService.getCategoryItems(category));
+      for (var category of Array.from(this.selectedCategories)) {
+        for (const item of this.items) {
+          if (item.category === category) {
+            filtered_items.push(item);
+          }
+        }
       }
     }
 
@@ -239,8 +280,8 @@ export class ItemListComponent implements OnInit {
     }
 
     // 3. Filter on geschmack
-    if (this.selectedGeschmack.size !== 0) {
-      filtered_items = this.filterGeschmack(this.selectedGeschmack, filtered_items);
+    if (this.selectedFlavour.size !== 0) {
+      filtered_items = this.filterGeschmack(this.selectedFlavour, filtered_items);
     }
 
     // 4. Filter on shop
@@ -249,27 +290,27 @@ export class ItemListComponent implements OnInit {
     }
 
     // 5. Filter on allergene
-    if (this.selectedAllergene.size !== 0) {
-      filtered_items = this.filterAllergene(this.selectedAllergene, filtered_items);
+    if (this.selectedAllergens.size !== 0) {
+      filtered_items = this.filterAllergene(this.selectedAllergens, filtered_items);
     }
 
     // 6. Sort items
     this.items = this.sortItems(this.sortProperty, filtered_items);
-  }
+  };
 
   /**
    * Returns all items in item who don't have the selected allergene
    * @param allergene 
    * @param items 
    */
-  filterAllergene(allergene: Set<string>, items: Item[]) {
+  filterAllergene(allergens: Set<string>, items: Item[]) {
     // Save the filtered items
     let filtered_items_having_allergene = new Set([]);
 
     // Iterate over all allergenes of all items and save items which have the selected allergenes
     for (var item of items) {
-      for (var itemAllergen of item.allergene) {
-        for (var selectedAllergene of Array.from(allergene.values())) {
+      for (var itemAllergen of item.allergens) {
+        for (var selectedAllergene of Array.from(allergens)) {
           if (selectedAllergene === itemAllergen) {
             filtered_items_having_allergene.add(item);
             continue;
@@ -281,22 +322,22 @@ export class ItemListComponent implements OnInit {
     // Runs over items and reduce it to elements who are in items and missing in having_alergene
     let filtered_items_havent_allergene: Item[] = items.filter(i => Array.from(filtered_items_having_allergene).indexOf(i) < 0)
     return Array.from(filtered_items_havent_allergene);
-  }
+  };
 
   /**
    * Returns all items in item whose shop id is in selected shop id. 
-   * @param shops 
+   * @param sids 
    * @param items 
    */
-  filterShop(shops: Set<number>, items: Item[]) {
+  filterShop(sids: Set<string>, items: Item[]) {
     // Save the filtered items
     let filtered_items = new Set([]);
 
     // Iterate over all shop ids of all items and save items which have the selected shop ids
     for (var item of items) {
-      for (var itemShopID of item.shops) {
-        for (var selectedShopID of Array.from(shops.values())) {
-          if (itemShopID === selectedShopID) {
+      for (var sid of item.shops) {
+        for (var selectedSid of Array.from(sids)) {
+          if (sid === selectedSid) {
             filtered_items.add(item);
             continue;
           }
@@ -306,22 +347,22 @@ export class ItemListComponent implements OnInit {
 
     // Return filtered items
     return Array.from(filtered_items);
-  }
+  };
 
   /**
-   * Returns all items in item whose geschmack is in selected geschmack.
-   * @param geschmack 
+   * Returns all items in item whose flavour is in selected geschmack.
+   * @param flavour 
    * @param items 
    */
-  filterGeschmack(geschmack: Set<string>, items: Item[]) {
+  filterGeschmack(flavours: Set<string>, items: Item[]) {
     // Save the filtered items
     let filtered_items = new Set([]);
 
     // Iterate over all geschmack of all items and save items which have the selected geschmack
     for (var item of items) {
-      for (var itemGeschmack of item.geschmack) {
-        for (var selectedGeschmack of Array.from(geschmack.values())) {
-          if (itemGeschmack === selectedGeschmack) {
+      for (var itemFlavour of item.flavours) {
+        for (var selectedFlavour of Array.from(flavours)) {
+          if (itemFlavour === selectedFlavour) {
             filtered_items.add(item);
             continue;
           }
@@ -331,7 +372,7 @@ export class ItemListComponent implements OnInit {
 
     // Return filtered items
     return Array.from(filtered_items);
-  }
+  };
 
   /**
    * Returns all items in item whose price is at least minPrice.
@@ -344,14 +385,14 @@ export class ItemListComponent implements OnInit {
 
     // Iterate over all items and save items whose price is greater than the min price
     for (var item of items) {
-      if (minPrice <= item.price) {
+      if (minPrice <= item.minPrice) {
         filtered_items.push(item);
       }
     }
 
     // Return filtered items
     return filtered_items;
-  }
+  };
 
   /**
    * Returns all items in item whose price is at least minPrice and at most maxPrice.
@@ -365,14 +406,14 @@ export class ItemListComponent implements OnInit {
 
     // Iterate over all items and save items whose price is between the min and max price
     for (var item of items) {
-      if ((item.price <= maxPrice) && (minPrice <= item.price)) {
+      if ((item.minPrice <= maxPrice) && (minPrice <= item.minPrice)) {
         filtered_items.push(item);
       }
     }
 
     // Return filtered items
     return filtered_items;
-  }
+  };
 
   /**************************************************************************************************************
    * Click Filter Listeners
@@ -386,74 +427,74 @@ export class ItemListComponent implements OnInit {
   onPriceSelected(minPrice: number) {
     this.isPriceFilterSelected = true;
     this.selectedMinPrice = minPrice;
-    this.updateItemsOnSelectedFitler();
-  }
+    this.updateItemsOnSelectedFilter();
+  };
 
   /**
    * Is invokes, if a category is selected. Updates filter property selectedCategories and updates item view for user by
    * applying all filters in method updateItemsOnSelectedFitler.
-   * @param subCategory 
+   * @param cid
    */
-  onCategorySelected(subCategory: SubCategory) {
-    if (this.selectedCategories.has(subCategory)) {
-      this.selectedCategories.delete(subCategory);
-      this.updateItemsOnSelectedFitler();
+  onCategorySelected(cid: string) {
+    if (this.selectedCategories.has(cid)) {
+      this.selectedCategories.delete(cid);
+      this.updateItemsOnSelectedFilter();
     } else {
-      this.selectedCategories.add(subCategory);
-      this.updateItemsOnSelectedFitler();
+      this.selectedCategories.add(cid);
+      this.updateItemsOnSelectedFilter();
     }
-  }
+  };
 
   /**
-   * Is invoked, if a geschmack is selected. Updates filter property selectedGeschmack and updates item view for user by
+   * Is invoked, if a geschmack is selected. Updates filter property selectedFlavour and updates item view for user by
    * applying all filters in method updateItemsOnSelectedFitler.
-   * @param geschmack 
+   * @param flavour 
    */
-  onGeschmackSelected(geschmack: string) {
-    if (this.selectedGeschmack.has(geschmack)) {
-      this.selectedGeschmack.delete(geschmack);
-      this.updateItemsOnSelectedFitler();
+  onFlavourSelected(flavour: string) {
+    if (this.selectedFlavour.has(flavour)) {
+      this.selectedFlavour.delete(flavour);
+      this.updateItemsOnSelectedFilter();
     } else {
-      this.selectedGeschmack.add(geschmack);
-      this.updateItemsOnSelectedFitler();
+      this.selectedFlavour.add(flavour);
+      this.updateItemsOnSelectedFilter();
     }
-  }
+  };
 
   /**
    * Is invoked, if a hersteller is selected. Updates filter property selectedShop and updates item view for user by
    * applying all filters in method updateItemsOnSelectedFitler.
-   * @param shopID 
+   * @param sid
    */
-  onHerstellerSelected(shopID: number) {
-    if (this.selectedShop.has(shopID)) {
-      this.selectedShop.delete(shopID);
-      this.updateItemsOnSelectedFitler();
+  onHerstellerSelected(sid: string) {
+    if (this.selectedShop.has(sid)) {
+      this.selectedShop.delete(sid);
+      this.updateItemsOnSelectedFilter();
     } else {
-      this.selectedShop.add(shopID);
-      this.updateItemsOnSelectedFitler();
+      this.selectedShop.add(sid);
+      this.updateItemsOnSelectedFilter();
     }
-  }
+  };
 
   /**
    * Is invoked, if an allergen is selected. Updates filter property selectedAllergene and updates item view for user by
    * applying all filters in method updateItemsOnSelectedFitler.
    * @param allergen 
    */
-  onAllergeneSelected(allergen: string) {
-    if (this.selectedAllergene.has(allergen)) {
-      this.selectedAllergene.delete(allergen);
-      this.updateItemsOnSelectedFitler();
+  onAllergenSelected(allergen: string) {
+    if (this.selectedAllergens.has(allergen)) {
+      this.selectedAllergens.delete(allergen);
+      this.updateItemsOnSelectedFilter();
     } else {
-      this.selectedAllergene.add(allergen);
-      this.updateItemsOnSelectedFitler();
+      this.selectedAllergens.add(allergen);
+      this.updateItemsOnSelectedFilter();
     }
-  }
+  };
 
   /**
    * Is invoked, if the price is reseted. Sets isPriceFilterSelected and all checked property of the price radio buttons to false. 
    * Sets name of all radio buttons to null. Updates item view for user by applying all filters in method updateItemsOnSelectedFitler.
    */
-  onPreisReset() {
+  onPriceReset() {
     // Set price filter selected to false
     this.isPriceFilterSelected = false;
 
@@ -468,8 +509,15 @@ export class ItemListComponent implements OnInit {
     this.priceRadioName = null;
 
     // Update items
-    this.updateItemsOnSelectedFitler();
-  }
+    this.updateItemsOnSelectedFilter();
+  };
+
+  onSetPrice(price: number) {
+    // TODO
+    this.isPriceFilterSelected = true;
+    this.selectedMinPrice = price;
+    this.updateItemsOnSelectedFilter();
+  };
 
   /**************************************************************************************************************
    * Click Sort Listeners
@@ -512,6 +560,6 @@ export class ItemListComponent implements OnInit {
         break;
       }
     }
-  }
+  };
 
 }

@@ -1,79 +1,77 @@
-import { Shop } from './shop.model';
+import { Shop } from "./shop.model";
+import { Injectable } from "@angular/core";
+import { Subject } from "rxjs";
+import { HttpClient } from "@angular/common/http";
 
+@Injectable()
 export class ShopService {
-  // Current loaded items from backend that are available to user
-  private shops: Shop[] = [
-    new Shop(1, 'Body and Fit', new Map([
-      [1, 6.5],
-      [2, 7.6],
-      [3, 5.3],
-      [4, 3.6],
-      [5, 7.8],
-      [6, 2.5],
-      [9, 1.5],
-      [10, 1.8]
-    ]), '../assets/img/body_and_fit.jpg', 'https://www.bodyandfit.com/de-de'),
-    new Shop(2, 'Amazon', new Map([
-      [2, 7.5],
-      [3, 5.4],
-      [7, 7.8],
-      [8, 5.6]
-    ]), '../assets/img/amazon.png', 'https://www.amazon.de/')
-  ];
+  // Current loaded shops from backend that are available to user
+  private shops: Shop[] = [];
+  private shopsFetched = new Subject<Shop[]>();
+  // Api base url for shop requests
+  private url = 'http://localhost:3000/api/shops?';
 
   /**
-   * Get list of all loaded shops 
+   * Create shopService class
+   * @param http 
    */
-  getShops() {
-    return this.shops.slice();
-  }
+  constructor(private http: HttpClient) { };
+
+  /**
+   * Notifies observers when items are fetched from server
+   */
+  getShopsListener() {
+    return this.shopsFetched.asObservable();
+  };
+
+  /**
+   * Get shops with given sids
+   * @param sids 
+   */
+  getShops(sids: string[]) {
+    const query = "shops=" + sids;
+    this.http.get<{ shops: Shop[] }>(this.url + query)
+      .subscribe((data) => {
+        this.shops = data.shops;
+        this.shopsFetched.next(this.shops.slice());
+      });
+  };
 
   /**
    * Get shop with given shop id
-   * @param id 
+   * @param sid
    */
-  getShopByShopID(id: number) {
-    return this.shops.find(i => i.id === id);
-  }
+  getShop(sid: string) {
+    return this.shops.find(i => i.sid === sid);
+  };
 
   /**
-   * Get all shops with given list of shop ids
-   * @param ids 
+   * Get price of item with iid in shop with sid 
+   * @param iid 
+   * @param sid 
    */
-  getShopsByShopIDs(ids: number[]) {
-    let allShops = [];
-    for (var id of ids) {
-      allShops.push(this.getShopByShopID(id));
-    }
-    return allShops;
-  }
-
-  getItempriceByShopID(itemID: number, shopID: number) {
-    let shop = this.getShopByShopID(shopID);
-    for (var item of Array.from(shop.items.keys())) {
-      if (item === itemID) {
-        return shop.items.get(item);
+  getItemprice(iid: string, sid: string): number {
+    const shop = this.shops.find(i => i.sid === sid);
+    shop.itemPrices.forEach((price, sIID) => {
+      if (sIID === iid) {
+        return price;
       }
-    }
-  }
+    });
+    return undefined;
+  };
 
   /**
-   * Get all shops that deliver item
-   * @param id
+   * Get url of item with iid in shop with sid
+   * @param iid 
+   * @param sid 
    */
-  getShopIDsByItemID(id: number) {
-    let allShops = [];
-
-    for (var shop of this.shops) {
-      for (var item of Array.from(shop.items.keys())) {
-        if (item === id) {
-          allShops.push(shop.id);
-          break;
-        }
+  getItemurl(iid: string, sid: string): string {
+    const shop = this.shops.find(i => i.sid === sid);
+    shop.itemUrls.forEach((url, sIID) => {
+      if (sIID === iid) {
+        return url;
       }
-    }
-
-    return allShops;
-
+    });
+    return undefined;
   }
 }
