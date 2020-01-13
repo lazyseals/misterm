@@ -44,34 +44,4 @@ export class ShopService {
   getShop(sid: string) {
     return this.shops.find(i => i.sid === sid);
   };
-
-  /**
-   * Get price of item with iid in shop with sid 
-   * @param iid 
-   * @param sid 
-   */
-  getItemprice(iid: string, sid: string): number {
-    const shop = this.shops.find(i => i.sid === sid);
-    shop.itemPrices.forEach((price, sIID) => {
-      if (sIID === iid) {
-        return price;
-      }
-    });
-    return undefined;
-  };
-
-  /**
-   * Get url of item with iid in shop with sid
-   * @param iid 
-   * @param sid 
-   */
-  getItemurl(iid: string, sid: string): string {
-    const shop = this.shops.find(i => i.sid === sid);
-    shop.itemUrls.forEach((url, sIID) => {
-      if (sIID === iid) {
-        return url;
-      }
-    });
-    return undefined;
-  }
 }

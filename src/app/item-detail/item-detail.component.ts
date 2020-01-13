@@ -118,7 +118,7 @@ export class ItemDetailComponent implements OnInit, OnDestroy {
     let sidToItemPrice = new Map<string, number>();
 
     for (var shop of this.shops) {
-      sidToItemPrice.set(shop.sid, this.shopService.getItemprice(this.item.iid, shop.sid));
+      sidToItemPrice.set(shop.sid, this.itemService.getItemprice(this.item.iid, shop.sid));
     }
 
     return sidToItemPrice;
@@ -149,7 +149,7 @@ export class ItemDetailComponent implements OnInit, OnDestroy {
    * @param sid
    */
   onShopClick(sid: string) {
-    window.location.href = this.shopService.getItemurl(this.item.iid, sid);
+    window.location.href = this.itemService.getItemurl(this.item.iid, sid);
   };
 
 }

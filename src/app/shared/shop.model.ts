@@ -8,6 +8,4 @@ export interface Shop {
   shippingFree: number;
   deliveryTime: string;
   affiliateLink: string;
-  itemPrices: Map<string, number>;
-  itemUrls: Map<string, string>;
 }

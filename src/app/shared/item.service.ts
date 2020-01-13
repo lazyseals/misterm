@@ -83,4 +83,34 @@ export class ItemService {
     }
     return Array.from(flavours);
   };
+
+  /**
+ * Get price of item with iid in shop with sid 
+ * @param iid 
+ * @param sid 
+ */
+  getItemprice(iid: string, sid: string): number {
+    const item = this.items.find(i => i.iid === iid);
+    item.pricesInShops.forEach((price, sID) => {
+      if (sid === sID) {
+        return price;
+      }
+    });
+    return undefined;
+  };
+
+  /**
+   * Get url of item with iid in shop with sid
+   * @param iid 
+   * @param sid 
+   */
+  getItemurl(iid: string, sid: string): string {
+    const item = this.items.find(i => i.iid === iid);
+    item.urlsInShops.forEach((url, sID) => {
+      if (sid === sID) {
+        return url;
+      }
+    });
+    return undefined;
+  }
 }
