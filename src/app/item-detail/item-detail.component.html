@@ -11,14 +11,14 @@
           <!-- col-sm-4 -->
           <div class="col-sm-4 text-center">
             <h1><span>&nbsp;</span></h1>
-            <img style="width:300px" class="card-img-top img-fluid" [src]="item.img" alt="">
+            <img *ngIf="item" style="width:300px" class="card-img-top img-fluid" [src]="item.img" alt="">
           </div>
           <!-- /. col-sm-4  -->
           <!-- col-sm-8 -->
           <div class="col-sm-8">
-            <h1>{{ item.name }}</h1>
+            <h1 *ngIf="item">{{ item.name }}</h1>
             <hr style="height: 1px;">
-            <p>{{item.descriptionLong}}</p>
+            <p *ngIf="item">{{item.descriptionLong}}</p>
             <div class="input-group my-3 px-1">
               <select class="form-control px-1">
                 <option selected>Größe</option>
@@ -38,7 +38,7 @@
             <div class="row">
               <div class="text-left col-sm-6 ">
                 <p class="d-inline">Günstigster Preis: </p>
-                <h4 class="text-success d-inline">{{ item.minPrice }}€</h4>
+                <h4 *ngIf="item" class="text-success d-inline">{{ item.minPrice }}€</h4>
               </div>
               <div class="text-right col-sm-6">
                 <button class="btn btn-success">Zum Shop</button>
@@ -73,17 +73,21 @@
             <h2>Bewertungen</h2>
             <div class="stars">
               <span class="text-warning" [innerHTML]="stars"></span>
-              {{ item.averageBewertung }} / 5.0
+              <ng-container *ngIf="item">
+                {{ item.averageBewertung }} / 5.0
+              </ng-container>
             </div>
           </div>
           <!-- /. col-lg-12 header -->
           <!-- col-lg-12 bewertungen-row -->
-          <div *ngFor="let bewertung of item.bewertungen; let lastItem = last;" class="col-lg-11 offset-lg-1">
-            <hr>
-            <p>{{ bewertung.text }}</p>
-            <small class="text-muted">{{ bewertung.autor }}</small>
-            <hr *ngIf="!lastItem">
-          </div>
+          <ng-container *ngIf="bewertung">
+            <div *ngFor="let bewertung of item.bewertungen; let lastItem = last;" class="col-lg-11 offset-lg-1">
+              <hr>
+              <p>{{ bewertung.text }}</p>
+              <small class="text-muted">{{ bewertung.autor }}</small>
+              <hr *ngIf="!lastItem">
+            </div>
+          </ng-container>
           <!-- /. col-lg-12 bewertungen row -->
         </div>
         <!-- /.row -->
@@ -114,7 +118,7 @@
           <!-- col-lg-12 img-row -->
           <div class="col-lg-11 offset-lg-1">
             <hr>
-            <img class="img-fluid" [src]="item.nutritionImg" alt="">
+            <img *ngIf="item" class="img-fluid" [src]="item.nutritionImg" alt="">
           </div>
           <!-- /. col-lg-12 img row -->
         </div>
@@ -146,30 +150,32 @@
           <!-- col-lg-12 img-row -->
           <div class="col-lg-11 offset-lg-1">
             <hr>
-            <div *ngFor="let shop of shops; let lastItem = last;">
-              <div class="row">
-                <div class="col-md-2">
-                  <img style="height:100px;" class="img-fluid" [src]="shop.img" alt="">
+            <ng-container *ngIf="shops">
+              <div *ngFor="let shop of shops; let lastItem = last;">
+                <div class="row">
+                  <div class="col-md-2">
+                    <img style="height:100px;" class="img-fluid" [src]="shop.img" alt="">
+                  </div>
+                  <div class="col-md-2 text-center">
+                    <p class="mb-0" style="font-size:150%; font-weight:bold;">
+                      {{ getShopItemPrice(shop.sid) }}0€ </p>
+                    <p>{{ getShopItemPrice(shop.sid) }}0€ / kg</p>
+                  </div>
+                  <div class="col-md-3 text-center">
+                    <p class="mb-1 pt-1">Versandkosten: {{ shop.shipping }}</p>
+                    <p>Ab {{ shop.shippingFree }}€ Bestellwert frei</p>
+                  </div>
+                  <div class="col-md-3 text-center">
+                    <p class="pt-1">Lieferzeit: {{ shop.deliveryTime }}</p>
+                  </div>
+                  <div class="col-md-2 text-right">
+                    <button (click)="onShopClick(shop.sid)" class="btn btn-success mt-1">Zum
+                      Shop</button>
+                  </div>
                 </div>
-                <div class="col-md-2 text-center">
-                  <p class="mb-0" style="font-size:150%; font-weight:bold;">
-                    {{ getShopItemPriceBy(shop.sid) }}0€ </p>
-                  <p>{{ getShopItemPriceBy(shop.sid) }}0€ / kg</p>
-                </div>
-                <div class="col-md-3 text-center">
-                  <p class="mb-1 pt-1">Versandkosten: {{ shop.shipping }}</p>
-                  <p>Ab {{ shop.shippingFree }}€ Bestellwert frei</p>
-                </div>
-                <div class="col-md-3 text-center">
-                  <p class="pt-1">Lieferzeit: {{ shop.deliveryTime }}</p>
-                </div>
-                <div class="col-md-2 text-right">
-                  <button (click)="onShopClick(shop.sid)" class="btn btn-success mt-1">Zum
-                    Shop</button>
-                </div>
+                <hr *ngIf="!lastItem">
               </div>
-              <hr *ngIf="!lastItem">
-            </div>
+            </ng-container>
           </div>
           <!-- /. col-lg-12 img row -->
         </div>
@@ -182,32 +188,3 @@
   <!-- container-fluid -->
 </section>
 <!-- ./ section shops -->
-
-<!-- section newsletter -->
-<section class="newsletter">
-  <!-- container-fluid -->
-  <div class="container-fluid mt-4 pb-5">
-    <!-- row -->
-    <div class="row">
-      <!-- col-lg-10 -->
-      <div class="col-lg-10 offset-lg-1">
-        <!-- roe -->
-        <div class="row">
-          <!-- col-lg-12 img-row -->
-          <div class="col-lg-11 offset-lg-1 text-center">
-            <h6 style="font-size: 20px;">Mister M Schnäppchen und News per Email</h6>
-            <button type="button" class="btn btn-success btn-round" placement="top"
-              ngbPopover="Der Mitgliederbereich ist zur Zeit in der Entwicklung. 
-                        Freue dich auf weitere tolle Features, die dein Erlebnis mit Mister M auf das nächste Level bringen." popoverTitle="Kommt Bald!">Jetzt Registrieren</button>
-          </div>
-          <!-- /. col-lg-12 img row -->
-        </div>
-        <!-- /.row -->
-      </div>
-      <!-- /. col-lg-10 -->
-    </div>
-    <!-- /. row -->
-  </div>
-  <!-- container-fluid -->
-</section>
-<!-- ./ newsletter -->

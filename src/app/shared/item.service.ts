@@ -1,13 +1,13 @@
 import { Item } from "./item.model";
 import { HttpClient } from '@angular/common/http';
-import { Subject } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
+import { throwError, Observable } from "rxjs";
 
 @Injectable()
 export class ItemService {
   // Current loaded items from backend that are available to user
   private items: Item[] = [];
-  private itemsFetched = new Subject<Item[]>();
   // Api base url for category requests
   private url = 'http://localhost:3000/api/items?';
 
@@ -18,43 +18,43 @@ export class ItemService {
   constructor(private http: HttpClient) { };
 
   /**
-   * Notfies observers when items are fetched from server
-   */
-  getItemsListener() {
-    return this.itemsFetched.asObservable();
-  };
-
-  /**
-   * Get items with given iids
-   * @param iids 
-   */
-  getItems(iids: string[]) {
-    const query = "items=" + iids;
-    this.http.get<{ items: Item[] }>(this.url + query)
-      .subscribe((data) => {
-        this.items = data.items;
-        this.itemsFetched.next(this.items.slice());
-      });
-  };
-
-  /**
    * Get items in category with cid
    * @param cid 
    */
   getItemsInCategory(cid: string) {
-    const query = "category=" + cid;
-    this.http.get<{ items: Item[] }>(this.url + query)
-      .subscribe((data) => {
-        this.items = data.items;
-        this.itemsFetched.next(this.items.slice());
-      });
+    const query = "cid=" + cid;
+    return this.http
+      .get<{ items: Item[] }>(
+        this.url + query
+      )
+      .pipe(
+        map(data => {
+          this.items = data.items;
+          return this.items.slice();
+        })
+      );
+  };
+
+  getItemInCategory(cid: string, iid: string) {
+    const query = "cid=" + cid + "&iid[]=" + iid;
+    return this.http
+      .get<{ items: Item[] }>(
+        this.url + query
+      )
+      .pipe(
+        map(data => {
+          this.items = data.items;
+          return this.items[0];
+        })
+      );
+
   };
 
   /**
    * Returns item with given iid
    * @param iid
    */
-  getItem(iid: string) {
+  getItem(iid: string): Item {
     return this.items.find(i => i.iid === iid);
   };
 

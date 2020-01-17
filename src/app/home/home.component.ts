@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ItemService } from 'app/shared/item.service';
 import { Item } from 'app/shared/item.model';
@@ -8,22 +8,17 @@ import { Item } from 'app/shared/item.model';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit {
   private items: Item[] = [];
   private itemsSub: Subscription;
 
   constructor(private itemService: ItemService) { };
 
   ngOnInit() {
-    this.itemService.getItemsInCategory('c1001');
-    this.itemsSub = this.itemService.getItemsListener()
-      .subscribe((items: Item[]) => {
+    this.itemService.getItemsInCategory('c2002')
+      .subscribe(items => {
         this.items = items.slice(0, 4);
       });
-  };
-
-  ngOnDestroy() {
-    this.itemsSub.unsubscribe();
   };
 
 }

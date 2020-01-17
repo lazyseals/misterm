@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, Renderer2, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Item } from '../shared/item.model';
 import { ItemService } from '../shared/item.service';
@@ -14,9 +14,9 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-item-list',
   templateUrl: './item-list.component.html',
-  styleUrls: ['./item-list.component.css']
+  styleUrls: ['./item-list.component.scss']
 })
-export class ItemListComponent implements OnInit, OnDestroy {
+export class ItemListComponent implements OnInit {
 
   /**************************************************************************************************************
    * Class variables
@@ -52,11 +52,9 @@ export class ItemListComponent implements OnInit, OnDestroy {
   // Category to be displayed
   private cid: string;
   private category: Category;
-  private categorySub: Subscription;
   // Subcategories for filter
   private subCids: Array<string>;
   private subCategories: Array<Category>;
-  private subCategorySub: Subscription;
   // All shops in the category to be displayed
   private shopsInCategory: Array<Shop>;
   private shopsSub: Subscription;
@@ -64,7 +62,6 @@ export class ItemListComponent implements OnInit, OnDestroy {
   private flavoursInCategory: Array<string>;
   // All items in the category to be displayed
   private items: Item[];
-  private itemsSub: Subscription;
 
   /**************************************************************************************************************
    * Filter properties
@@ -81,6 +78,8 @@ export class ItemListComponent implements OnInit, OnDestroy {
   private selectedShop = new Set<string>([]);
   // Selected allergen filter from all allergene (Not dependend on selected category. Always display 14 allergenes)
   private selectedAllergens = new Set<string>([]);
+
+  private isFetching = false;
 
   /**************************************************************************************************************
    * Constructors
@@ -105,65 +104,71 @@ export class ItemListComponent implements OnInit, OnDestroy {
    */
   ngOnInit() {
     this.cid = this.route.snapshot.params['cid'];
+    // Subscribe to route changes
     this.route.params.subscribe(
       (params: Params) => {
         this.cid = params['cid'];
-        this.categoryService.getCategories([this.cid]);
-        this.categorySub = this.categoryService.getCategoriesListener()
-          .subscribe((categories: Category[]) => {
-            this.category = categories[0];
+        this.categoryService.getCategories([this.cid])
+          .subscribe(category => {
+            this.category = category[0];
+            if (this.isMainCategory()) {
+              this.categoryService.getCategories(this.category.subCategories)
+                .subscribe(subCategories => {
+                  this.subCategories = subCategories;
+                });
+              this.itemService.getItemsInCategory(this.cid)
+                .subscribe(items => {
+                  this.items = items;
+                  this.shopService.getShops(this.itemService.getShopsInItems())
+                    .subscribe(shops => {
+                      this.shopsInCategory = shops;
+                    });
+                  this.flavoursInCategory = this.itemService.getFlavoursInItems();
+                });
+            } else {
+              this.itemService.getItemsInCategory(this.cid)
+                .subscribe(items => {
+                  this.items = items;
+                  this.shopService.getShops(this.itemService.getShopsInItems())
+                    .subscribe(shops => {
+                      this.shopsInCategory = shops;
+                    });
+                  this.flavoursInCategory = this.itemService.getFlavoursInItems();
+                });
+            }
           });
+      }
+    );
+    // End subscription
+    this.categoryService.getCategories([this.cid])
+      .subscribe(category => {
+        this.category = category[0];
         if (this.isMainCategory()) {
-          this.categoryService.getCategories(this.category.subCategories);
-          this.subCategorySub = this.categoryService.getCategoriesListener()
-            .subscribe((subCategories: Category[]) => {
+          this.categoryService.getCategories(this.category.subCategories)
+            .subscribe(subCategories => {
               this.subCategories = subCategories;
             });
+          this.itemService.getItemsInCategory(this.cid)
+            .subscribe(items => {
+              this.items = items;
+              this.shopService.getShops(this.itemService.getShopsInItems())
+                .subscribe(shops => {
+                  this.shopsInCategory = shops;
+                });
+              this.flavoursInCategory = this.itemService.getFlavoursInItems();
+            });
+        } else {
+          this.itemService.getItemsInCategory(this.cid)
+            .subscribe(items => {
+              this.items = items;
+              this.shopService.getShops(this.itemService.getShopsInItems())
+                .subscribe(shops => {
+                  this.shopsInCategory = shops;
+                });
+              this.flavoursInCategory = this.itemService.getFlavoursInItems();
+            });
         }
-        this.itemService.getItemsInCategory(this.cid);
-        this.itemsSub = this.itemService.getItemsListener()
-          .subscribe((items: Item[]) => {
-            this.items = items;
-          });
-        this.shopService.getShops(this.itemService.getShopsInItems());
-        this.shopsSub = this.shopService.getShopsListener()
-          .subscribe((shops: Shop[]) => {
-            this.shopsInCategory = shops;
-          });
-        this.flavoursInCategory = this.itemService.getFlavoursInItems();
       });
-    this.categoryService.getCategories([this.cid]);
-    this.categorySub = this.categoryService.getCategoriesListener()
-      .subscribe((categories: Category[]) => {
-        this.category = categories[0];
-      });
-    if (this.isMainCategory()) {
-      this.categoryService.getCategories(this.category.subCategories);
-      this.subCategorySub = this.categoryService.getCategoriesListener()
-        .subscribe((subCategories: Category[]) => {
-          this.subCategories = subCategories;
-        });
-    }
-    this.itemService.getItemsInCategory(this.cid);
-    this.itemsSub = this.itemService.getItemsListener()
-      .subscribe((items: Item[]) => {
-        this.items = items;
-      });
-    this.shopService.getShops(this.itemService.getShopsInItems());
-    this.shopsSub = this.shopService.getShopsListener()
-      .subscribe((shops: Shop[]) => {
-        this.shopsInCategory = shops;
-      });
-    this.flavoursInCategory = this.itemService.getFlavoursInItems();
-  };
-
-  /**
-   * Unsubscribe from all subscriptions
-   */
-  ngOnDestroy() {
-    this.itemsSub.unsubscribe();
-    this.shopsSub.unsubscribe();
-    this.categorySub.unsubscribe();
   };
 
   /**************************************************************************************************************

@@ -1,9 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Item } from '../shared/item.model';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Shop } from '../shared/shop.model';
 import { ItemService } from 'app/shared/item.service';
-import { Subscription } from 'rxjs';
 import { ShopService } from 'app/shared/shop.service';
 import { Bewertung } from 'app/shared/bewertung.model';
 import { BewertungService } from 'app/shared/bewertung.service';
@@ -13,7 +12,7 @@ import { BewertungService } from 'app/shared/bewertung.service';
   templateUrl: './item-detail.component.html',
   styleUrls: ['./item-detail.component.scss']
 })
-export class ItemDetailComponent implements OnInit, OnDestroy {
+export class ItemDetailComponent implements OnInit {
   /**************************************************************************************************************
    * Class variables
    **************************************************************************************************************/
@@ -27,10 +26,6 @@ export class ItemDetailComponent implements OnInit, OnDestroy {
   private stars: string;
   // Matching of shopID to item price
   private shopItemPrice: Map<string, number>;
-  // Waiting for shops to be loaded from backend
-  private shopsSub: Subscription;
-  // Waiting for bewertungen to be loaded from backend
-  private bewertungenSub: Subscription;
 
   /**
    * Constructor
@@ -55,42 +50,52 @@ export class ItemDetailComponent implements OnInit, OnDestroy {
       (params: Params) => {
         const iid: string = params['iid'];
         const cid: string = this.route.snapshot.params['cid'];
-        this.item = this.itemService.getItem(iid);
-        this.shopService.getShops(this.item.shops);
-        this.shopsSub = this.shopService.getShopsListener()
-          .subscribe((shops: Shop[]) => {
-            this.shops = this.sortShopsByPrice(shops);
+        this.itemService.getItemInCategory(cid, iid)
+          .subscribe(item => {
+            this.item = item;
+            if (this.item.shops && this.item.shops.length > 0) {
+              this.shopService.getShops(this.item.shops)
+                .subscribe(shops => {
+                  this.shops = this.sortShopsByPrice(shops);
+                  this.shopItemPrice = this.setShopItemPrice();
+                });
+            } else {
+              console.log('Shop undefined');
+            }
+            if (this.item.bewertungen && this.item.bewertungen.length > 0) {
+              this.bewertungService.getBewertungen(this.item.bewertungen)
+                .subscribe(bewertungen => {
+                  this.bewertungen = bewertungen;
+                });
+              this.stars = this.getStars(this.item.averageBewertung);
+            } else {
+              console.log('Bewertungen undefined');
+            }
           });
-        this.shopItemPrice = this.setShopItemPrice();
-        this.bewertungService.getBewertungen(this.item.bewertungen);
-        this.bewertungenSub = this.bewertungService.getBewertungenListener()
-          .subscribe((bewertungen: Bewertung[]) => {
-            this.bewertungen = bewertungen;
-          });
-        this.stars = this.getStars(this.item.averageBewertung);
       }
     );
-    this.item = this.itemService.getItem(iid);
-    this.shopService.getShops(this.item.shops);
-    this.shopsSub = this.shopService.getShopsListener()
-      .subscribe((shops: Shop[]) => {
-        this.shops = this.sortShopsByPrice(shops);
+    this.itemService.getItemInCategory(cid, iid)
+      .subscribe(item => {
+        this.item = item;
+        if (this.item.shops && this.item.shops.length > 0) {
+          this.shopService.getShops(this.item.shops)
+            .subscribe(shops => {
+              this.shops = this.sortShopsByPrice(shops);
+              this.shopItemPrice = this.setShopItemPrice();
+            });
+        } else {
+          console.log('Shop undefined');
+        }
+        if (this.item.bewertungen && this.item.bewertungen.length > 0) {
+          this.bewertungService.getBewertungen(this.item.bewertungen)
+            .subscribe(bewertungen => {
+              this.bewertungen = bewertungen;
+            });
+          this.stars = this.getStars(this.item.averageBewertung);
+        } else {
+          console.log('Bewertungen undefined');
+        }
       });
-    this.shopItemPrice = this.setShopItemPrice();
-    this.bewertungService.getBewertungen(this.item.bewertungen);
-    this.bewertungenSub = this.bewertungService.getBewertungenListener()
-      .subscribe((bewertungen: Bewertung[]) => {
-        this.bewertungen = bewertungen;
-      });
-    this.stars = this.getStars(this.item.averageBewertung);
-  };
-
-  /**
-   * Unsubscribe from all subscriptions
-   */
-  ngOnDestroy() {
-    this.bewertungenSub.unsubscribe();
-    this.shopsSub.unsubscribe();
   };
 
   /**

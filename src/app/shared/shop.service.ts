@@ -1,13 +1,12 @@
 import { Shop } from "./shop.model";
 import { Injectable } from "@angular/core";
-import { Subject } from "rxjs";
 import { HttpClient } from "@angular/common/http";
+import { map, catchError } from "rxjs/operators";
 
 @Injectable()
 export class ShopService {
   // Current loaded shops from backend that are available to user
   private shops: Shop[] = [];
-  private shopsFetched = new Subject<Shop[]>();
   // Api base url for shop requests
   private url = 'http://localhost:3000/api/shops?';
 
@@ -18,23 +17,26 @@ export class ShopService {
   constructor(private http: HttpClient) { };
 
   /**
-   * Notifies observers when items are fetched from server
-   */
-  getShopsListener() {
-    return this.shopsFetched.asObservable();
-  };
-
-  /**
    * Get shops with given sids
    * @param sids 
    */
   getShops(sids: string[]) {
-    const query = "shops=" + sids;
-    this.http.get<{ shops: Shop[] }>(this.url + query)
-      .subscribe((data) => {
-        this.shops = data.shops;
-        this.shopsFetched.next(this.shops.slice());
-      });
+    let query: string = "";
+    for (const sid of sids) {
+      query += "sids[]=" + sid + "&";
+    }
+    // Remove last question mark
+    query = query.substring(0, query.length - 1);
+    return this.http
+      .get<{ shops: Shop[] }>(
+        this.url + query
+      )
+      .pipe(
+        map(data => {
+          this.shops = data.shops;
+          return this.shops.slice();
+        })
+      );
   };
 
   /**

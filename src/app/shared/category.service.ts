@@ -1,13 +1,12 @@
 import { Category } from './category.model';
 import { HttpClient } from '@angular/common/http';
-import { Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
+import { map, catchError } from 'rxjs/operators';
 
 @Injectable()
 export class CategoryService {
   // Current loaded categories from backend that are available to user
   private categories: Category[] = [];
-  private categoriesFetched = new Subject<Category[]>();
   // Api base url for category requests
   private url = 'http://localhost:3000/api/categories?';
 
@@ -18,23 +17,26 @@ export class CategoryService {
   constructor(private http: HttpClient) { };
 
   /**
-   * Notfies observers when categories are fetched from server
-   */
-  getCategoriesListener() {
-    return this.categoriesFetched.asObservable();
-  };
-
-  /**
    * Get categories with given cids
    * @param cids
    */
   getCategories(cids: string[]) {
-    const query = "categories=" + cids;
-    this.http.get<{ categories: Category[] }>(this.url + query)
-      .subscribe((data) => {
-        this.categories = data.categories;
-        this.categoriesFetched.next(this.categories.slice());
-      });
+    let query: string = "";
+    for (const cid of cids) {
+      query += "cids[]=" + cid + "&";
+    }
+    // Remove last question mark
+    query = query.substring(0, query.length - 1);
+    return this.http
+      .get<{ categories: Category[] }>(
+        this.url + query
+      )
+      .pipe(
+        map(data => {
+          this.categories = data.categories;
+          return this.categories.slice();
+        })
+      );
   };
 
   /**

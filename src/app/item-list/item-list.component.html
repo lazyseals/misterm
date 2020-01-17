@@ -2,7 +2,7 @@
 
   <div class="row px-5">
     <div class="col-lg-6 mt-8">
-      <h1 class="my-4">{{ category.name }}</h1>
+      <h1 *ngIf="category && !isFetching" class=" my-4">{{ category.name }}</h1>
     </div>
     <div class="col-lg-6 mt-8">
       <div class="row">
@@ -112,7 +112,7 @@
             </div>
           </form>
         </li>
-        <li *ngIf="isMainCategory()" class="list-group-item filter-panel">
+        <li *ngIf="category && !isFetching && category.main" class="list-group-item filter-panel">
           <div class="mb-1">
             <span style="font-weight: bold;">Produkttyp</span>
           </div>
@@ -131,7 +131,7 @@
             </div>
           </div>
         </li>
-        <li class="list-group-item filter-panel">
+        <li *ngIf="flavoursInCategory && !isFetching" class="list-group-item filter-panel">
           <div class="mb-1">
             <span style="font-weight: bold;">Geschmack</span>
           </div>
@@ -149,7 +149,7 @@
             </div>
           </div>
         </li>
-        <li class="list-group-item filter-panel">
+        <li *ngIf="shopsInCategory && !isFetching" class="list-group-item filter-panel">
           <div class="mb-1">
             <span style="font-weight: bold;">Hersteller</span>
           </div>
@@ -340,7 +340,7 @@
       <div class="row">
 
         <div *ngFor="let item of items" class="col-lg-3 col-md-6 mb-4">
-          <app-item-list-item [item]=item></app-item-list-item>
+          <app-item-list-item *ngIf="item && !isFetching" [item]=item></app-item-list-item>
         </div>
 
       </div>
@@ -353,3 +353,9 @@
   <!-- /.row -->
 
 </div>
+<h1 *ngIf="!category && !isFetching">
+  No data available!
+</h1>
+<h1 *ngIf="isFetching">
+  Loading...
+</h1>
