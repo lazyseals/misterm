@@ -10,7 +10,12 @@ import { BewertungService } from './shared/bewertung.service';
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
-    providers: [ItemService, CategoryService, ShopService, BewertungService]
+    providers: [
+        ItemService,
+        CategoryService,
+        ShopService,
+        BewertungService
+    ]
 })
 export class AppComponent implements OnInit {
 

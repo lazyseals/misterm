@@ -1,13 +1,14 @@
 import { Item } from "./item.model";
 import { HttpClient } from '@angular/common/http';
-import { map, catchError } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { throwError, Observable } from "rxjs";
+import { Subject } from "rxjs";
 
 @Injectable()
 export class ItemService {
   // Current loaded items from backend that are available to user
   private items: Item[] = [];
+  private itemsUpdated = new Subject<Item[]>();
   // Api base url for category requests
   private url = 'http://localhost:3000/api/items?';
 
@@ -16,6 +17,13 @@ export class ItemService {
    * @param http 
    */
   constructor(private http: HttpClient) { };
+
+  /**
+   * Notify that items changed due to filtering
+   */
+  getItemsUpdateListener() {
+    return this.itemsUpdated.asObservable();
+  };
 
   /**
    * Get items in category with cid
@@ -27,14 +35,17 @@ export class ItemService {
       .get<{ items: Item[] }>(
         this.url + query
       )
-      .pipe(
-        map(data => {
-          this.items = data.items;
-          return this.items.slice();
-        })
-      );
+      .subscribe((data) => {
+        this.items = data.items;
+        this.itemsUpdated.next(this.items.slice());
+      });
   };
 
+  /**
+   * Get single item withh iid in category with cid
+   * @param cid 
+   * @param iid 
+   */
   getItemInCategory(cid: string, iid: string) {
     const query = "cid=" + cid + "&iid[]=" + iid;
     return this.http

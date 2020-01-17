@@ -18,6 +18,7 @@ import { ItemDetailComponent } from './item-detail/item-detail.component';
 import { ItemListComponent } from './item-list/item-list.component';
 import { ItemListItemComponent } from './item-list/item-list-item/item-list-item.component';
 import { AccordionTogglerDirective } from './shared/accordionToggler.directive';
+import { FilterPanelComponent } from './item-list/filter-panel/filter-panel.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { AccordionTogglerDirective } from './shared/accordionToggler.directive';
     ItemDetailComponent,
     ItemListComponent,
     ItemListItemComponent,
-    AccordionTogglerDirective
+    AccordionTogglerDirective,
+    FilterPanelComponent
   ],
   imports: [
     BrowserModule,
