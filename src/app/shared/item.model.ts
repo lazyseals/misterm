@@ -17,6 +17,6 @@ export interface Item {
   shops: string[];
   category: string;
   bewertungen: string[];
-  pricesInShops: Map<string, number>;
-  urlsInShops: Map<string, string>;
+  pricesInShops: [{ sid: string, price: number }];
+  urlsInShops: [{ sid: string, url: string }];
 }

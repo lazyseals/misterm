@@ -47,7 +47,7 @@ export class ItemService {
    * @param iid 
    */
   getItemInCategory(cid: string, iid: string) {
-    const query = "cid=" + cid + "&iid[]=" + iid;
+    const query = "cid=" + cid + "&iids[]=" + iid;
     return this.http
       .get<{ items: Item[] }>(
         this.url + query
@@ -102,11 +102,11 @@ export class ItemService {
  */
   getItemprice(iid: string, sid: string): number {
     const item = this.items.find(i => i.iid === iid);
-    item.pricesInShops.forEach((price, sID) => {
-      if (sid === sID) {
-        return price;
+    for (let priceToShop of item.pricesInShops) {
+      if (sid === priceToShop.sid) {
+        return priceToShop.price;
       }
-    });
+    }
     return undefined;
   };
 
@@ -117,11 +117,11 @@ export class ItemService {
    */
   getItemurl(iid: string, sid: string): string {
     const item = this.items.find(i => i.iid === iid);
-    item.urlsInShops.forEach((url, sID) => {
-      if (sid === sID) {
-        return url;
+    for (let urlToShop of item.urlsInShops) {
+      if (sid === urlToShop.sid) {
+        return urlToShop.url;
       }
-    });
+    }
     return undefined;
   }
 }

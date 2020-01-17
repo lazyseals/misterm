@@ -50,28 +50,6 @@ export class ItemDetailComponent implements OnInit {
       (params: Params) => {
         const iid: string = params['iid'];
         const cid: string = this.route.snapshot.params['cid'];
-        this.itemService.getItemInCategory(cid, iid)
-          .subscribe(item => {
-            this.item = item;
-            if (this.item.shops && this.item.shops.length > 0) {
-              this.shopService.getShops(this.item.shops)
-                .subscribe(shops => {
-                  this.shops = this.sortShopsByPrice(shops);
-                  this.shopItemPrice = this.setShopItemPrice();
-                });
-            } else {
-              console.log('Shop undefined');
-            }
-            if (this.item.bewertungen && this.item.bewertungen.length > 0) {
-              this.bewertungService.getBewertungen(this.item.bewertungen)
-                .subscribe(bewertungen => {
-                  this.bewertungen = bewertungen;
-                });
-              this.stars = this.getStars(this.item.averageBewertung);
-            } else {
-              console.log('Bewertungen undefined');
-            }
-          });
       }
     );
     this.itemService.getItemInCategory(cid, iid)
@@ -112,11 +90,13 @@ export class ItemDetailComponent implements OnInit {
    * @param sid
    */
   private getShopItemPrice(sid: string) {
+    let shopPrice: Number;
     this.shopItemPrice.forEach((price: number, _sid: string) => {
       if (sid === _sid) {
-        return price;
+        shopPrice = price;
       }
     });
+    return shopPrice;
   };
 
   private setShopItemPrice() {

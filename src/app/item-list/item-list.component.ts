@@ -56,19 +56,6 @@ export class ItemListComponent implements OnInit, OnDestroy {
     this.route.params.subscribe(
       (params: Params) => {
         this.cid = params['cid'];
-        this.categoryService.getCategories([this.cid])
-          .subscribe(category => {
-            this.category = category[0];
-            this.itemService.getItemsInCategory(this.cid);
-            this.itemsServerSub = this.itemService.getItemsUpdateListener()
-              .subscribe(items => {
-                this.items = items;
-              });
-          });
-        this.itemsFilterSub = this.filterService.getItemsUpdateListener()
-          .subscribe((items: Item[]) => {
-            this.items = items;
-          });
       }
     );
     // End subscription
