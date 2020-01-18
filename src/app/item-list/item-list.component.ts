@@ -4,8 +4,8 @@ import { Item } from '../shared/item.model';
 import { ItemService } from '../shared/item.service';
 import { CategoryService } from '../shared/category.service';
 import { Category } from '../shared/category.model';
-import { FilterService } from '../shared/filter.service';
-import { SortService } from '../shared/sort.service';
+import { FilterService } from './filter.service';
+import { SortService } from './sort.service';
 import { Subscription } from 'rxjs';
 
 /**
@@ -24,6 +24,8 @@ export class ItemListComponent implements OnInit, OnDestroy {
   // Category to be displayed
   private cid: string;
   private category: Category;
+  private subCids: string[] = [];
+  private subCategories: Category[];
   // All items in the category to be displayed
   private items: Item[];
   // True if app is fetching data from backend
@@ -51,22 +53,38 @@ export class ItemListComponent implements OnInit, OnDestroy {
    * Load items and category from server
    */
   ngOnInit() {
-    this.cid = this.route.snapshot.params['cid'];
-    // Subscribe to route changes
     this.route.params.subscribe(
       (params: Params) => {
         this.cid = params['cid'];
+        this.fetchData();
       }
     );
-    // End subscription
+  };
+
+  fetchData() {
     this.categoryService.getCategories([this.cid])
       .subscribe(category => {
         this.category = category[0];
-        this.itemService.getItemsInCategory(this.cid);
-        this.itemsServerSub = this.itemService.getItemsUpdateListener()
-          .subscribe(items => {
-            this.items = items;
-          });
+        if (this.category.main && this.category.subCategories.length > 0) {
+          this.categoryService.getSubcategories(this.category.subCategories)
+            .subscribe(subCategories => {
+              this.subCategories = subCategories;
+              for (const subCategory of subCategories) {
+                this.subCids.push(subCategory.cid);
+              }
+              this.itemService.getItemsInCategories(this.subCids);
+              this.itemsServerSub = this.itemService.getItemsUpdateListener()
+                .subscribe(items => {
+                  this.items = items;
+                });
+            });
+        } else {
+          this.itemService.getItemsInCategory(this.cid);
+          this.itemsServerSub = this.itemService.getItemsUpdateListener()
+            .subscribe(items => {
+              this.items = items;
+            });
+        }
       });
     this.itemsFilterSub = this.filterService.getItemsUpdateListener()
       .subscribe((items: Item[]) => {

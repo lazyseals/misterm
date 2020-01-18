@@ -1,4 +1,4 @@
-import { Item } from "./item.model";
+import { Item } from "../shared/item.model";
 import { Subject } from "rxjs";
 import { SortService } from "./sort.service";
 import { Injectable } from "@angular/core";

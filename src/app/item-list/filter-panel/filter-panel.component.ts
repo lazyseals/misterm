@@ -4,7 +4,7 @@ import { Shop } from 'app/shared/shop.model';
 import { ItemService } from 'app/shared/item.service';
 import { CategoryService } from 'app/shared/category.service';
 import { ShopService } from 'app/shared/shop.service';
-import { FilterService } from 'app/shared/filter.service';
+import { FilterService } from '../filter.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -14,6 +14,7 @@ import { Subscription } from 'rxjs';
 })
 export class FilterPanelComponent implements OnInit, OnDestroy {
   @Input() private category: Category;
+  @Input() private subCategories: Array<Category>;
 
   // View childs for proce radio buttons
   @ViewChild('bisZwanzig', { static: true }) bisZwanzig: ElementRef;
@@ -26,7 +27,6 @@ export class FilterPanelComponent implements OnInit, OnDestroy {
   private priceRadioName = "price";
   // Subcategories for filter
   private subCids: Array<string>;
-  private subCategories: Array<Category>;
   // All shops in the category to be displayed
   private shopsInCategory: Array<Shop>;
   // All geschmack in the category to be displayed
@@ -52,29 +52,14 @@ export class FilterPanelComponent implements OnInit, OnDestroy {
    * Load shops and subcategories from server
    */
   ngOnInit() {
-    if (this.category.main) {
-      this.categoryService.getCategories(this.category.subCategories)
-        .subscribe(subCategories => {
-          this.subCategories = subCategories;
-        });
-      this.itemService.getItemsUpdateListener()
-        .subscribe(items => {
-          this.shopService.getShops(this.itemService.getShopsInItems())
-            .subscribe(shops => {
-              this.shopsInCategory = shops;
-            });
-          this.flavoursInCategory = this.itemService.getFlavoursInItems();
-        });
-    } else {
-      this.itemService.getItemsUpdateListener()
-        .subscribe(items => {
-          this.shopService.getShops(this.itemService.getShopsInItems())
-            .subscribe(shops => {
-              this.shopsInCategory = shops;
-            });
-          this.flavoursInCategory = this.itemService.getFlavoursInItems();
-        });
-    }
+    this.itemService.getItemsUpdateListener()
+      .subscribe(items => {
+        this.shopService.getShops(this.itemService.getShopsInItems())
+          .subscribe(shops => {
+            this.shopsInCategory = shops;
+          });
+        this.flavoursInCategory = this.itemService.getFlavoursInItems();
+      });
   };
 
   ngOnDestroy() {

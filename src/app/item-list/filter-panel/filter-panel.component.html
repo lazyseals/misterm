@@ -87,7 +87,7 @@
       </div>
     </form>
   </li>
-  <li *ngIf="category && category.main" class="list-group-item filter-panel">
+  <li *ngIf="category && category.subCategories.length > 0" class="list-group-item filter-panel">
     <div class="mb-1">
       <span style="font-weight: bold;">Produkttyp</span>
     </div>

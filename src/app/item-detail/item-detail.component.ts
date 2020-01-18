@@ -44,14 +44,16 @@ export class ItemDetailComponent implements OnInit {
    * Loads items, shops and bewertungen from server
    */
   ngOnInit() {
-    const cid: string = this.route.snapshot.params['cid'];
-    const iid: string = this.route.snapshot.params['iid'];
     this.route.params.subscribe(
       (params: Params) => {
         const iid: string = params['iid'];
         const cid: string = this.route.snapshot.params['cid'];
+        this.fetchData(cid, iid);
       }
     );
+  };
+
+  fetchData(cid: string, iid: string) {
     this.itemService.getItemInCategory(cid, iid)
       .subscribe(item => {
         this.item = item;
@@ -74,7 +76,7 @@ export class ItemDetailComponent implements OnInit {
           console.log('Bewertungen undefined');
         }
       });
-  };
+  }
 
   /**
    * Sorts loaded shops by price ascending

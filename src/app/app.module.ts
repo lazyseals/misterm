@@ -13,7 +13,7 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { ComponentsModule } from './components/components.module';
 import { ExamplesModule } from './examples/examples.module';
 import { HomeComponent } from './home/home.component';
-import { ItemCardComponent } from './item-card/item-card.component';
+import { ItemCardComponent } from './home/item-card/item-card.component';
 import { ItemDetailComponent } from './item-detail/item-detail.component';
 import { ItemListComponent } from './item-list/item-list.component';
 import { ItemListItemComponent } from './item-list/item-list-item/item-list-item.component';

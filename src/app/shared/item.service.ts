@@ -2,7 +2,7 @@ import { Item } from "./item.model";
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { Subject } from "rxjs";
+import { Subject, forkJoin } from "rxjs";
 
 @Injectable()
 export class ItemService {
@@ -30,8 +30,9 @@ export class ItemService {
    * @param cid 
    */
   getItemsInCategory(cid: string) {
+    this.items = [];
     const query = "cid=" + cid;
-    return this.http
+    this.http
       .get<{ items: Item[] }>(
         this.url + query
       )
@@ -42,11 +43,44 @@ export class ItemService {
   };
 
   /**
+   * Just returns items in category but doesn't set global items
+   * @param cid 
+   */
+  private getItemsInCategoryHelper(cid: string) {
+    const query = "cid=" + cid;
+    return this.http
+      .get<{ items: Item[] }>(
+        this.url + query
+      )
+      .pipe(
+        map(data => {
+          return data.items;
+        })
+      );
+  };
+
+  /**
+   * Get items in multiple categories
+   * @param cids 
+   */
+  getItemsInCategories(cids: string[]) {
+    this.items = [];
+    cids.forEach((cid) => {
+      this.getItemsInCategoryHelper(cid)
+        .subscribe((items) => {
+          this.items = this.items.concat(items);
+          this.itemsUpdated.next(this.items.slice());
+        })
+    });
+  };
+
+  /**
    * Get single item withh iid in category with cid
    * @param cid 
    * @param iid 
    */
   getItemInCategory(cid: string, iid: string) {
+    this.items = [];
     const query = "cid=" + cid + "&iids[]=" + iid;
     return this.http
       .get<{ items: Item[] }>(
@@ -75,7 +109,7 @@ export class ItemService {
   getShopsInItems() {
     let sids = new Set<string>([]);
     for (const item of this.items) {
-      for (const sid in item.shops) {
+      for (const sid of item.shops) {
         sids.add(sid);
       }
     }

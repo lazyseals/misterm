@@ -1,4 +1,4 @@
-import { Item } from "./item.model";
+import { Item } from "../shared/item.model";
 
 export class SortService {
   // Defines how the items should be sorted. Can be from [popularity, priceAsc, priceDesc, proteinDesc, "caloriesAsc]
