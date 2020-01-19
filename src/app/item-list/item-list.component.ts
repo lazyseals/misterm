@@ -62,6 +62,7 @@ export class ItemListComponent implements OnInit, OnDestroy {
   };
 
   fetchData() {
+    this.isFetching = true;
     this.categoryService.getCategories([this.cid])
       .subscribe(category => {
         this.category = category[0];
@@ -75,6 +76,7 @@ export class ItemListComponent implements OnInit, OnDestroy {
               this.itemService.getItemsInCategories(this.subCids);
               this.itemsServerSub = this.itemService.getItemsUpdateListener()
                 .subscribe(items => {
+                  this.isFetching = false;
                   this.items = items;
                 });
             });
@@ -82,6 +84,7 @@ export class ItemListComponent implements OnInit, OnDestroy {
           this.itemService.getItemsInCategory(this.cid);
           this.itemsServerSub = this.itemService.getItemsUpdateListener()
             .subscribe(items => {
+              this.isFetching = false;
               this.items = items;
             });
         }

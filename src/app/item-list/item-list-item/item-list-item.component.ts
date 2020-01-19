@@ -13,4 +13,16 @@ export class ItemListItemComponent implements OnInit {
   ngOnInit() {
   }
 
+  shortenName(name: string) {
+    let parts = name.split(' ');
+    if (parts.length > 4) {
+      let shortenedName = '';
+      for (let i = 0; i < 4; i++) {
+        shortenedName += parts[i] + ' ';
+      }
+      return shortenedName + '...';
+    }
+    return name;
+  }
+
 }

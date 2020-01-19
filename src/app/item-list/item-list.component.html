@@ -29,14 +29,26 @@
 
     <div class="col-lg-10">
 
-      <div class="row">
+      <div *ngIf="items && !isFetching" class="row">
 
         <div *ngFor="let item of items" class="col-lg-3 col-md-6 mb-4">
-          <app-item-list-item *ngIf="item && !isFetching" [item]=item></app-item-list-item>
+          <app-item-list-item *ngIf="item" [item]=item></app-item-list-item>
         </div>
 
       </div>
       <!-- /.row -->
+
+      <div *ngIf="isFetching" class="lds-grid">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
 
     </div>
     <!-- /.col-lg-9 -->

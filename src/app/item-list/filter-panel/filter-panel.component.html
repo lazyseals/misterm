@@ -105,19 +105,22 @@
       </div>
     </div>
   </li>
-  <li *ngIf="flavoursInCategory" class="list-group-item filter-panel">
+  <li *ngIf="flavoursInCategory && flavoursContainElements()" class="list-group-item filter-panel">
     <div class="mb-1">
       <span style="font-weight: bold;">Geschmack</span>
     </div>
-    <div class="form">
+    <div class="form flavours-list">
       <div class="form-row">
         <div class="col">
-          <div *ngFor="let flavour of flavoursInCategory" class="form-check">
-            <label class="form-check-label">
+          <div *ngFor="let flavour of flavoursToBeDisplayed" class="form-check">
+            <label *ngIf="flavour !== null && flavour !== 'null' && flavour !== ''" class="form-check-label">
               <input (click)="onFlavourSelected(flavour)" type="checkbox" class="form-check-input" value="">
               {{ flavour }}
               <span class="form-check-sign"></span>
             </label>
+          </div>
+          <div *ngIf="flavoursInCategory.length > 0 && equals(flavoursToBeDisplayed, flavoursInCategory) === false">
+            <span (click)="onMoreFlavours()" class="zurueck text-success">mehr...</span>
           </div>
         </div>
       </div>
@@ -144,9 +147,10 @@
   <li class="list-group-item filter-panel">
     <div class="mb-1">
       <span style="font-weight: bold;">Allergene (nicht enthalten)</span>
-      <span class="ml-1" placement="right"
-        ngbTooltip="Allergene sind nicht vollständig erfasst! Keine Garantie für falsche Angaben."><i
-          class="fa fa-question-circle"></i></span>
+      <span class="ml-1" placement="right" container="body"
+        ngbTooltip="Allergene sind nicht vollständig erfasst! Keine Garantie für falsche Angaben.">
+        <i class="fa fa-question-circle"></i>
+      </span>
     </div>
     <div class="form">
       <div class="form-row">

@@ -11,13 +11,16 @@ import { Item } from 'app/shared/item.model';
 export class HomeComponent implements OnInit, OnDestroy {
   private items: Item[] = [];
   private itemsSub: Subscription;
+  private isFetching = false;
 
   constructor(private itemService: ItemService) { };
 
   ngOnInit() {
     this.itemService.getItemsInCategory('c2002');
+    this.isFetching = true;
     this.itemService.getItemsUpdateListener()
       .subscribe(items => {
+        this.isFetching = false;
         this.items = items.slice(0, 4);
       });
   };

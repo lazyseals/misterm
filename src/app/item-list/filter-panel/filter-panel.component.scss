@@ -12,3 +12,9 @@
 .zurueck:hover {
   border-bottom: 1px solid #6bd098;
 }
+
+.flavours-list {
+  max-height: 400px;
+  overflow:hidden; 
+  overflow-y:scroll;
+}

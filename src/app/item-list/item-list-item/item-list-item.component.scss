@@ -17,8 +17,19 @@
 }
 
 .card-img-top {
+  display: block;
+  margin: 0 auto;
   height: auto; 
   width: auto; 
   max-width: 200px; 
   max-height: 200px;
+}
+
+.img-container {
+  height: 200px;
+}
+
+.img-link {
+  display: inline-block;
+  width: 100%;
 }

@@ -33,6 +33,10 @@ export class FilterPanelComponent implements OnInit, OnDestroy {
   private flavoursInCategory: Array<string>;
   // Subscriptions to item changes due to server loading
   private itemsServerSub: Subscription;
+  // True if more flavours should be displayed
+  private displayMoreFlavours = false;
+  // Flavours that are displayed
+  private flavoursToBeDisplayed: Array<string>;
 
   /**
    * Create filter panel
@@ -59,6 +63,8 @@ export class FilterPanelComponent implements OnInit, OnDestroy {
             this.shopsInCategory = shops;
           });
         this.flavoursInCategory = this.itemService.getFlavoursInItems();
+        console.log(this.flavoursInCategory);
+        this.flavoursToBeDisplayed = this.flavoursInCategory.slice(0, 10);
       });
   };
 
@@ -177,6 +183,23 @@ export class FilterPanelComponent implements OnInit, OnDestroy {
     this.filterService.setPriceFilterSelected(true);
     this.filterService.setSelectedMinPrice(price);
     this.filterService.updateItemsOnSelectedFilter();
+  };
+
+  onMoreFlavours() {
+    this.flavoursToBeDisplayed = this.flavoursInCategory;
+  };
+
+  equals(array1, array2) {
+    return array1.length === array2.length && array1.sort().every(function (value, index) { return value === array2.sort()[index] });
+  };
+
+  flavoursContainElements() {
+    for (const flavour of this.flavoursInCategory) {
+      if (flavour !== 'null' && flavour !== '') {
+        return true;
+      }
+    }
+    return false;
   };
 
 }

@@ -26,6 +26,7 @@ export class ItemDetailComponent implements OnInit {
   private stars: string;
   // Matching of shopID to item price
   private shopItemPrice: Map<string, number>;
+  private isFetching = false;
 
   /**
    * Constructor
@@ -54,8 +55,10 @@ export class ItemDetailComponent implements OnInit {
   };
 
   fetchData(cid: string, iid: string) {
+    this.isFetching = true;
     this.itemService.getItemInCategory(cid, iid)
       .subscribe(item => {
+        this.isFetching = false;
         this.item = item;
         if (this.item.shops && this.item.shops.length > 0) {
           this.shopService.getShops(this.item.shops)
