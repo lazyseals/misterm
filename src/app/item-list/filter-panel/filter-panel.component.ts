@@ -6,6 +6,7 @@ import { CategoryService } from 'app/shared/category.service';
 import { ShopService } from 'app/shared/shop.service';
 import { FilterService } from '../filter.service';
 import { Subscription } from 'rxjs';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-filter-panel',
@@ -159,9 +160,10 @@ export class FilterPanelComponent implements OnInit, OnDestroy {
    * Is invoked, if the price is reseted. Sets isPriceFilterSelected and all checked property of the price radio buttons to false. 
    * Sets name of all radio buttons to null. Updates item view for user by applying all filters in method updateItemsOnSelectedFitler.
    */
-  onPriceReset() {
+  onPriceReset(form: NgForm) {
     // Set price filter selected to false
     this.filterService.setPriceFilterSelected(false);
+    this.filterService.setSelectedMaxPrice(undefined);
 
     // Set checked property of all radio buttons to false
     this.bisZwanzig.nativeElement.checked = false;
@@ -175,12 +177,17 @@ export class FilterPanelComponent implements OnInit, OnDestroy {
 
     // Update items
     this.filterService.updateItemsOnSelectedFilter();
+
+    // Reset form
+    form.resetForm();
   };
 
-  onSetPrice(price: number) {
-    // TODO
+  onSetPrice(form: NgForm) {
+    const minPrice = form.value.inputMin;
+    const maxPrice = form.value.inputMax;
     this.filterService.setPriceFilterSelected(true);
-    this.filterService.setSelectedMinPrice(price);
+    this.filterService.setSelectedMinPrice(minPrice);
+    this.filterService.setSelectedMaxPrice(maxPrice);
     this.filterService.updateItemsOnSelectedFilter();
   };
 

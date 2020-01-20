@@ -5,7 +5,7 @@
         <span style="font-weight: bold;">Preis</span>
       </div>
       <div class="col text-right">
-        <span (click)="onPriceReset()" class="zurueck text-success">Zurücksetzen</span>
+        <span (click)="onPriceReset(setPrice)" class="zurueck text-success">Zurücksetzen</span>
       </div>
     </div>
     <form (submit)="onSetPrice(setPrice)" #setPrice="ngForm">

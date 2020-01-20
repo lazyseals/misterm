@@ -65,7 +65,6 @@ export class ItemListComponent implements OnInit, OnDestroy {
   };
 
   paginateItems() {
-    this.items = this.itemService.getItems();
     this.items = this.items.slice((this.page - 1) * this.numberOfItemsToDisplay, this.page * this.numberOfItemsToDisplay);
   }
 
@@ -158,6 +157,7 @@ export class ItemListComponent implements OnInit, OnDestroy {
   };
 
   onChangePage() {
+    this.items = this.itemService.getItems();
     this.paginateItems();
   }
 

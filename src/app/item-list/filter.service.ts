@@ -19,6 +19,7 @@ export class FilterService {
   private isPriceFilterSelected = false;
   // Selected min price of selected price range (Not dependend on selected category. Always display all price ranges)
   private selectedMinPrice: number = 0;
+  private selectedMaxPrice: number;
   // Selected geschmack filter from all geschmack in category
   private selectedFlavour = new Set<string>([]);
   // Selected shop filter from all shop in category
@@ -68,7 +69,10 @@ export class FilterService {
     if (this.isPriceFilterSelected) {
       if (this.selectedMinPrice === 80) {
         filtered_items = this.filterMinPrice(80, filtered_items);
-      } else {
+      } else if (this.selectedMaxPrice) {
+        filtered_items = this.filterPriceRange(this.selectedMinPrice, this.selectedMaxPrice, filtered_items);
+      }
+      else {
         filtered_items = this.filterPriceRange(this.selectedMinPrice, this.minToMaxPrice.get(this.selectedMinPrice), filtered_items);
       }
     }
@@ -133,6 +137,7 @@ export class FilterService {
       for (var sid of item.shops) {
         for (var selectedSid of Array.from(sids)) {
           if (sid === selectedSid) {
+            console.log(item);
             filtered_items.add(item);
             continue;
           }
@@ -222,6 +227,10 @@ export class FilterService {
     this.selectedMinPrice = minPrice;
   };
 
+  setSelectedMaxPrice(maxPrice: number) {
+    this.selectedMaxPrice = maxPrice;
+  }
+
   setSelectedFlavour(flavour: Set<string>) {
     this.selectedFlavour = flavour;
   };
@@ -249,6 +258,10 @@ export class FilterService {
   getSelectedMinPrice() {
     return this.selectedMinPrice;
   };
+
+  getSelectedMaxPrice() {
+    return this.selectedMaxPrice;
+  }
 
   getSelectedFlavour() {
     return this.selectedFlavour;
