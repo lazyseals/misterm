@@ -26,6 +26,13 @@ export class ItemService {
   };
 
   /**
+   * Return currently fetched items
+   */
+  getItems() {
+    return this.items.slice();
+  }
+
+  /**
    * Get items in category with cid
    * @param cid 
    */

@@ -160,4 +160,23 @@ Loading spinner
     opacity: 0.5;
   }
 }
-  
+
+/************************************
+Pagination
+************************************/
+.pagination > .page-item > .page-link, .pagination > .page-item > span, .pagination > .page-item:first-child > .page-link, .pagination > .page-item:first-child > span, .pagination > .page-item:last-child > .page-link, .pagination > .page-item:last-child > span {
+  border: 2px solid #6bd098;
+  color: #6bd098;
+}
+
+.pagination > li > a:hover, .pagination > li > a:focus, .pagination > li > a:active, .pagination > li.active > a, .pagination > li.active > span, .pagination > li.active > a:hover, .pagination > li.active > span:hover, .pagination > li.active > a:focus, .pagination > li.active > span:focus {
+  background-color: #6bd098;
+  border-color: #6bd098;
+  color: #fff;
+}
+
+.page-item.active .page-link {
+  background-color: #6bd098;
+  border-color: #6bd098;
+  color: #fff;
+}

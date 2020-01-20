@@ -34,6 +34,9 @@ export class ItemListComponent implements OnInit, OnDestroy {
   private itemsFilterSub: Subscription;
   // Subscriptions to item changes due to server loading
   private itemsServerSub: Subscription;
+  private numberOfItemsToDisplay = 24;
+  private page = 1;
+  private collectionSize: Number;
 
   /**
    * Constructor 
@@ -61,6 +64,11 @@ export class ItemListComponent implements OnInit, OnDestroy {
     );
   };
 
+  paginateItems() {
+    this.items = this.itemService.getItems();
+    this.items = this.items.slice((this.page - 1) * this.numberOfItemsToDisplay, this.page * this.numberOfItemsToDisplay);
+  }
+
   fetchData() {
     this.isFetching = true;
     this.categoryService.getCategories([this.cid])
@@ -78,6 +86,8 @@ export class ItemListComponent implements OnInit, OnDestroy {
                 .subscribe(items => {
                   this.isFetching = false;
                   this.items = items;
+                  this.collectionSize = (this.items.length / this.numberOfItemsToDisplay) * 10;
+                  this.paginateItems();
                 });
             });
         } else {
@@ -86,12 +96,16 @@ export class ItemListComponent implements OnInit, OnDestroy {
             .subscribe(items => {
               this.isFetching = false;
               this.items = items;
+              this.collectionSize = (this.items.length / this.numberOfItemsToDisplay) * 10;
+              this.paginateItems();
             });
         }
       });
     this.itemsFilterSub = this.filterService.getItemsUpdateListener()
       .subscribe((items: Item[]) => {
         this.items = items;
+        this.collectionSize = (this.items.length / this.numberOfItemsToDisplay) * 10;
+        this.paginateItems();
       });
   };
 
@@ -142,5 +156,9 @@ export class ItemListComponent implements OnInit, OnDestroy {
       }
     }
   };
+
+  onChangePage() {
+    this.paginateItems();
+  }
 
 }

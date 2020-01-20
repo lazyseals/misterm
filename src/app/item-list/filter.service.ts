@@ -2,6 +2,7 @@ import { Item } from "../shared/item.model";
 import { Subject } from "rxjs";
 import { SortService } from "./sort.service";
 import { Injectable } from "@angular/core";
+import { ItemService } from "app/shared/item.service";
 
 @Injectable()
 export class FilterService {
@@ -29,7 +30,8 @@ export class FilterService {
   private itemsUpdated = new Subject<Item[]>();
 
   constructor(
-    private sortService: SortService
+    private sortService: SortService,
+    private itemService: ItemService
   ) { };
 
   /**
@@ -43,6 +45,8 @@ export class FilterService {
    * Invoked by all click listener methods. Applies all filters and updates items that are seen by user.
    */
   updateItemsOnSelectedFilter() {
+    // Get current items
+    this.items = this.itemService.getItems();
     // Save the filtered items
     let filtered_items: Item[] = [];
 
@@ -102,7 +106,7 @@ export class FilterService {
     for (var item of items) {
       for (var itemAllergen of item.allergens) {
         for (var selectedAllergene of Array.from(allergens)) {
-          if (selectedAllergene === itemAllergen) {
+          if (selectedAllergene.toLowerCase() === itemAllergen.toLowerCase()) {
             filtered_items_having_allergene.add(item);
             continue;
           }

@@ -13,8 +13,8 @@
               <option id="popularity" selected>Beliebteste zuerst</option>
               <option id="priceAsc">Preis: Günstigster zuerst</option>
               <option id="priceDesc">Preis: Höchster zuerst</option>
-              <option id="proteinDesc">Nährwerte: Höchster Proteingehalt zuerst</option>
-              <option id="calorieAsc">Nährwerte: Niedrigste Kalorien zuerst</option>
+              <!--<option id="proteinDesc">Nährwerte: Höchster Proteingehalt zuerst</option>
+              <option id="calorieAsc">Nährwerte: Niedrigste Kalorien zuerst</option>-->
             </select> </div>
         </form>
       </div>
@@ -35,6 +35,11 @@
           <app-item-list-item *ngIf="item" [item]=item></app-item-list-item>
         </div>
 
+      </div>
+
+      <div *ngIf="items && !isFetching" class="row justify-content-center">
+        <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" (pageChange)="onChangePage()"
+          aria-label="Default pagination" class="d-flex justify-content-center"></ngb-pagination>
       </div>
       <!-- /.row -->
 

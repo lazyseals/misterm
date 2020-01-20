@@ -63,7 +63,6 @@ export class FilterPanelComponent implements OnInit, OnDestroy {
             this.shopsInCategory = shops;
           });
         this.flavoursInCategory = this.itemService.getFlavoursInItems();
-        console.log(this.flavoursInCategory);
         this.flavoursToBeDisplayed = this.flavoursInCategory.slice(0, 10);
       });
   };
@@ -133,7 +132,7 @@ export class FilterPanelComponent implements OnInit, OnDestroy {
       this.filterService.updateItemsOnSelectedFilter();
     } else {
       shops.add(sid);
-      this.filterService.setSelectedFlavour(shops);
+      this.filterService.setSelectedShop(shops);
       this.filterService.updateItemsOnSelectedFilter();
     }
   };
@@ -143,7 +142,7 @@ export class FilterPanelComponent implements OnInit, OnDestroy {
    * applying all filters in method updateItemsOnSelectedFitler.
    * @param allergen 
    */
-  onAllergenSelected(allergen: string) {
+  onAllergeneSelected(allergen: string) {
     let allergens = this.filterService.getSelectedAllergens();
     if (allergens.has(allergen)) {
       allergens.delete(allergen);
