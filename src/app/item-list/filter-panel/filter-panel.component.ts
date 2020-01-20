@@ -2,7 +2,6 @@ import { Component, OnInit, Input, ViewChild, ElementRef, OnDestroy } from '@ang
 import { Category } from 'app/shared/category.model';
 import { Shop } from 'app/shared/shop.model';
 import { ItemService } from 'app/shared/item.service';
-import { CategoryService } from 'app/shared/category.service';
 import { ShopService } from 'app/shared/shop.service';
 import { FilterService } from '../filter.service';
 import { Subscription } from 'rxjs';
@@ -14,7 +13,9 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./filter-panel.component.scss']
 })
 export class FilterPanelComponent implements OnInit, OnDestroy {
+  // Current category visible to user
   @Input() private category: Category;
+  // Subcategories of current category
   @Input() private subCategories: Array<Category>;
 
   // View childs for proce radio buttons
@@ -24,31 +25,35 @@ export class FilterPanelComponent implements OnInit, OnDestroy {
   @ViewChild('SechzigBisAchtzig', { static: true }) sechzigBisAchtzig: ElementRef;
   @ViewChild('AbAchtzig', { static: true }) abAchtzig: ElementRef;
 
-  // unified name of the price radio buttons. Needed for reseting the price filter
+  // Unified name of the price radio buttons. Needed for reseting the price filter
   private priceRadioName = "price";
-  // Subcategories for filter
+
+  // Cids of subcategories for filter
   private subCids: Array<string>;
+
   // All shops in the category to be displayed
   private shopsInCategory: Array<Shop>;
+
   // All geschmack in the category to be displayed
   private flavoursInCategory: Array<string>;
-  // Subscriptions to item changes due to server loading
-  private itemsServerSub: Subscription;
-  // True if more flavours should be displayed
-  private displayMoreFlavours = false;
+
   // Flavours that are displayed
   private flavoursToBeDisplayed: Array<string>;
 
+  // True if more flavours should be displayed
+  private displayMoreFlavours = false;
+
+  // Subscriptions to item changes due to server loading
+  private itemsServerSub: Subscription;
+
   /**
-   * Create filter panel
+   * Constructor
    * @param itemService 
-   * @param categoryService 
    * @param shopService 
    * @param filterService 
    */
   constructor(
     private itemService: ItemService,
-    private categoryService: CategoryService,
     private shopService: ShopService,
     private filterService: FilterService,
   ) { };
@@ -57,17 +62,27 @@ export class FilterPanelComponent implements OnInit, OnDestroy {
    * Load shops and subcategories from server
    */
   ngOnInit() {
+    // Subscribe to current fetched items from server. 
+    // Fetching is invoked by parent component item - list.
     this.itemService.getItemsUpdateListener()
       .subscribe(items => {
+        // Load all shops of all items from server
         this.shopService.getShops(this.itemService.getShopsInItems())
           .subscribe(shops => {
+            // Set shops
             this.shopsInCategory = shops;
           });
+        // Get all flavours of all items from loaded items
         this.flavoursInCategory = this.itemService.getFlavoursInItems();
+        // Display only 10 flavours by default. 
+        // Display more flacours on click.
         this.flavoursToBeDisplayed = this.flavoursInCategory.slice(0, 10);
       });
   };
 
+  /**
+   * Unsubscribe from all subscriptions
+   */
   ngOnDestroy() {
     if (this.itemsServerSub) {
       this.itemsServerSub.unsubscribe();
@@ -75,7 +90,8 @@ export class FilterPanelComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Is invoked, if a price range is selected. Updates filter property selectedMinPrice and updates item view for user by 
+   * Is invoked, if a price range is selected. 
+   * Updates filter property selectedMinPrice and updates item view for user by 
    * applying all filters in method updateItemsOnSelectedFitler.
    * @param minPrice 
    */
@@ -86,7 +102,8 @@ export class FilterPanelComponent implements OnInit, OnDestroy {
   };
 
   /**
-   * Is invokes, if a category is selected. Updates filter property selectedCategories and updates item view for user by
+   * Is invokes, if a category is selected. 
+   * Updates filter property selectedCategories and updates item view for user by
    * applying all filters in method updateItemsOnSelectedFitler.
    * @param cid
    */
@@ -104,7 +121,8 @@ export class FilterPanelComponent implements OnInit, OnDestroy {
   };
 
   /**
-   * Is invoked, if a geschmack is selected. Updates filter property selectedFlavour and updates item view for user by
+   * Is invoked, if a geschmack is selected. 
+   * Updates filter property selectedFlavour and updates item view for user by
    * applying all filters in method updateItemsOnSelectedFitler.
    * @param flavour 
    */
@@ -122,7 +140,8 @@ export class FilterPanelComponent implements OnInit, OnDestroy {
   };
 
   /**
-   * Is invoked, if a hersteller is selected. Updates filter property selectedShop and updates item view for user by
+   * Is invoked, if a hersteller is selected. 
+   * Updates filter property selectedShop and updates item view for user by
    * applying all filters in method updateItemsOnSelectedFitler.
    * @param sid
    */
@@ -139,7 +158,8 @@ export class FilterPanelComponent implements OnInit, OnDestroy {
   };
 
   /**
-   * Is invoked, if an allergen is selected. Updates filter property selectedAllergene and updates item view for user by
+   * Is invoked, if an allergen is selected. 
+   * Updates filter property selectedAllergene and updates item view for user by
    * applying all filters in method updateItemsOnSelectedFitler.
    * @param allergen 
    */
@@ -157,8 +177,10 @@ export class FilterPanelComponent implements OnInit, OnDestroy {
   };
 
   /**
-   * Is invoked, if the price is reseted. Sets isPriceFilterSelected and all checked property of the price radio buttons to false. 
-   * Sets name of all radio buttons to null. Updates item view for user by applying all filters in method updateItemsOnSelectedFitler.
+   * Is invoked, if the price is reseted. 
+   * Sets isPriceFilterSelected and all checked property of the price radio buttons to false. 
+   * Sets name of all radio buttons to null. 
+   * Updates item view for user by applying all filters in method updateItemsOnSelectedFitler.
    */
   onPriceReset(form: NgForm) {
     // Set price filter selected to false
@@ -182,6 +204,13 @@ export class FilterPanelComponent implements OnInit, OnDestroy {
     form.resetForm();
   };
 
+  /**
+   * Is invoked by manually setting the price in form.
+   * Sets isPriceFilterSelected to true.
+   * Sets min and max price provided by form.
+   * Updates item view for user by applying all filters in method updateItemsOnSelectedFitler.
+   * @param form 
+   */
   onSetPrice(form: NgForm) {
     const minPrice = form.value.inputMin;
     const maxPrice = form.value.inputMax;
@@ -191,14 +220,28 @@ export class FilterPanelComponent implements OnInit, OnDestroy {
     this.filterService.updateItemsOnSelectedFilter();
   };
 
+  /**
+   * Displays more flavours on click 'more' by user.
+   */
   onMoreFlavours() {
     this.flavoursToBeDisplayed = this.flavoursInCategory;
   };
 
-  equals(array1, array2) {
+  /**
+   * Compare 2 arrays and returns true if they both contain the same elements.
+   * False elsewise.
+   * @param array1 
+   * @param array2 
+   */
+  private equals(array1, array2) {
     return array1.length === array2.length && array1.sort().every(function (value, index) { return value === array2.sort()[index] });
   };
 
+  /**
+   * Checks if the flavours to be displayed contain real flavours.
+   * Returns false, if flavours contain only empty strings or null strings.
+   * Necessary to prevent faults from parsing.
+   */
   flavoursContainElements() {
     for (const flavour of this.flavoursInCategory) {
       if (flavour !== 'null' && flavour !== '') {

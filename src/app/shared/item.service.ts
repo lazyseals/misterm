@@ -8,7 +8,10 @@ import { Subject, forkJoin } from "rxjs";
 export class ItemService {
   // Current loaded items from backend that are available to user
   private items: Item[] = [];
+
+  // Subject to update components interested in loaded items
   private itemsUpdated = new Subject<Item[]>();
+
   // Api base url for category requests
   private url = 'http://localhost:3000/api/items?';
 
@@ -137,10 +140,10 @@ export class ItemService {
   };
 
   /**
- * Get price of item with iid in shop with sid 
- * @param iid 
- * @param sid 
- */
+   * Get price of item with iid in shop with sid 
+   * @param iid 
+   * @param sid 
+   */
   getItemprice(iid: string, sid: string): number {
     const item = this.items.find(i => i.iid === iid);
     for (let priceToShop of item.pricesInShops) {

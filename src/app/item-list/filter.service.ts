@@ -13,23 +13,39 @@ export class FilterService {
     [40, 60],
     [60, 80]
   ]);
+
   // Selected subcategories filter from all subcategories in category
   private selectedCategories = new Set<string>([]);
+
   // True if a price filter is adapted
   private isPriceFilterSelected = false;
+
   // Selected min price of selected price range (Not dependend on selected category. Always display all price ranges)
   private selectedMinPrice: number = 0;
+
+  // Selected min price of selected price range (Not dependend on selected category. Always display all price ranges)
   private selectedMaxPrice: number;
+
   // Selected geschmack filter from all geschmack in category
   private selectedFlavour = new Set<string>([]);
+
   // Selected shop filter from all shop in category
   private selectedShop = new Set<string>([]);
+
   // Selected allergen filter from all allergene (Not dependend on selected category. Always display 14 allergenes)
   private selectedAllergens = new Set<string>([]);
+
   // Items that will be filtered somehow
   private items: Item[] = [];
+
+  // Subject to inform parent component item-list about changes to items due to applied filters
   private itemsUpdated = new Subject<Item[]>();
 
+  /**
+   * Constructor
+   * @param sortService 
+   * @param itemService 
+   */
   constructor(
     private sortService: SortService,
     private itemService: ItemService
@@ -43,7 +59,16 @@ export class FilterService {
   };
 
   /**
-   * Invoked by all click listener methods. Applies all filters and updates items that are seen by user.
+   * Get current filtered items
+   */
+  getItems() {
+    return this.items.slice();
+  }
+
+  /**
+   * Invoked by all click listener methods. 
+   * Applies all filters and updates items that are seen by user.
+   * Notifies parent component item-list about changes due to filtering.
    */
   updateItemsOnSelectedFilter() {
     // Get current items
@@ -94,6 +119,8 @@ export class FilterService {
 
     // 6. Sort items
     this.items = this.sortService.sortItems(this.sortService.getSortProperty(), filtered_items);
+
+    // 7. Notify item-list component about changes due to filtering
     this.itemsUpdated.next(this.items.slice());
   };
 
@@ -215,6 +242,10 @@ export class FilterService {
     return filtered_items;
   };
 
+  /*************************************************
+   * Getter and Setter Methods for class properties
+   *************************************************/
+
   setSelectedCategories(selectedCategories: Set<string>) {
     this.selectedCategories = selectedCategories;
   };
@@ -273,9 +304,5 @@ export class FilterService {
 
   getSelectedAllergens() {
     return this.selectedAllergens;
-  };
-
-  getItems() {
-    return this.items;
   };
 }

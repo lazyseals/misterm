@@ -7,12 +7,19 @@ import { Item } from 'app/shared/item.model';
   styleUrls: ['./item-list-item.component.scss']
 })
 export class ItemListItemComponent implements OnInit {
+  // Item of card
   @Input() private item: Item;
   constructor() { }
 
   ngOnInit() {
   }
 
+  /**
+   * Shortens name. 
+   * Display only first 4 words of name.
+   * If word contains more than 4 words, The first 3 are displayed followed by '...'.
+   * @param name 
+   */
   shortenName(name: string) {
     let parts = name.split(' ');
     if (parts.length > 4) {

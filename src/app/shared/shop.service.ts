@@ -7,6 +7,7 @@ import { map, catchError } from "rxjs/operators";
 export class ShopService {
   // Current loaded shops from backend that are available to user
   private shops: Shop[] = [];
+
   // Api base url for shop requests
   private url = 'http://localhost:3000/api/shops?';
 

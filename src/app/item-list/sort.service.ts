@@ -1,7 +1,9 @@
 import { Item } from "../shared/item.model";
 
 export class SortService {
-  // Defines how the items should be sorted. Can be from [popularity, priceAsc, priceDesc, proteinDesc, "caloriesAsc]
+  // Defines how the items should be sorted. 
+  // Can be from [popularity, priceAsc, priceDesc, proteinDesc, "caloriesAsc]
+  // Default: popularity
   private sortProperty = "popularity";
 
   /**
@@ -20,7 +22,8 @@ export class SortService {
   }
 
   /**
-   * Sorts items by selected property. Property must be from [popularity, priceAsc, priceDesc, proteinDesc, "caloriesAsc]
+   * Sorts items by selected property. 
+   * Property must be from [popularity, priceAsc, priceDesc, proteinDesc, "caloriesAsc]
    * @param property 
    * @param items 
    */

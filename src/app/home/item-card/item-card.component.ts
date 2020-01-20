@@ -7,6 +7,7 @@ import { Item } from 'app/shared/item.model';
   styleUrls: ['./item-card.component.scss']
 })
 export class ItemCardComponent {
+  // Get item from parent component home
   @Input() private item: Item;
 
   constructor() { };

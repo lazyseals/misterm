@@ -13,19 +13,22 @@ import { BewertungService } from 'app/shared/bewertung.service';
   styleUrls: ['./item-detail.component.scss']
 })
 export class ItemDetailComponent implements OnInit {
-  /**************************************************************************************************************
-   * Class variables
-   **************************************************************************************************************/
-  // Item displayed
+  // Item to be displayed
   private item: Item;
+
   // All shops that an item is available in 
   private shops: Shop[];
+
   // All bewertungen for item
   private bewertungen: Bewertung[];
+
   // HTML string representing stars between 0/5 to 5/5 depending on the average rating og the item
   private stars: string;
+
   // Matching of shopID to item price
   private shopItemPrice: Map<string, number>;
+
+  // True if component fetches data from backend
   private isFetching = false;
 
   /**
@@ -33,6 +36,7 @@ export class ItemDetailComponent implements OnInit {
    * @param route 
    * @param itemService 
    * @param shopService 
+   * @param bewertungService 
    */
   constructor(
     private route: ActivatedRoute,
@@ -54,30 +58,50 @@ export class ItemDetailComponent implements OnInit {
     );
   };
 
+  /**
+   * Fetches item, its category and its shop from server. 
+   * Calculates star based on item avaerage bewertung.
+   * @param cid 
+   * @param iid 
+   */
   fetchData(cid: string, iid: string) {
+    // Set isFetching to true
     this.isFetching = true;
+    // Get single item from server
     this.itemService.getItemInCategory(cid, iid)
       .subscribe(item => {
+        // Set is Fetching to false
         this.isFetching = false;
+        // Set fetched item
         this.item = item;
+        // Check if item is available in a shop
         if (this.item.shops && this.item.shops.length > 0) {
+          // Item shop is available
           this.shopService.getShops(this.item.shops)
             .subscribe(shops => {
+              // Set shops in which an item is available in
               this.shops = this.sortShopsByPrice(shops);
+              // Set item price foreach shop
               this.shopItemPrice = this.setShopItemPrice();
             });
         } else {
+          // No shop available for this item
           console.log('Shop undefined');
         }
+        // Check if bewertung for item is available
         if (this.item.bewertungen && this.item.bewertungen.length > 0) {
+          // Bewertung for item is available
           this.bewertungService.getBewertungen(this.item.bewertungen)
             .subscribe(bewertungen => {
+              // Set fetched bewertungen
               this.bewertungen = bewertungen;
             });
-          this.stars = this.getStars(this.item.averageBewertung);
         } else {
+          // No bewertungen available for item
           console.log('Bewertungen undefined');
         }
+        // Calculate html string stars for item bewertung
+        this.stars = this.getStars(this.item.averageBewertung);
       });
   }
 
@@ -91,7 +115,7 @@ export class ItemDetailComponent implements OnInit {
   };
 
   /**
-   * 
+   * Get price of item in shop with sid
    * @param sid
    */
   private getShopItemPrice(sid: string) {
@@ -104,6 +128,10 @@ export class ItemDetailComponent implements OnInit {
     return shopPrice;
   };
 
+  /**
+   * Foreach fetched shop set item price. 
+   * Fetched from item service.
+   */
   private setShopItemPrice() {
     let sidToItemPrice = new Map<string, number>();
 

@@ -7,7 +7,10 @@ import { map, catchError } from 'rxjs/operators';
 export class CategoryService {
   // Current loaded categories from backend that are available to user
   private categories: Category[] = [];
+
+  // Current loaded subcategories from category
   private subCategories: Category[] = [];
+
   // Api base url for category requests
   private url = 'http://localhost:3000/api/categories?';
 

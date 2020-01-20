@@ -3,6 +3,11 @@ h2 {
   margin-bottom: 30px;
 }
 
+.container-fluid {
+  padding-right: 0;
+  padding-left: 0;
+}
+
 h1::after,
 h2::after {
   display: block;
@@ -30,4 +35,9 @@ h2::after {
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+}
+
+.row {
+  margin-right: 0px;
+  margin-left: 0px;
 }
