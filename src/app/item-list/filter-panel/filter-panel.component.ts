@@ -73,7 +73,8 @@ export class FilterPanelComponent implements OnInit, OnDestroy {
             this.shopsInCategory = shops;
           });
         // Get all flavours of all items from loaded items
-        this.flavoursInCategory = this.itemService.getFlavoursInItems();
+        this.flavoursInCategory = this.itemService.getFlavoursInItems()
+          .sort((a, b) => a < b ? -1 : 1);
         // Display only 10 flavours by default. 
         // Display more flacours on click.
         this.flavoursToBeDisplayed = this.flavoursInCategory.slice(0, 10);
@@ -250,5 +251,4 @@ export class FilterPanelComponent implements OnInit, OnDestroy {
     }
     return false;
   };
-
 }

@@ -1,5 +1,8 @@
 .jumbotron {
   height: 85vh;
+  background-image: url(../../assets/img/jumbotron.png); 
+  background-size: cover;
+  background-position: center;
 }
 
 .jumbo-row {
@@ -8,6 +11,10 @@
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+}
+
+.jumbo-row h1 {
+  font-weight: 500;
 }
 
 .benefits-row {

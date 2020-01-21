@@ -71,6 +71,8 @@ export class ItemListComponent implements OnInit, OnDestroy {
     this.route.params.subscribe(
       (params: Params) => {
         this.cid = params['cid'];
+        // When route changes, start by page 1
+        this.page = 1;
         this.fetchData();
       }
     );

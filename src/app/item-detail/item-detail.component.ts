@@ -170,4 +170,11 @@ export class ItemDetailComponent implements OnInit {
     window.location.href = this.itemService.getItemurl(this.item.iid, sid);
   };
 
+  /**
+   * Scroll to component
+   * @param el 
+   */
+  scroll(el: HTMLElement) {
+    el.scrollIntoView();
+  };
 }
