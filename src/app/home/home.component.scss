@@ -1,9 +1,17 @@
 .jumbotron {
-  height: 60vh;
+  height: 85vh;
 }
 
-.helper {
-  height: 25%; 
-  vertical-align: middle; 
-  display: inline-block;
+.jumbo-row {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.benefits-row {
+  height: 15vh;
+  display: fekx;
+  align-items: center;
 }
