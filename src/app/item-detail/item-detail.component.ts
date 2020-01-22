@@ -119,6 +119,17 @@ export class ItemDetailComponent implements OnInit {
                   }
                 });
             });
+        } else {
+          // Set is fetching to false (All necessary data is fetched)
+          this.isFetching = false;
+          // Get item from main category
+          this.itemService.getItemInCategory(cid, iid)
+            .subscribe((item) => {
+              // Set fetched item
+              this.item = item;
+              // Get shops and bewertungen
+              this.fetchAdditionalItemData();
+            });
         }
       });
   }
