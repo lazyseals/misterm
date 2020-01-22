@@ -5,6 +5,10 @@
   background-position: center;
 }
 
+.jumbotron h1 {
+  margin-left: -5px;
+}
+
 .jumbo-row {
   position: relative;
   top: 50%;
@@ -13,12 +17,34 @@
   transform: translate(-50%, -50%);
 }
 
-.jumbo-row h1 {
-  font-weight: 500;
-}
-
 .benefits-row {
   height: 15vh;
   display: fekx;
   align-items: center;
+}
+
+.form-control {
+  border: 1px solid #66615B!important;
+}
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+  color:    #66615B;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+ color:    #66615B;
+ opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+ color:    #66615B;
+ opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+ color:    #66615B;
+}
+::-ms-input-placeholder { /* Microsoft Edge */
+ color:    #66615B;
+}
+
+::placeholder { /* Most modern browsers support this now. */
+ color:    #66615B;
 }

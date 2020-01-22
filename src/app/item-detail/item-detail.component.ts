@@ -6,6 +6,7 @@ import { ItemService } from 'app/shared/item.service';
 import { ShopService } from 'app/shared/shop.service';
 import { Bewertung } from 'app/shared/bewertung.model';
 import { BewertungService } from 'app/shared/bewertung.service';
+import { CategoryService } from 'app/shared/category.service';
 
 @Component({
   selector: 'app-item-detail',
@@ -42,7 +43,8 @@ export class ItemDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private itemService: ItemService,
     private shopService: ShopService,
-    private bewertungService: BewertungService
+    private bewertungService: BewertungService,
+    private categoryService: CategoryService
   ) { };
 
   /**
@@ -67,42 +69,94 @@ export class ItemDetailComponent implements OnInit {
   fetchData(cid: string, iid: string) {
     // Set isFetching to true
     this.isFetching = true;
-    // Get single item from server
-    this.itemService.getItemInCategory(cid, iid)
-      .subscribe(item => {
-        // Set is Fetching to false
-        this.isFetching = false;
-        // Set fetched item
-        this.item = item;
-        // Check if item is available in a shop
-        if (this.item.shops && this.item.shops.length > 0) {
-          // Item shop is available
-          this.shopService.getShops(this.item.shops)
-            .subscribe(shops => {
-              // Set shops in which an item is available in
-              this.shops = this.sortShopsByPrice(shops);
-              // Set item price foreach shop
-              this.shopItemPrice = this.setShopItemPrice();
+    // Check if item is undefined => Only if invoked directly
+    if (this.itemService.getItem(iid)) {
+      // Get fetched item from item service
+      this.item = this.itemService.getItem(iid);
+      // Set is Fetching to false
+      this.isFetching = false;
+      // Get shops and bewertungen
+      this.fetchAdditionalItemData();
+    }
+    else {
+      // Item needs to be loaded from one of the subcategories
+      this.fetchItemInSubcategories(cid, iid);
+    }
+  };
+
+  /**
+   * Fetches item and necessary data in subCategories of category 
+   * @param cid 
+   */
+  private fetchItemInSubcategories(cid: string, iid: string) {
+    // Get categories from backend
+    this.categoryService.getCategories([cid])
+      .subscribe(fetchedCategory => {
+        // Set category at position 0, because only 1 catgory will be fetched, but is packed into array
+        const category = fetchedCategory[0];
+        // Check if category is main and has subcategories
+        if (category.main && category.subCategories.length > 0) {
+          // Category has subcategories => Fetch them
+          this.categoryService.getSubcategories(category.subCategories)
+            .subscribe(subCategories => {
+              // Set subcategories
+              let subCids = [];
+              for (const subCategory of subCategories) {
+                // Set subcategory cids
+                subCids.push(subCategory.cid);
+              }
+              // Get item from one of the subcategories
+              this.itemService.getItemInCategories(subCids, iid)
+                .subscribe((items: Item[]) => {
+                  for (let item of items) {
+                    if (item) {
+                      this.isFetching = false;
+                      // Set fetched item
+                      this.item = item;
+                      // Get shops and bewertungen
+                      this.fetchAdditionalItemData();
+                    }
+                  }
+                });
             });
-        } else {
-          // No shop available for this item
-          console.log('Shop undefined');
         }
-        // Check if bewertung for item is available
-        if (this.item.bewertungen && this.item.bewertungen.length > 0) {
-          // Bewertung for item is available
-          this.bewertungService.getBewertungen(this.item.bewertungen)
-            .subscribe(bewertungen => {
-              // Set fetched bewertungen
-              this.bewertungen = bewertungen;
-            });
-        } else {
-          // No bewertungen available for item
-          console.log('Bewertungen undefined');
-        }
-        // Calculate html string stars for item bewertung
-        this.stars = this.getStars(this.item.averageBewertung);
       });
+  }
+
+  /**
+   * Fetches shop and bewertungen from server for required item.
+   */
+  private fetchAdditionalItemData() {
+    // Check if item is available in a shop
+    if (this.item && this.item.shops && this.item.shops.length > 0) {
+      // Item shop is available
+      this.shopService.getShops(this.item.shops)
+        .subscribe(shops => {
+          // Set shops in which an item is available in
+          this.shops = this.sortShopsByPrice(shops);
+          // Set item price foreach shop
+          this.shopItemPrice = this.setShopItemPrice();
+        });
+    } else {
+      // No shop available for this item
+      console.log('Shop undefined');
+    }
+    // Check if bewertung for item is available
+    if (this.item && this.item.bewertungen && this.item.bewertungen.length > 0) {
+      // Bewertung for item is available
+      this.bewertungService.getBewertungen(this.item.bewertungen)
+        .subscribe(bewertungen => {
+          // Set fetched bewertungen
+          this.bewertungen = bewertungen;
+        });
+    } else {
+      // No bewertungen available for item
+      console.log('Bewertungen undefined');
+    }
+    // Calculate html string stars for item bewertung
+    if (this.item) {
+      this.stars = this.getStars(this.item.averageBewertung);
+    }
   }
 
   /**
@@ -167,7 +221,7 @@ export class ItemDetailComponent implements OnInit {
    * @param sid
    */
   onShopClick(sid: string) {
-    window.location.href = this.itemService.getItemurl(this.item.iid, sid);
+    window.open(this.itemService.getItemurl(this.item.iid, sid));
   };
 
   /**

@@ -2,7 +2,7 @@ import { Item } from "./item.model";
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { Subject, forkJoin } from "rxjs";
+import { Subject, forkJoin, Observable } from "rxjs";
 
 @Injectable()
 export class ItemService {
@@ -85,7 +85,7 @@ export class ItemService {
   };
 
   /**
-   * Get single item withh iid in category with cid
+   * Get single item with iid in category with cid
    * @param cid 
    * @param iid 
    */
@@ -103,6 +103,35 @@ export class ItemService {
         })
       );
 
+  };
+
+  /**
+   * Get single item with iid in categories with cid in cids
+   * @param cids 
+   * @param iid 
+   */
+  getItemInCategories(cids: string[], iid: string) {
+    let observableBatch = [];
+    let query = "";
+
+    cids.forEach((category, key) => {
+      query = "cid=" + category + "&iids[]=" + iid;
+      observableBatch.push(this.http
+        .get<{ items: Item[] }>(
+          this.url + query
+        )
+        .pipe(
+          map(data => {
+            if (data.items[0]) {
+              this.items = data.items;
+            }
+            return data.items[0];
+          })
+        )
+      );
+    });
+
+    return forkJoin(observableBatch);
   };
 
   /**
