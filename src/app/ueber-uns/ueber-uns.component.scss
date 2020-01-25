@@ -1,0 +1,32 @@
+.ueber-uns {
+  background-color: #e9ecef;
+}
+
+.letter {
+  background-color: #fff;
+  font-style: italic;
+  border-radius: 20px;
+  box-shadow: 0 6px 10px -4px rgba(0, 0, 0, 0.15);
+  border: 1px solid #66615B;
+}
+
+.letter p {
+  margin-bottom: 10px;
+}
+
+.greeting {
+  font-size: 400%;
+}
+
+.letter-img {
+  height: 100px;
+  width: auto;
+  border-radius: 50%;
+  border: 1px solid #66615B;
+  float: left;
+}
+
+.signature {
+  height: 40px;
+  width: auto;
+}
