@@ -54,7 +54,7 @@
   <div class="row mt-3">
     <div class="col-xl-10 offset-xl-1">
       <div *ngIf="items && !isFetching" class="row">
-        <div *ngFor="let item of items" class="col-xl-3">
+        <div *ngFor="let item of items" class="col-lg-3 col-sm-6 col-12 mb-3">
           <app-item-card *ngIf="item" [item]=item></app-item-card>
         </div>
       </div>
@@ -71,8 +71,8 @@
       </div>
     </div>
   </div>
-  <div class="row pt-5">
-    <div class="col-xl-12 text-center">
+  <div class="row pt-3">
+    <div class="col-12 text-center">
       <a href="#" [routerLink]="['/category', 'c1001']" routerLinkActive="router-link-active"
         class="btn btn-lg btn-outline-success btn-round">Alle ansehen</a>
     </div>
@@ -100,7 +100,7 @@
     </p>
   </div>
   <div class="row mt-5 pb-5">
-    <div class="col-xl-4 col-md-6 col-12 mb-3 d-flex">
+    <div class="col-lg-4 col-sm-6 col-12 mb-3 d-flex">
       <div class="feat-item mx-auto">
         <div class="d-flex item-icon d-flex">
           <i class="fa fa-binoculars text-success"></i>
@@ -110,7 +110,7 @@
           bereits vorsortiert nach den relevantesten Kategorien</p>
       </div>
     </div>
-    <div class="col-xl-4 col-md-6 col-12 mb-3 d-flex">
+    <div class="col-lg-4 col-sm-6 col-12 mb-3 d-flex">
       <div class="feat-item mx-auto">
         <div class="d-flex item-icon d-flex">
           <i class="fa fa-filter text-success"></i>
@@ -120,7 +120,7 @@
           Filteroptionen, wie z.B. Allergenfilter und Preisfilter</p>
       </div>
     </div>
-    <div class="col-xl-4 col-md-6 col-12 mb-3 d-flex">
+    <div class="col-lg-4 col-sm-6 col-12 mb-3 d-flex">
       <div class="feat-item mx-auto" style="padding-bottom: 58px;">
         <div class="d-flex item-icon d-flex">
           <i class="fa fa-comments text-success"></i>
@@ -130,7 +130,7 @@
           Bewertungen</p>
       </div>
     </div>
-    <div class="col-xl-4 col-md-6 col-12 mb-3 d-flex">
+    <div class="col-lg-4 col-sm-6 col-12 mb-3 d-flex">
       <div class="feat-item mx-auto">
         <div class="d-flex item-icon d-flex">
           <i class="fa fa-balance-scale text-success"></i>
@@ -140,7 +140,7 @@
           für dich beste Produkt vorschlagen können</p>
       </div>
     </div>
-    <div class="col-xl-4 col-md-6 col-12 mb-3 d-flex">
+    <div class="col-lg-4 col-sm-6 col-12 mb-3 d-flex">
       <div class="feat-item mx-auto">
         <div class="d-flex item-icon d-flex">
           <i class="fa fa-heart text-success"></i>
@@ -151,7 +151,7 @@
         </p>
       </div>
     </div>
-    <div class="col-xl-4 col-md-6 col-12 mb-3 d-flex">
+    <div class="col-lg-4 col-sm-6 col-12 mb-3 d-flex">
       <div class="feat-item mx-auto">
         <div class="d-flex item-icon d-flex">
           <i class="fa fa-thumbs-up text-success"></i>

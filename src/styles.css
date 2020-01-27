@@ -1,3 +1,10 @@
+/************************************
+General html elements
+************************************/
+body {
+  word-wrap: break-word;
+}
+
 /**********************************
 Font weight
 ***********************************/
@@ -38,34 +45,6 @@ Form groups
 
 .form-control-round {
     border-radius: 200px;
-}
-
-/************************************
-Margins
-************************************/
-.mr-6 {
-    margin-right: 6rem!important;
-}
-.mr-7 {
-    margin-right: 7rem!important;
-}
-.mr-8 {
-    margin-right: 8rem!important;
-}
-.mr-9 {
-    margin-right: 9rem!important;
-}
-.mr-10 {
-    margin-right: 10rem!important;
-}
-.mt-8 {
-    margin-top: 8rem!important;
-}
-.mt-9 {
-    margin-top: 9rem!important;
-}
-.mt-10 {
-    margin-top: 10rem!important;
 }
 
 /************************************
