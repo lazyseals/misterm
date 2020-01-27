@@ -1,3 +1,7 @@
+/******************
+* General HTML
+******************/
+
 h2 {
   margin-bottom: 30px;
 }
@@ -16,6 +20,10 @@ h2::after {
   margin-top: 30px;
 }
 
+/******************
+* Jumbotron
+******************/
+
 .jumbotron {
   height: 85vh;
   background-image: url(../../assets/img/jumbotron.png); 
@@ -25,6 +33,7 @@ h2::after {
 
 .jumbotron h1 {
   margin-left: -5px;
+  overflow-wrap: break-word;
 }
 
 .jumbo-row {
@@ -35,11 +44,30 @@ h2::after {
   transform: translate(-50%, -50%);
 }
 
-.benefits-row {
-  height: 15vh;
-  display: fekx;
-  align-items: center;
+@media (max-width: 576px) {
+  .jumbotron {
+    padding: 4rem 2rem;
+  }
 }
+
+@media (min-width: 576px) {
+}
+
+/******************
+* Benefits row
+******************/
+
+@media (min-width: 992px) {
+  .benefits-row {
+    height: 15vh;
+    display: flex;
+    align-items: center;
+  }
+}
+
+/******************
+* Features
+******************/
 
 .features {
   background: linear-gradient(to bottom right, #fff 0%, #fff 50%, #6bd098 50%, #6bd098 100%);

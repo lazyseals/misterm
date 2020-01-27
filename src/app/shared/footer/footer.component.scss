@@ -5,3 +5,15 @@ footer {
 footer .btn {
   background-color: #bbbbbb;
 }
+
+li {
+  list-style: none;
+  display: inline-block;
+}
+
+@media screen and (min-width: 767px) {
+  .footer .footer-nav, 
+  .footer .credits {
+    margin: 0 auto;
+  }
+}

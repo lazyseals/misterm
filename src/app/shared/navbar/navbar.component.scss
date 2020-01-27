@@ -22,3 +22,16 @@
 .navbar-nav button {
   cursor: context-menu;
 }
+
+/*****************
+* Media Queries
+*****************/
+@media screen and (max-width: 991px) {
+  .fixed-top .navbar-collapse {
+    background-color: #ffffff!important;
+}
+
+@media screen and (max-width: 767px){
+  
+}
+}

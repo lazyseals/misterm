@@ -1,17 +1,21 @@
 <footer class="footer">
     <div class="container">
         <div class="row">
-            <nav class="footer-nav">
-                <ul>
-                    <li><a [routerLink]="['/ueberuns']" routerLinkActive="router-link-active" class="btn btn-neutral"
-                            href="#">Über uns</a></li>
-                    <li><a class="btn btn-neutral" href="#">Haftungsausschuss</a></li>
-                    <li><a class="btn btn-neutral" href="#">Datenschutz</a></li>
-                    <li><a class="btn btn-neutral" href="#">Impressum</a></li>
+            <nav class="footer-nav col-12">
+                <ul class="mx-auto">
+                    <li class="m-0 p-0 "><a [routerLink]="['/ueberuns']" routerLinkActive="router-link-active"
+                            class="btn btn-neutral mx-lg-3 mx-md-2 mx-1 p-0" href="#">Über uns</a></li>
+                    <li class="m-0 p-0 "><a class="btn btn-neutral mx-lg-3 mx-md-2 mx-1 p-0"
+                            href="#">Haftungsausschuss</a></li>
+                    <li class="m-0 p-0 "><a class="btn btn-neutral mx-lg-3 mx-md-2 mx-1 p-0" href="#">Datenschutz</a>
+                    </li>
+                    <li class="m-0 p-0 "><a class="btn btn-neutral mx-lg-3 mx-md-2 mx-1 p-0" href="#">Impressum</a></li>
                 </ul>
             </nav>
-            <div class="credits ml-auto">
-                <span class="copyright">
+        </div>
+        <div class="row">
+            <div class="credits col-12">
+                <span class="copyright mx-auto">
                     © {{test | date: 'yyyy'}}, Daniel von Mirbach - Mister M GmbH
                 </span>
             </div>
