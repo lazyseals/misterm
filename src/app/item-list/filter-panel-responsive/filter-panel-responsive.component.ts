@@ -7,6 +7,7 @@ import { FilterService } from '../filter.service';
 import { Subscription } from 'rxjs';
 import { NgForm } from '@angular/forms';
 import { ItemListComponent } from '../item-list.component';
+import { Item } from 'app/shared/item.model';
 
 @Component({
   selector: 'app-filter-panel-responsive',
@@ -64,23 +65,18 @@ export class FilterPanelResponsiveComponent implements OnInit {
    * Load shops and subcategories from server
    */
   ngOnInit() {
-    // Subscribe to current fetched items from server. 
-    // Fetching is invoked by parent component item - list.
-    this.itemService.getItemsUpdateListener()
-      .subscribe(items => {
-        // Load all shops of all items from server
-        this.shopService.getShops(this.itemService.getShopsInItems())
-          .subscribe(shops => {
-            // Set shops
-            this.shopsInCategory = shops;
-          });
-        // Get all flavours of all items from loaded items
-        this.flavoursInCategory = this.itemService.getFlavoursInItems()
-          .sort((a, b) => a < b ? -1 : 1);
-        // Display only 10 flavours by default. 
-        // Display more flacours on click.
-        this.flavoursToBeDisplayed = this.flavoursInCategory.slice(0, 10);
+    // Load all shops of all items from server
+    this.shopService.getShops(this.itemService.getShopsInItems())
+      .subscribe(shops => {
+        // Set shops
+        this.shopsInCategory = shops;
       });
+    // Get all flavours of all items from loaded items
+    this.flavoursInCategory = this.itemService.getFlavoursInItems()
+      .sort((a, b) => a < b ? -1 : 1);
+    // Display only 10 flavours by default. 
+    // Display more flacours on click.
+    this.flavoursToBeDisplayed = this.flavoursInCategory.slice(0, 10);
   };
 
   /**

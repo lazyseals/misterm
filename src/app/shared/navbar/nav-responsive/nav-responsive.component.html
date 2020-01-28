@@ -1,0 +1,37 @@
+<!-- Main menu -->
+<ul *ngIf="displayMainMenu" class="navbar-nav">
+  <li class="nav-item">
+    <button (click)="onClickMain('Proteine')" class="btn btn btn-lg btn-neutral btn-round menubtn m-0"
+      id="proteine">Proteine<i class="fa fa-caret-right"></i></button>
+  </li>
+  <li class="nav-item">
+    <button (click)="onClickMain('Supplements')" class="btn btn btn-lg btn-neutral btn-round menubtn m-0"
+      id="supplements">Supplements<i class="fa fa-caret-right"></i></button>
+  </li>
+  <li class="nav-item">
+    <button (click)="onClickMain('Food')" class="btn btn btn-lg btn-neutral btn-round menubtn m-0" id="food">Food<i
+        class="fa fa-caret-right"></i></button>
+  </li>
+  <li class="nav-item">
+    <button (click)="onClickMain('Getränke')" class="btn btn btn-lg btn-neutral btn-round menubtn m-0"
+      id="getraenke">Getränke<i class="fa fa-caret-right"></i></button>
+  </li>
+</ul>
+<!-- /. Main menu -->
+
+<!-- First submenu -->
+<ul *ngIf="displayFirstSubmenu" class="navbar-nav">
+  <div class="nav-item">
+    <h4 class="m-0">
+      <i (click)="onClickFirstSubmenuBack()" class="fa fa-chevron-left"></i>
+      <span class="subheader">{{ categoryToDisplay }}</span>
+    </h4>
+  </div>
+  <li *ngFor="let menuItem of whichSubmenu()" class="nav-item">
+    <a href="#" [routerLink]="['/category', menuItem.cid]" (click)="closeNav()"
+      class="btn btn btn-lg btn-neutral btn-round menubtn m-0 mw-100 text-left" id="menuItem.name">
+      {{ menuItem.name }}
+    </a>
+  </li>
+</ul>
+<!-- /. First submenu -->

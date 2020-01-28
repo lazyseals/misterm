@@ -22,6 +22,8 @@ import { FilterPanelComponent } from './item-list/filter-panel/filter-panel.comp
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { UeberUnsComponent } from './ueber-uns/ueber-uns.component';
 import { FilterPanelResponsiveComponent } from './item-list/filter-panel-responsive/filter-panel-responsive.component';
+import { NavResponsiveComponent } from './shared/navbar/nav-responsive/nav-responsive.component';
+import { NavRegularComponent } from './shared/navbar/nav-regular/nav-regular.component';
 
 
 @NgModule({
@@ -38,7 +40,9 @@ import { FilterPanelResponsiveComponent } from './item-list/filter-panel-respons
     FilterPanelComponent,
     PageNotFoundComponent,
     UeberUnsComponent,
-    FilterPanelResponsiveComponent
+    FilterPanelResponsiveComponent,
+    NavResponsiveComponent,
+    NavRegularComponent
   ],
   imports: [
     BrowserModule,

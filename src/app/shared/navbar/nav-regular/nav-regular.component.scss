@@ -1,0 +1,24 @@
+.submenu li {
+  list-style: none;
+}
+
+.submenu-header:link,
+.submenu-header:visited {
+  color: #5e5e5e!important;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0 0 1px 0;
+  margin-left: 1rem;
+  border-bottom: 1px solid transparent;
+  -webkit-transition: border-bottom 0.2s, color 0.2s;
+  transition: border-bottom 0.2s, color 0.2s;
+}
+
+.submenu-header:hover,
+.submenu-header:active {
+  border-bottom: 1px solid #5e5e5e;
+}
+
+.navbar-nav button {
+  cursor: context-menu;
+} 

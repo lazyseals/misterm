@@ -111,18 +111,21 @@
     </div>
     <div class="form flavours-list">
       <div class="form-row">
-        <div *ngFor="let flavour of flavoursToBeDisplayed" class="col-md-4 col-sm-6 col-12">
-          <div class="form-check">
-            <label *ngIf="flavour !== null && flavour !== 'null' && flavour !== ''" class="form-check-label">
-              <input (click)="onFlavourSelected(flavour)" type="checkbox" class="form-check-input" value="">
-              {{ flavour }}
-              <span class="form-check-sign"></span>
-            </label>
+        <ng-container *ngFor="let flavour of flavoursToBeDisplayed">
+          <div *ngIf="flavour !== null && flavour !== 'null' && flavour !== ''" class="col-md-4 col-sm-6 col-12">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input (click)="onFlavourSelected(flavour)" type="checkbox" class="form-check-input" value="">
+                {{ flavour }}
+                <span class="form-check-sign"></span>
+              </label>
+            </div>
           </div>
-          <div *ngIf="flavoursInCategory.length > 0 && equals(flavoursToBeDisplayed, flavoursInCategory) === false">
-            <span (click)="onMoreFlavours()" class="zurueck text-success">mehr...</span>
-          </div>
-        </div>
+        </ng-container>
+      </div>
+      <div *ngIf="flavoursInCategory.length > 0 && equals(flavoursToBeDisplayed, flavoursInCategory) === false"
+        class="d-block">
+        <span (click)="onMoreFlavours()" class="zurueck text-success">mehr...</span>
       </div>
     </div>
   </li>
