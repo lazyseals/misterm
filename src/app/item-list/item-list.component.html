@@ -19,11 +19,21 @@
       </form>
     </div>
     <div class="col-4 mb-xl-0 mb-4 pb-2 d-xl-none d-inline-block d-flex">
-      <button type="button" class="filter-btn btn btn-outline-success btn-round ml-auto mt-auto">Filter</button>
+      <button type="button" class="filter-btn btn btn-outline-success btn-round ml-auto mt-auto"
+        (click)="onOpenResponsiveFilter()">Filter</button>
     </div>
   </div>
 </div>
 <!-- /. Sort options -->
+
+<!-- Responsive filter panel -->
+<div class="container-fluid">
+  <div *ngIf="openResponsiveFilter" class="row mb-5 px-md-5 px-4 d-xl-none d-block">
+    <app-filter-panel-responsive [subCategories]=subCategories [category]=category>
+    </app-filter-panel-responsive>
+  </div>
+</div>
+<!-- /. Responsive filter panel -->
 
 <!-- Filter and sort options -->
 <div class="container-fluid">

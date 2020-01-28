@@ -1,0 +1,315 @@
+<div class="list-group">
+  <li class="list-group-item filter-panel">
+    <div class="row mb-2">
+      <div class="col-6">
+        <span style="font-weight: bold;">Preis</span>
+      </div>
+      <div class="col-6 text-right">
+        <span (click)="onPriceReset(setPrice)" class="zurueck text-success">Zurücksetzen</span>
+      </div>
+    </div>
+    <form (submit)="onSetPrice(setPrice)" #setPrice="ngForm">
+      <div class="form-row">
+        <div class="form-group col-md-5">
+          <input type="text" class="form-control" name="inputMin" placeholder="0€" ngModel>
+        </div>
+        <div class="col-md-2 text-center">
+          <p class="pt-2">-</p>
+        </div>
+        <div class="form-group col-md-5 text-right">
+          <input type="text" class="form-control" name="inputMax" placeholder="1.000€" ngModel>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-12">
+          <button style="width:100%" class="btn btn-success" type="submit">Anwenden</button>
+        </div>
+      </div>
+      <div class="form-row mt-3">
+        <div class="col-12">
+          <div class="form-check-radio">
+            <label class="form-check-label" for="bisZwanzig">
+              <input type="radio" (click)="onPriceSelected(0)" [name]="priceRadioName" class="form-check-input"
+                id="bisZwanzig" #bisZwanzig>
+              bis 20€
+              <span class="form-check-sign"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-12">
+          <div class="form-check-radio">
+            <label class="form-check-label" for="ZwanzigBisVierzig">
+              <input type="radio" (click)="onPriceSelected(20)" [name]="priceRadioName" class="form-check-input"
+                id="ZwanzigBisVierzig" #ZwanzigBisVierzig>
+              20€ bis 40€
+              <span class="form-check-sign"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-12">
+          <div class="form-check-radio">
+            <label class="form-check-label" for="VierzigBisSechzig">
+              <input type="radio" (click)="onPriceSelected(40)" [name]="priceRadioName" class="form-check-input"
+                id="VierzigBisSechzig" #VierzigBisSechzig>
+              40€ bis 60€
+              <span class="form-check-sign"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-12">
+          <div class="form-check-radio">
+            <label class="form-check-label" for="SechzigBisAchtzig">
+              <input type="radio" (click)="onPriceSelected(60)" [name]="priceRadioName" class="form-check-input"
+                id="SechzigBisAchtzig" #SechzigBisAchtzig>
+              60€ bis 80€
+              <span class="form-check-sign"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-12">
+          <div class="form-check-radio">
+            <label class="form-check-label" for="AbAchtzig">
+              <input type="radio" (click)="onPriceSelected(80)" [name]="priceRadioName" class="form-check-input"
+                id="AbAchtzig" #AbAchtzig>
+              ab 80€
+              <span class="form-check-sign"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </form>
+  </li>
+  <li *ngIf="category && category.subCategories.length > 0" class="list-group-item filter-panel">
+    <div class="mb-1">
+      <span style="font-weight: bold;">Produkttyp</span>
+    </div>
+    <div class="form">
+      <div class="form-row">
+        <div class="col-12">
+          <div *ngFor="let subCategory of subCategories" class="form-check">
+            <label class="form-check-label">
+              <input (click)="onCategorySelected(subCategory.cid)" type="checkbox" class="form-check-input" value="">
+              {{ subCategory.name }}
+              <span class="form-check-sign"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </li>
+  <li *ngIf="flavoursInCategory && flavoursContainElements()" class="list-group-item filter-panel">
+    <div class="mb-1">
+      <span style="font-weight: bold;">Geschmack</span>
+    </div>
+    <div class="form flavours-list">
+      <div class="form-row">
+        <div class="col-12">
+          <div *ngFor="let flavour of flavoursToBeDisplayed" class="form-check">
+            <label *ngIf="flavour !== null && flavour !== 'null' && flavour !== ''" class="form-check-label">
+              <input (click)="onFlavourSelected(flavour)" type="checkbox" class="form-check-input" value="">
+              {{ flavour }}
+              <span class="form-check-sign"></span>
+            </label>
+          </div>
+          <div *ngIf="flavoursInCategory.length > 0 && equals(flavoursToBeDisplayed, flavoursInCategory) === false">
+            <span (click)="onMoreFlavours()" class="zurueck text-success">mehr...</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </li>
+  <li *ngIf="shopsInCategory" class="list-group-item filter-panel">
+    <div class="mb-1">
+      <span style="font-weight: bold;">Hersteller</span>
+    </div>
+    <div class="form">
+      <div class="form-row">
+        <div class="col-12">
+          <div *ngFor="let shop of shopsInCategory" class="form-check">
+            <label class="form-check-label">
+              <input (click)="onHerstellerSelected(shop.sid)" type="checkbox" class="form-check-input" value="">
+              {{ shop.name }}
+              <span class="form-check-sign"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </li>
+  <li class="list-group-item filter-panel">
+    <div class="mb-1">
+      <span style="font-weight: bold;">Allergene (nicht enthalten)</span>
+      <span class="ml-1" placement="right" container="body" ngbTooltip="Allergene sind nicht vollständig erfasst, da viele Allergenangaben nur in Form von Bildern vorliegen! 
+        Daher übernehmen wir keine Garantie für falsche Angaben.">
+        <i class="fa fa-question-circle"></i>
+      </span>
+    </div>
+    <div class="form">
+      <div class="form-row">
+        <div class="col-12">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input (click)="onAllergeneSelected('ei')" type="checkbox" class="form-check-input">
+              Ei
+              <span class="form-check-sign"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-12">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input (click)="onAllergeneSelected('erdnuesse')" type="checkbox" class="form-check-input">
+              Erdnüsse
+              <span class="form-check-sign"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-12">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input (click)="onAllergeneSelected('fisch')" type="checkbox" class="form-check-input">
+              Fisch
+              <span class="form-check-sign"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-12">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input (click)="onAllergeneSelected('gluten')" type="checkbox" class="form-check-input">
+              Gluten
+              <span class="form-check-sign"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-12">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input (click)="onAllergeneSelected('krebs')" type="checkbox" class="form-check-input">
+              Krebstiere
+              <span class="form-check-sign"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-12">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input (click)="onAllergeneSelected('lupine')" type="checkbox" class="form-check-input">
+              Lupine
+              <span class="form-check-sign"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-12">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input (click)="onAllergeneSelected('milch')" type="checkbox" class="form-check-input">
+              Milch
+              <span class="form-check-sign"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-12">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input (click)="onAllergeneSelected('schalenfruechte')" type="checkbox" class="form-check-input">
+              Schalenfrüchte
+              <span class="form-check-sign"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-12">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input (click)="onAllergeneSelected('schwefeloxid')" type="checkbox" class="form-check-input">
+              Schwefeloxid
+              <span class="form-check-sign"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-12">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input (click)="onAllergeneSelected('sellerie')" type="checkbox" class="form-check-input">
+              Sellerie
+              <span class="form-check-sign"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-12">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input (click)="onAllergeneSelected('senf')" type="checkbox" class="form-check-input">
+              Senf
+              <span class="form-check-sign"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-12">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input (click)="onAllergeneSelected('sesam')" type="checkbox" class="form-check-input">
+              Sesam
+              <span class="form-check-sign"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-12">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input (click)="onAllergeneSelected('soja')" type="checkbox" class="form-check-input">
+              Soja
+              <span class="form-check-sign"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-12">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input (click)="onAllergeneSelected('weichtiere')" type="checkbox" class="form-check-input">
+              Weichtiere
+              <span class="form-check-sign"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 p-0">
+        <button class="btn btn-success w-100" type="button" (click)="onApplyAllFilters()">Alle Filter Anwenden</button>
+      </div>
+    </div>
+  </li>
+</div>

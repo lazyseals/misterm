@@ -21,6 +21,7 @@ import { AccordionTogglerDirective } from './shared/accordionToggler.directive';
 import { FilterPanelComponent } from './item-list/filter-panel/filter-panel.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { UeberUnsComponent } from './ueber-uns/ueber-uns.component';
+import { FilterPanelResponsiveComponent } from './item-list/filter-panel-responsive/filter-panel-responsive.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { UeberUnsComponent } from './ueber-uns/ueber-uns.component';
     AccordionTogglerDirective,
     FilterPanelComponent,
     PageNotFoundComponent,
-    UeberUnsComponent
+    UeberUnsComponent,
+    FilterPanelResponsiveComponent
   ],
   imports: [
     BrowserModule,

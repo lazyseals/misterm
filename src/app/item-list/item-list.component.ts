@@ -50,6 +50,9 @@ export class ItemListComponent implements OnInit, OnDestroy {
   // Number of pages. E.g. 70 items to display => collectionSize =  70 / 24 = 3
   private collectionSize: Number;
 
+  // Open responsive filter
+  private openResponsiveFilter = false;
+
   /**
    * Constructor 
    * @param route 
@@ -231,6 +234,22 @@ export class ItemListComponent implements OnInit, OnDestroy {
       // Paginate items (display only items on given page)
       this.paginateItems();
     }
+  }
+
+  /**
+   * Is invoked when responsive filter should be opened.
+   * Sets openFilter property to opposite value.
+   */
+  onOpenResponsiveFilter() {
+    this.openResponsiveFilter = !this.openResponsiveFilter;
+  }
+
+  /**
+   * Is invoked when respinsive filter should be closed.
+   * Sets openFilter property to false.
+   */
+  closeResponsiveFilter() {
+    this.openResponsiveFilter = false;
   }
 
 }
