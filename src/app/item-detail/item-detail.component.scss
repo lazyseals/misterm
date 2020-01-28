@@ -1,11 +1,9 @@
+/***********************
+* General HTML elements
+***********************/
 h1, 
 h2 {
   margin-bottom: 30px;
-}
-
-.container-fluid {
-  padding-right: 0;
-  padding-left: 0;
 }
 
 h1::after,
@@ -18,10 +16,51 @@ h2::after {
   margin-top: 30px;
 }
 
+
+/***********************
+* Product main
+***********************/
+.product-main {
+  margin-top: 8rem;
+}
+
+.product-main img {
+  height: auto; 
+  width: auto; 
+  max-width: 300px; 
+  max-height: 300px;
+}
+
+/***********************
+* Naehrwerte
+***********************/
+
+.naehrwerte img {
+  height: auto; 
+  width: auto; 
+  max-width: 500px; 
+  max-height: 500px;
+}
+
+/***********************
+* Shops
+***********************/
+
 .shops {
   background-color: #e9ecef;
 }
 
+.shops img {
+  height: auto; 
+  width: auto; 
+  max-width: 100px; 
+  max-height: 100px;
+}
+
+
+/***********************
+* Loading animation
+***********************/
 .fetching-container {
   height: 92vh;
 }
@@ -35,23 +74,4 @@ h2::after {
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-}
-
-.row {
-  margin-right: 0px;
-  margin-left: 0px;
-}
-
-.naehrwerte img {
-  height: auto; 
-  width: auto; 
-  max-width: 500px; 
-  max-height: 500px;
-}
-
-.shops img {
-  height: auto; 
-  width: auto; 
-  max-width: 100px; 
-  max-height: 100px;
 }
