@@ -48,6 +48,7 @@ h2::after {
 
 .shops {
   background-color: #e9ecef;
+  overflow: hidden;
 }
 
 .shops img {
@@ -55,6 +56,12 @@ h2::after {
   width: auto; 
   max-width: 100px; 
   max-height: 100px;
+}
+
+@media screen and (max-width: 776px) {
+  .vk {
+    font-weight: 300;
+  }
 }
 
 
