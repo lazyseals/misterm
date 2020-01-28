@@ -10,18 +10,18 @@
     </div>
     <form (submit)="onSetPrice(setPrice)" #setPrice="ngForm">
       <div class="form-row">
-        <div class="form-group col-md-5">
+        <div class="form-group col-sm-5">
           <input type="text" class="form-control" name="inputMin" placeholder="0€" ngModel>
         </div>
-        <div class="col-md-2 text-center">
+        <div class="col-sm-2 text-center">
           <p class="pt-2">-</p>
         </div>
-        <div class="form-group col-md-5 text-right">
+        <div class="form-group col-sm-5 text-right">
           <input type="text" class="form-control" name="inputMax" placeholder="1.000€" ngModel>
         </div>
       </div>
       <div class="form-row">
-        <div class="col-12">
+        <div class="col-sm-6 offset-sm-3 col-12">
           <button style="width:100%" class="btn btn-success" type="submit">Anwenden</button>
         </div>
       </div>
@@ -93,8 +93,8 @@
     </div>
     <div class="form">
       <div class="form-row">
-        <div class="col-12">
-          <div *ngFor="let subCategory of subCategories" class="form-check">
+        <div *ngFor="let subCategory of subCategories" class="col-md-4 col-sm-6 col-12">
+          <div class="form-check">
             <label class="form-check-label">
               <input (click)="onCategorySelected(subCategory.cid)" type="checkbox" class="form-check-input" value="">
               {{ subCategory.name }}
@@ -111,8 +111,8 @@
     </div>
     <div class="form flavours-list">
       <div class="form-row">
-        <div class="col-12">
-          <div *ngFor="let flavour of flavoursToBeDisplayed" class="form-check">
+        <div *ngFor="let flavour of flavoursToBeDisplayed" class="col-md-4 col-sm-6 col-12">
+          <div class="form-check">
             <label *ngIf="flavour !== null && flavour !== 'null' && flavour !== ''" class="form-check-label">
               <input (click)="onFlavourSelected(flavour)" type="checkbox" class="form-check-input" value="">
               {{ flavour }}
@@ -132,8 +132,8 @@
     </div>
     <div class="form">
       <div class="form-row">
-        <div class="col-12">
-          <div *ngFor="let shop of shopsInCategory" class="form-check">
+        <div *ngFor="let shop of shopsInCategory" class="col-md-4 col-sm-6 col-12">
+          <div class="form-check">
             <label class="form-check-label">
               <input (click)="onHerstellerSelected(shop.sid)" type="checkbox" class="form-check-input" value="">
               {{ shop.name }}
@@ -154,7 +154,7 @@
     </div>
     <div class="form">
       <div class="form-row">
-        <div class="col-12">
+        <div class="col-md-4 col-sm-6 col-12">
           <div class="form-check">
             <label class="form-check-label">
               <input (click)="onAllergeneSelected('ei')" type="checkbox" class="form-check-input">
@@ -163,9 +163,7 @@
             </label>
           </div>
         </div>
-      </div>
-      <div class="form-row">
-        <div class="col-12">
+        <div class="col-md-4 col-sm-6 col-12">
           <div class="form-check">
             <label class="form-check-label">
               <input (click)="onAllergeneSelected('erdnuesse')" type="checkbox" class="form-check-input">
@@ -174,9 +172,7 @@
             </label>
           </div>
         </div>
-      </div>
-      <div class="form-row">
-        <div class="col-12">
+        <div class="col-md-4 col-sm-6 col-12">
           <div class="form-check">
             <label class="form-check-label">
               <input (click)="onAllergeneSelected('fisch')" type="checkbox" class="form-check-input">
@@ -185,9 +181,7 @@
             </label>
           </div>
         </div>
-      </div>
-      <div class="form-row">
-        <div class="col-12">
+        <div class="col-md-4 col-sm-6 col-12">
           <div class="form-check">
             <label class="form-check-label">
               <input (click)="onAllergeneSelected('gluten')" type="checkbox" class="form-check-input">
@@ -196,9 +190,7 @@
             </label>
           </div>
         </div>
-      </div>
-      <div class="form-row">
-        <div class="col-12">
+        <div class="col-md-4 col-sm-6 col-12">
           <div class="form-check">
             <label class="form-check-label">
               <input (click)="onAllergeneSelected('krebs')" type="checkbox" class="form-check-input">
@@ -207,9 +199,7 @@
             </label>
           </div>
         </div>
-      </div>
-      <div class="form-row">
-        <div class="col-12">
+        <div class="col-md-4 col-sm-6 col-12">
           <div class="form-check">
             <label class="form-check-label">
               <input (click)="onAllergeneSelected('lupine')" type="checkbox" class="form-check-input">
@@ -218,9 +208,7 @@
             </label>
           </div>
         </div>
-      </div>
-      <div class="form-row">
-        <div class="col-12">
+        <div class="col-md-4 col-sm-6 col-12">
           <div class="form-check">
             <label class="form-check-label">
               <input (click)="onAllergeneSelected('milch')" type="checkbox" class="form-check-input">
@@ -229,9 +217,7 @@
             </label>
           </div>
         </div>
-      </div>
-      <div class="form-row">
-        <div class="col-12">
+        <div class="col-md-4 col-sm-6 col-12">
           <div class="form-check">
             <label class="form-check-label">
               <input (click)="onAllergeneSelected('schalenfruechte')" type="checkbox" class="form-check-input">
@@ -240,9 +226,7 @@
             </label>
           </div>
         </div>
-      </div>
-      <div class="form-row">
-        <div class="col-12">
+        <div class="col-md-4 col-sm-6 col-12">
           <div class="form-check">
             <label class="form-check-label">
               <input (click)="onAllergeneSelected('schwefeloxid')" type="checkbox" class="form-check-input">
@@ -251,9 +235,7 @@
             </label>
           </div>
         </div>
-      </div>
-      <div class="form-row">
-        <div class="col-12">
+        <div class="col-md-4 col-sm-6 col-12">
           <div class="form-check">
             <label class="form-check-label">
               <input (click)="onAllergeneSelected('sellerie')" type="checkbox" class="form-check-input">
@@ -262,9 +244,7 @@
             </label>
           </div>
         </div>
-      </div>
-      <div class="form-row">
-        <div class="col-12">
+        <div class="col-md-4 col-sm-6 col-12">
           <div class="form-check">
             <label class="form-check-label">
               <input (click)="onAllergeneSelected('senf')" type="checkbox" class="form-check-input">
@@ -273,9 +253,7 @@
             </label>
           </div>
         </div>
-      </div>
-      <div class="form-row">
-        <div class="col-12">
+        <div class="col-md-4 col-sm-6 col-12">
           <div class="form-check">
             <label class="form-check-label">
               <input (click)="onAllergeneSelected('sesam')" type="checkbox" class="form-check-input">
@@ -284,9 +262,7 @@
             </label>
           </div>
         </div>
-      </div>
-      <div class="form-row">
-        <div class="col-12">
+        <div class="col-md-4 col-sm-6 col-12">
           <div class="form-check">
             <label class="form-check-label">
               <input (click)="onAllergeneSelected('soja')" type="checkbox" class="form-check-input">
@@ -295,9 +271,7 @@
             </label>
           </div>
         </div>
-      </div>
-      <div class="form-row">
-        <div class="col-12">
+        <div class="col-md-4 col-sm-6 col-12">
           <div class="form-check">
             <label class="form-check-label">
               <input (click)="onAllergeneSelected('weichtiere')" type="checkbox" class="form-check-input">
@@ -306,9 +280,10 @@
             </label>
           </div>
         </div>
-      </div>
-      <div class="col-12 p-0">
-        <button class="btn btn-success w-100" type="button" (click)="onApplyAllFilters()">Alle Filter Anwenden</button>
+        <div class="col-sm-6 offset-sm-3 col-12 p-0">
+          <button class="btn btn-success w-100" type="button" (click)="onApplyAllFilters()">Alle Filter
+            Anwenden</button>
+        </div>
       </div>
     </div>
   </li>
