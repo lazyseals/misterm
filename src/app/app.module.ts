@@ -24,6 +24,8 @@ import { UeberUnsComponent } from './ueber-uns/ueber-uns.component';
 import { FilterPanelResponsiveComponent } from './item-list/filter-panel-responsive/filter-panel-responsive.component';
 import { NavResponsiveComponent } from './shared/navbar/nav-responsive/nav-responsive.component';
 import { NavRegularComponent } from './shared/navbar/nav-regular/nav-regular.component';
+import { ImpressumComponent } from './shared/footer/impressum/impressum.component';
+import { DatenschutzComponent } from './shared/footer/datenschutz/datenschutz.component';
 
 
 @NgModule({
@@ -42,7 +44,9 @@ import { NavRegularComponent } from './shared/navbar/nav-regular/nav-regular.com
     UeberUnsComponent,
     FilterPanelResponsiveComponent,
     NavResponsiveComponent,
-    NavRegularComponent
+    NavRegularComponent,
+    ImpressumComponent,
+    DatenschutzComponent
   ],
   imports: [
     BrowserModule,

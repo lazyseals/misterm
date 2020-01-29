@@ -15,7 +15,7 @@ export interface Item {
   minSize: string;
   popularity: number;
   shops: string[];
-  category: string;
+  categories: string[];
   bewertungen: string[];
   pricesInShops: [{ sid: string, price: number }];
   urlsInShops: [{ sid: string, url: string }];

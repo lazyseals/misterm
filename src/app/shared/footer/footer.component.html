@@ -4,15 +4,14 @@
             <nav class="footer-nav col-12">
                 <ul class="d-flex justify-content-center mt-4 row">
                     <li class="m-0 p-0 col-lg-2 col-sm-3 col-12"><a [routerLink]="['/ueberuns']"
-                            routerLinkActive="router-link-active" class="btn btn-neutral mx-lg-4 mx-md-3 mx-1 p-0"
-                            href="#">Über uns</a></li>
-                    <li class="m-0 p-0 col-lg-2 col-sm-3 col-12"><a class="btn btn-neutral mx-lg-4 mx-md-3 mx-1 p-0"
-                            href="#">Haftungsausschuss</a></li>
-                    <li class="m-0 p-0 col-lg-2 col-sm-3 col-12"><a class="btn btn-neutral mx-lg-4 mx-md-3 mx-1 p-0"
-                            href="#">Datenschutz</a>
+                            class="btn btn-neutral mx-lg-4 mx-md-3 mx-1 p-0" href="#">Über uns</a></li>
+                    <!--<li class="m-0 p-0 col-lg-2 col-sm-3 col-12"><a class="btn btn-neutral mx-lg-4 mx-md-3 mx-1 p-0"
+                            href="#">Haftungsausschuss</a></li>-->
+                    <li class="m-0 p-0 col-lg-2 col-sm-3 col-12"><a [routerLink]="['/datenschutz']"
+                            class="btn btn-neutral mx-lg-4 mx-md-3 mx-1 p-0" href="#">Datenschutz</a>
                     </li>
-                    <li class="m-0 p-0 col-lg-2 col-sm-3 col-12"><a class="btn btn-neutral mx-lg-4 mx-md-3 mx-1 p-0"
-                            href="#">Impressum</a></li>
+                    <li class="m-0 p-0 col-lg-2 col-sm-3 col-12"><a [routerLink]="['/impressum']"
+                            class="btn btn-neutral mx-lg-4 mx-md-3 mx-1 p-0" href="#">Impressum</a></li>
                 </ul>
             </nav>
         </div>

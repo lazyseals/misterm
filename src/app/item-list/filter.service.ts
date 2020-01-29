@@ -83,8 +83,10 @@ export class FilterService {
       filtered_items = [];
       for (var category of Array.from(this.selectedCategories)) {
         for (const item of this.items) {
-          if (item.category === category) {
-            filtered_items.push(item);
+          for (const cid of item.categories) {
+            if (cid === category) {
+              filtered_items.push(item);
+            }
           }
         }
       }
