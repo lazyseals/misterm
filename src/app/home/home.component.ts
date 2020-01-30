@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit() {
     // TODO: Fetch c1001 ('Beliebteste') instead of c2002 ('Whey Protein')
     // At the moment no items in c1001
-    this.itemService.getItemsInCategory('c2002');
+    this.itemService.getItemsInCategory('c1001');
     // Set isFetching to true
     this.isFetching = true;
     this.itemService.getItemsUpdateListener()

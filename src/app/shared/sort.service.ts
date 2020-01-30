@@ -1,4 +1,4 @@
-import { Item } from "../shared/item.model";
+import { Item } from "./item.model";
 
 export class SortService {
   // Defines how the items should be sorted. 

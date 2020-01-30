@@ -6,6 +6,7 @@ import { Subject, forkJoin, Observable } from "rxjs";
 import { ShopService } from "./shop.service";
 import { Shop } from "./shop.model";
 import { resolve } from "url";
+import { SortService } from "./sort.service";
 
 @Injectable()
 export class ItemService {
@@ -24,7 +25,8 @@ export class ItemService {
    */
   constructor(
     private http: HttpClient,
-    private shopService: ShopService
+    private shopService: ShopService,
+    private sortService: SortService
   ) { };
 
   /**
@@ -35,10 +37,10 @@ export class ItemService {
   };
 
   /**
-   * Return currently fetched items
+   * Return currently fetched items sorted
    */
   getItems() {
-    return this.items.slice();
+    return this.sortService.sortItems(this.sortService.getSortProperty(), this.items.slice());
   }
 
   /**
@@ -54,7 +56,9 @@ export class ItemService {
       )
       .subscribe((data) => {
         this.items = data.items;
-        this.itemsUpdated.next(this.items.slice());
+        this.itemsUpdated.next(
+          this.sortService.sortItems(this.sortService.getSortProperty(), this.items.slice())
+        );
       });
   };
 
@@ -70,7 +74,7 @@ export class ItemService {
       )
       .pipe(
         map(data => {
-          return data.items;
+          return this.sortService.sortItems(this.sortService.getSortProperty(), data.items);
         })
       );
   };
@@ -85,7 +89,9 @@ export class ItemService {
       this.getItemsInCategoryHelper(cid)
         .subscribe((items) => {
           this.items = this.items.concat(items);
-          this.itemsUpdated.next(this.items.slice());
+          this.itemsUpdated.next(
+            this.sortService.sortItems(this.sortService.getSortProperty(), this.items.slice())
+          );
         })
     });
   };

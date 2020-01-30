@@ -5,7 +5,7 @@ import { ItemService } from '../shared/item.service';
 import { CategoryService } from '../shared/category.service';
 import { Category } from '../shared/category.model';
 import { FilterService } from './filter.service';
-import { SortService } from './sort.service';
+import { SortService } from '../shared/sort.service';
 import { Subscription } from 'rxjs';
 
 /**
@@ -16,8 +16,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './item-list.component.html',
   styleUrls: ['./item-list.component.scss'],
   providers: [
-    FilterService,
-    SortService
+    FilterService
   ]
 })
 export class ItemListComponent implements OnInit, OnDestroy {

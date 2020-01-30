@@ -1,6 +1,6 @@
 import { Item } from "../shared/item.model";
 import { Subject } from "rxjs";
-import { SortService } from "./sort.service";
+import { SortService } from "../shared/sort.service";
 import { Injectable } from "@angular/core";
 import { ItemService } from "app/shared/item.service";
 

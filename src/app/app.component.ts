@@ -5,6 +5,7 @@ import { ItemService } from './shared/item.service';
 import { CategoryService } from './shared/category.service';
 import { ShopService } from './shared/shop.service';
 import { BewertungService } from './shared/bewertung.service';
+import { SortService } from './shared/sort.service';
 
 @Component({
     selector: 'app-root',
@@ -14,7 +15,8 @@ import { BewertungService } from './shared/bewertung.service';
         ItemService,
         CategoryService,
         ShopService,
-        BewertungService
+        BewertungService,
+        SortService
     ]
 })
 export class AppComponent implements OnInit {
