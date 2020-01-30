@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Item } from '../shared/item.model';
 import { ItemService } from '../shared/item.service';
@@ -20,6 +20,7 @@ import { Subscription } from 'rxjs';
   ]
 })
 export class ItemListComponent implements OnInit, OnDestroy {
+
   // Category to be displayed
   private category: Category;
   private cid: string;

@@ -28,8 +28,10 @@
 
 <!-- Responsive filter panel -->
 <div class="container-fluid">
-  <div *ngIf="openResponsiveFilter" class="row mb-5 px-md-5 px-4 d-xl-none d-block">
-    <app-filter-panel-responsive *ngIf="category" [subCategories]=subCategories [category]=category>
+  <div [ngClass]="{'d-block': openResponsiveFilter, 'd-none': !openResponsiveFilter}"
+    class="row mb-5 px-md-5 px-4 d-xl-none">
+    <app-filter-panel-responsive class="navbar-responsive" *ngIf="category" [subCategories]=subCategories
+      [category]=category>
     </app-filter-panel-responsive>
   </div>
 </div>

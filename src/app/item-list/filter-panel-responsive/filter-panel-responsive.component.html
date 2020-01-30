@@ -28,9 +28,9 @@
       <div class="form-row mt-3">
         <div class="col-12">
           <div class="form-check-radio">
-            <label class="form-check-label" for="bisZwanzig">
+            <label class="form-check-label" for="bisZwanzig_r">
               <input type="radio" (click)="onPriceSelected(0)" [name]="priceRadioName" class="form-check-input"
-                id="bisZwanzig" #bisZwanzig>
+                id="bisZwanzig_r" #bisZwanzig_r>
               bis 20€
               <span class="form-check-sign"></span>
             </label>
@@ -40,9 +40,9 @@
       <div class="form-row">
         <div class="col-12">
           <div class="form-check-radio">
-            <label class="form-check-label" for="ZwanzigBisVierzig">
+            <label class="form-check-label" for="ZwanzigBisVierzig_r">
               <input type="radio" (click)="onPriceSelected(20)" [name]="priceRadioName" class="form-check-input"
-                id="ZwanzigBisVierzig" #ZwanzigBisVierzig>
+                id="ZwanzigBisVierzig_r" #ZwanzigBisVierzig_r>
               20€ bis 40€
               <span class="form-check-sign"></span>
             </label>
@@ -52,9 +52,9 @@
       <div class="form-row">
         <div class="col-12">
           <div class="form-check-radio">
-            <label class="form-check-label" for="VierzigBisSechzig">
+            <label class="form-check-label" for="VierzigBisSechzig_r">
               <input type="radio" (click)="onPriceSelected(40)" [name]="priceRadioName" class="form-check-input"
-                id="VierzigBisSechzig" #VierzigBisSechzig>
+                id="VierzigBisSechzig_r" #VierzigBisSechzig_r>
               40€ bis 60€
               <span class="form-check-sign"></span>
             </label>
@@ -64,9 +64,9 @@
       <div class="form-row">
         <div class="col-12">
           <div class="form-check-radio">
-            <label class="form-check-label" for="SechzigBisAchtzig">
+            <label class="form-check-label" for="SechzigBisAchtzig_r">
               <input type="radio" (click)="onPriceSelected(60)" [name]="priceRadioName" class="form-check-input"
-                id="SechzigBisAchtzig" #SechzigBisAchtzig>
+                id="SechzigBisAchtzig_r" #SechzigBisAchtzig_r>
               60€ bis 80€
               <span class="form-check-sign"></span>
             </label>
@@ -76,9 +76,9 @@
       <div class="form-row">
         <div class="col-12">
           <div class="form-check-radio">
-            <label class="form-check-label" for="AbAchtzig">
+            <label class="form-check-label" for="AbAchtzig_r">
               <input type="radio" (click)="onPriceSelected(80)" [name]="priceRadioName" class="form-check-input"
-                id="AbAchtzig" #AbAchtzig>
+                id="AbAchtzig_r" #AbAchtzig_r>
               ab 80€
               <span class="form-check-sign"></span>
             </label>
@@ -150,7 +150,7 @@
   <li class="list-group-item filter-panel">
     <div class="mb-1">
       <span style="font-weight: bold;">Allergene (nicht enthalten)</span>
-      <span class="ml-1" placement="right" container="body" ngbTooltip="Allergene sind nicht vollständig erfasst, da viele Allergenangaben nur in Form von Bildern vorliegen! 
+      <span class="ml-1" placement="bottom" ngbPopover="Allergene sind nicht vollständig erfasst, da viele Allergenangaben nur in Form von Bildern vorliegen! 
         Daher übernehmen wir keine Garantie für falsche Angaben.">
         <i class="fa fa-question-circle"></i>
       </span>

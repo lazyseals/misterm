@@ -20,12 +20,12 @@ export class FilterPanelResponsiveComponent implements OnInit {
   // Subcategories of current category
   @Input() private subCategories: Array<Category>;
 
-  // View childs for proce radio buttons
-  @ViewChild('bisZwanzig', { static: true }) bisZwanzig: ElementRef;
-  @ViewChild('ZwanzigBisVierzig', { static: true }) zwanzigBisVierzig: ElementRef;
-  @ViewChild('VierzigBisSechzig', { static: true }) vierzigBisSechzig: ElementRef;
-  @ViewChild('SechzigBisAchtzig', { static: true }) sechzigBisAchtzig: ElementRef;
-  @ViewChild('AbAchtzig', { static: true }) abAchtzig: ElementRef;
+  // View childs for price radio buttons
+  @ViewChild('bisZwanzig_r', { static: true }) bisZwanzig: ElementRef;
+  @ViewChild('ZwanzigBisVierzig_r', { static: true }) zwanzigBisVierzig: ElementRef;
+  @ViewChild('VierzigBisSechzig_r', { static: true }) vierzigBisSechzig: ElementRef;
+  @ViewChild('SechzigBisAchtzig_r', { static: true }) sechzigBisAchtzig: ElementRef;
+  @ViewChild('AbAchtzig_r', { static: true }) abAchtzig: ElementRef;
 
   // Unified name of the price radio buttons. Needed for reseting the price filter
   private priceRadioName = "price";
