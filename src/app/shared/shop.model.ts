@@ -1,5 +1,3 @@
-import { Item } from "./item.model";
-
 export interface Shop {
   sid: string;
   name: string;
@@ -8,4 +6,5 @@ export interface Shop {
   shippingFree: number;
   deliveryTime: string;
   affiliateLink: string;
+  popularity: Number;
 }

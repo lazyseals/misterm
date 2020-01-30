@@ -11,7 +11,6 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 
 import { ComponentsModule } from './components/components.module';
-import { ExamplesModule } from './examples/examples.module';
 import { HomeComponent } from './home/home.component';
 import { ItemCardComponent } from './home/item-card/item-card.component';
 import { ItemDetailComponent } from './item-detail/item-detail.component';
@@ -20,7 +19,7 @@ import { ItemListItemComponent } from './item-list/item-list-item/item-list-item
 import { AccordionTogglerDirective } from './shared/accordionToggler.directive';
 import { FilterPanelComponent } from './item-list/filter-panel/filter-panel.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { UeberUnsComponent } from './ueber-uns/ueber-uns.component';
+import { UeberUnsComponent } from './shared/footer/ueber-uns/ueber-uns.component';
 import { FilterPanelResponsiveComponent } from './item-list/filter-panel-responsive/filter-panel-responsive.component';
 import { NavResponsiveComponent } from './shared/navbar/nav-responsive/nav-responsive.component';
 import { NavRegularComponent } from './shared/navbar/nav-regular/nav-regular.component';
@@ -54,7 +53,6 @@ import { DatenschutzComponent } from './shared/footer/datenschutz/datenschutz.co
     FormsModule,
     RouterModule,
     ComponentsModule,
-    ExamplesModule,
     AppRoutingModule,
     HttpClientModule
   ],

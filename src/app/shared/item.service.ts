@@ -3,6 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Subject, forkJoin, Observable } from "rxjs";
+import { ShopService } from "./shop.service";
+import { Shop } from "./shop.model";
+import { resolve } from "url";
 
 @Injectable()
 export class ItemService {
@@ -19,7 +22,10 @@ export class ItemService {
    * Create categoryService class
    * @param http 
    */
-  constructor(private http: HttpClient) { };
+  constructor(
+    private http: HttpClient,
+    private shopService: ShopService
+  ) { };
 
   /**
    * Notify that items changed due to filtering
@@ -167,6 +173,44 @@ export class ItemService {
     }
     return Array.from(flavours);
   };
+
+  /**
+   * Get url of item with iid with respect to flavour.
+   * If 2 shops both have the same flavour, then take the shop with the higher popularity.
+   * @param iid 
+   * @param flavour 
+   */
+  getItemurlByFlavour(iid: string, flavour: string) {
+    // All shops that hold that flavour
+    let sids = new Set<string>([]);
+
+    // 1. Find all shops that hold that flavour
+    const item = this.items.find(i => i.iid === iid);
+    for (const flavourToShop of item.flavoursInShops) {
+      // Check if flavour in flavours
+      if (flavourToShop.flavours.some(e => e === flavour)) {
+        sids.add(flavourToShop.sid);
+      }
+    }
+
+    // 2. Get all shops from backend
+    return new Promise<string>(resolve => {
+      this.shopService.getShops(Array.from(sids))
+        .subscribe(shops => {
+          // 3. Get shop with highest popularity
+          let mostPopShop: Shop;
+          let mostPopShopPopularity: Number = 0;
+          for (const shop of shops) {
+            if (shop.popularity > mostPopShopPopularity) {
+              mostPopShop = shop;
+            }
+          }
+
+          // 4. Return item url of most popular shop
+          resolve(this.getItemurl(iid, mostPopShop.sid));
+        });
+    });
+  }
 
   /**
    * Get price of item with iid in shop with sid 

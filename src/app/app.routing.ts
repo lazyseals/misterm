@@ -7,7 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { ItemListComponent } from './item-list/item-list.component';
 import { ItemDetailComponent } from './item-detail/item-detail.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { UeberUnsComponent } from './ueber-uns/ueber-uns.component';
+import { UeberUnsComponent } from './shared/footer/ueber-uns/ueber-uns.component';
 import { DatenschutzComponent } from './shared/footer/datenschutz/datenschutz.component';
 import { ImpressumComponent } from './shared/footer/impressum/impressum.component';
 

@@ -7,7 +7,7 @@ export interface Item {
   averageBewertung: number;
   descriptionLong: string;
   descriptionShort: string;
-  flavours: string[];
+  flavours: string[]
   img: string;
   nutritionImg: string;
   nutritionText: Nutrition;
@@ -17,6 +17,7 @@ export interface Item {
   shops: string[];
   categories: string[];
   bewertungen: string[];
+  flavoursInShops: [{ sid: string, flavours: string[] }];
   pricesInShops: [{ sid: string, price: number }];
   urlsInShops: [{ sid: string, url: string }];
 }

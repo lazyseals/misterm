@@ -32,6 +32,9 @@ export class ItemDetailComponent implements OnInit {
   // True if component fetches data from backend
   private isFetching = false;
 
+  // Selected flavour from dropdown
+  private selectedFlavour: string = '';
+
   /**
    * Constructor
    * @param route 
@@ -234,6 +237,23 @@ export class ItemDetailComponent implements OnInit {
   onShopClick(sid: string) {
     window.open(this.itemService.getItemurl(this.item.iid, sid));
   };
+
+  onShopFlavourClick(el: any) {
+    if (this.selectedFlavour) {
+      // If flavour selected => Redirect to shop 
+      this.itemService.getItemurlByFlavour(this.item.iid, this.selectedFlavour)
+        .then((url) => {
+          window.open(url);
+        });
+    } else {
+      // Scroll down to shop list
+      el.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+    }
+  }
+
+  onSelectFlavour(ev: any) {
+    this.selectedFlavour = ev.target.value;
+  }
 
   /**
    * Scroll to component

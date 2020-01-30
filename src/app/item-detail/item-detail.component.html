@@ -24,7 +24,7 @@
 
         <!-- Geschmack -->
         <form class="input-group mb-4 px-1">
-          <select class="form-control px-1">
+          <select class="form-control px-1" (change)="onSelectFlavour($event)">
             <option selected>Geschmack</option>
             <ng-container *ngIf="item">
               <ng-container *ngFor="let flavour of item.flavours">
@@ -50,7 +50,8 @@
             <h4 class="mini-box text-success d-inline" *ngIf="item">{{ item.minPrice.toFixed(2) }}€</h4>
           </div>
           <div class="col-sm-6 col-12 mt-sm-0 mt-3 text-sm-right">
-            <button class="mini-box btn btn-round btn-success" (click)="scroll(shopsSection)">Zum Shop</button>
+            <button class="mini-box btn btn-round btn-success" (click)="onShopFlavourClick(shopsSection)">Zum
+              Shop</button>
           </div>
         </div>
       </div>
@@ -163,7 +164,7 @@
               <div class="col-md-2 col-4 d-md-inline-block">
                 <img class="img-fluid mini-box" [src]="shop.img" alt="">
               </div>
-              <div class="col-md-2 col-4 text-md-center my-auto d-md-inline-block">
+              <div class="col-md-2 col-4 text-center my-auto d-md-inline-block">
                 <p class="mb-0 mini-box" style="font-size:150%; font-weight:bold;">
                   {{ getShopItemPrice(shop.sid).toFixed(2) }}€ </p>
               </div>
@@ -174,7 +175,7 @@
               <div class="col-md-3 text-md-center my-md-auto d-md-inline-block d-none">
                 <p class="pt-1 mini-box">Lieferzeit: {{ shop.deliveryTime }}</p>
               </div>
-              <div class="col-md-2 col-4 text-md-right my-auto d-md-inline-block">
+              <div class="col-md-2 col-4 text-right my-auto d-md-inline-block">
                 <button class="mini-box btn btn-round btn-success mt-1" (click)="onShopClick(shop.sid)">Zum
                   Shop</button>
               </div>
@@ -184,7 +185,7 @@
                 <p class="vk mb-1 pt-1 mini-box">Versandkosten: {{ shop.shipping.toFixed(2) }}€</p>
                 <p class="vk mini-box">Ab {{ shop.shippingFree }}€ Bestellwert frei</p>
               </div>
-              <div class="col-6 d-md-none d-inline-block">
+              <div class="col-6 d-md-none d-inline-block text-right">
                 <p class="vk pt-1 mini-box">Lieferzeit: {{ shop.deliveryTime }}</p>
               </div>
             </div>
