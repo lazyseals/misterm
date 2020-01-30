@@ -142,6 +142,8 @@ export class NavRegularComponent implements OnInit {
       direction = this.translateDirection(this.getDirection(event, menuItem));
     }
 
+    console.log(direction);
+
     if (direction !== 'bottom') {
       for (let j = 0; j < this.dropdownVisible.length; j++) {
         this.dropdownVisible[j] = false;

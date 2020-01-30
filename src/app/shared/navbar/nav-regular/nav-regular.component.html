@@ -1,12 +1,12 @@
 <ul class="navbar-nav ml-auto">
-  <li class="nav-item">
+  <li class=" nav-item">
     <div ngbDropdown #myDropProtein="ngbDropdown" class="d-inline-block">
       <button ngbDropdownAnchor class="btn btn btn-lg btn-neutral btn-round menubtn" id="proteine"
         (mouseenter)="handleMenuOpen($event, 'protein')" (mouseleave)="closeAll($event, 'protein')">Proteine</button>
-      <div ngbDropdownMenu aria-labelledby="proteine" class="dropdown-primary w-600"
+      <div ngbDropdownMenu aria-labelledby="proteine" class="sub-drop"
         (mouseleave)="handleMenuClose($event, 'protein')">
         <div class="row mb-3">
-          <div class="col-lg-4 column">
+          <div class="col-xl-2 col-3 column">
             <h3><a href="#" [routerLink]="['/category', 'c2001']"
                 class="submenu-header btn btn-neutral btn-round my-0">Milchproteine</a></h3>
             <ul class="submenu pl-1">
@@ -19,15 +19,17 @@
               </li>
             </ul>
           </div>
-          <div class="col-lg-4 column">
+          <div class="col-xl-2 col-3 column">
             <h3><a href="#" [routerLink]="['/category', 'c2005']"
                 class="submenu-header btn btn-neutral btn-round my-0">Pflanzliches
                 Protein</a></h3>
             <ul class="submenu pl-1">
               <li><a href="#" [routerLink]="['/category', 'c2006']"
-                  class="btn btn-neutral btn-round my-0">Sojaprotein</a></li>
+                  class="btn btn-neutral btn-round my-0">Sojaprotein</a>
+              </li>
               <li><a href="#" [routerLink]="['/category', 'c2007']"
-                  class="btn btn-neutral btn-round my-0">Reisprotein</a></li>
+                  class="btn btn-neutral btn-round my-0">Reisprotein</a>
+              </li>
               <li><a href="#" [routerLink]="['/category', 'c2008']"
                   class="btn btn-neutral btn-round my-0">Erbsenprotein</a></li>
               <li><a href="#" [routerLink]="['/category', 'c2009']" class="btn btn-neutral btn-round my-0">Veganes
@@ -37,7 +39,7 @@
               </li>
             </ul>
           </div>
-          <div class="col-lg-4 column">
+          <div class="col-xl-2 col-3 column">
             <h3><a href="#" [routerLink]="['/category', 'c2011']"
                 class="submenu-header btn btn-neutral btn-round my-0">Weitere Proteine</a>
             </h3>
@@ -54,10 +56,10 @@
     <div ngbDropdown #myDropSupp="ngbDropdown" class="d-inline-block">
       <button ngbDropdownAnchor class="btn btn btn-lg btn-neutral btn-round menubtn" id="supplements"
         (mouseenter)="handleMenuOpen($event, 'supp')" (mouseleave)="closeAll($event, 'supp')">Supplements</button>
-      <div ngbDropdownMenu aria-labelledby="supplements" class="dropdown-menu supp-drop"
+      <div ngbDropdownMenu aria-labelledby="supplements" class="sub-drop"
         (mouseleave)="handleMenuClose($event, 'supp')">
-        <div class="row mr-6">
-          <div class="col-3 column">
+        <div class="row mb-3">
+          <div class="col-2 column">
             <h3><a href="#" [routerLink]="['/category', 'c3001']"
                 class="submenu-header btn btn-neutral btn-round my-0">Aminosäuren</a></h3>
             <ul class="submenu pl-1">
@@ -81,7 +83,7 @@
                   Alanin</a></li>
             </ul>
           </div>
-          <div class="col-3 column">
+          <div class="col-2 column">
             <h3><span>&nbsp;</span></h3>
             <ul class="submenu pl-1">
               <li><a href="#" [routerLink]="['/category', 'c3009']" class="btn btn-neutral btn-round my-0">Citrullin</a>
@@ -98,7 +100,7 @@
               <li><a href="#" [routerLink]="['/category', 'c3015']" class="btn btn-neutral btn-round my-0">EAA</a></li>
             </ul>
           </div>
-          <div class="col-3 column">
+          <div class="col-2 column">
             <h3><a href="#" [routerLink]="['/category', 'c3020']"
                 class="submenu-header btn btn-neutral btn-round my-0">Vitalstoffe</a></h3>
             <ul class="submenu pl-1">
@@ -120,7 +122,7 @@
               <li><a href="#" [routerLink]="['/category', 'c3029']" class="btn btn-neutral btn-round my-0">ZMA</a></li>
             </ul>
           </div>
-          <div class="col-3 column">
+          <div class="col-2 column">
             <h3><span>&nbsp;</span></h3>
             <ul class="submenu pl-1">
               <li><a href="#" [routerLink]="['/category', 'c3030']"
@@ -143,7 +145,7 @@
                   Nahrungsergänzungsmittel</a></li>
             </ul>
           </div>
-          <div class="col-3 column">
+          <div class="col-2 column">
             <h3><a href="#" [routerLink]="['/category', 'c3016']"
                 class="submenu-header btn btn-neutral btn-round my-0">Pre-Workout</a></h3>
             <ul class="submenu pl-1">
@@ -155,7 +157,7 @@
               </li>
             </ul>
           </div>
-          <div class="col-3 column">
+          <div class="col-2 column">
             <h3><a href="#" [routerLink]="['/category', 'c3043']"
                 class="submenu-header btn btn-neutral btn-round my-0">Diätnahrung</a></h3>
             <ul class="submenu pl-1">
@@ -166,7 +168,7 @@
               <li><a href="#" [routerLink]="['/category', 'c3046']" class="btn btn-neutral btn-round my-0">CLA</a></li>
             </ul>
           </div>
-          <div class="col-3 column mb-3">
+          <div class="col-2 column">
             <h3><a href="#" [routerLink]="['/category', 'c3038']"
                 class="submenu-header btn btn-neutral btn-round my-0">Masseaufbau</a></h3>
             <ul class="submenu pl-1">
@@ -181,7 +183,7 @@
               </li>
             </ul>
           </div>
-          <div class="col-3 column mb-3">
+          <div class="col-2 column">
             <h3><a href="#" [routerLink]="['/category', 'c3047']"
                 class="submenu-header btn btn-neutral btn-round my-0">Creatin</a>
             </h3>
@@ -194,10 +196,9 @@
     <div ngbDropdown #myDropFood="ngbDropdown" class="d-inline-block">
       <button ngbDropdownAnchor class="btn btn btn-lg btn-neutral btn-round menubtn" id="food"
         (mouseenter)="handleMenuOpen($event, 'food')" (mouseleave)="closeAll($event, 'food')">Food</button>
-      <div ngbDropdownMenu aria-labelledby="food" class="dropdown-menu food-drop"
-        (mouseleave)="handleMenuClose($event, 'food')">
-        <div class="row">
-          <div class="col-xl-3 col-lg-4 column">
+      <div ngbDropdownMenu aria-labelledby="food" class="sub-drop" (mouseleave)="handleMenuClose($event, 'food')">
+        <div class="row mb-3">
+          <div class="col-2 column">
             <h3><a href="#" [routerLink]="['/category', 'c4015']"
                 class="submenu-header btn btn-neutral btn-round my-0">Alltägliche
                 Lebensmittel</a></h3>
@@ -220,7 +221,7 @@
               </li>
             </ul>
           </div>
-          <div class="col-xl-3 col-lg-4 column">
+          <div class="col-2 column">
             <h3><span>&nbsp;</span></h3>
             <ul class="submenu pl-1">
               <li><a href="#" [routerLink]="['/category', 'c4024']"
@@ -243,7 +244,7 @@
               </li>
             </ul>
           </div>
-          <div class="col-xl-3 col-lg-4 column">
+          <div class="col-2 column">
             <h3><a href="#" [routerLink]="['/category', 'c4001']"
                 class="submenu-header btn btn-neutral btn-round my-0">Riegel &amp;
                 Snacks</a></h3>
@@ -267,7 +268,7 @@
                   class="btn btn-neutral btn-round my-0">Süßigkeiten</a></li>
             </ul>
           </div>
-          <div class="col-xl-3 col-lg-4 column">
+          <div class="col-2 column">
             <h3><a href="#" [routerLink]="['/category', 'c4008']"
                 class="submenu-header btn btn-neutral btn-round my-0">Superfoods</a>
             </h3>
@@ -284,7 +285,7 @@
               </li>
             </ul>
           </div>
-          <div class="col-xl-3 col-lg-4 column">
+          <div class="col-2 column">
             <h3><a href="#" [routerLink]="['/category', 'c4031']"
                 class="submenu-header btn btn-neutral btn-round my-0">Backen</a>
             </h3>
@@ -305,18 +306,35 @@
       <button ngbDropdownAnchor class="btn btn btn-lg btn-neutral btn-round menubtn" id="getraenke"
         (mouseenter)="handleMenuOpen($event, 'getraenke')"
         (mouseleave)="closeAll($event, 'getraenke')">Getränke</button>
-      <div ngbDropdownMenu aria-labelledby="getraenke" class="dropdown-primary"
+      <div ngbDropdownMenu aria-labelledby="getraenke" class="sub-drop"
         (mouseleave)="handleMenuClose($event, 'getraenke')">
-        <a href="#" [routerLink]="['/category', 'c5001']"
-          class="submenu-header btn btn-neutral btn-round my-2 mt-4">Protein Drinks</a>
-        <a href="#" [routerLink]="['/category', 'c5002']"
-          class="submenu-header btn btn-neutral btn-round my-2">Mahlzeitenersatz-Shakes</a>
-        <a href="#" [routerLink]="['/category', 'c5003']"
-          class="submenu-header btn btn-neutral btn-round my-2">Isotonische Getränke</a>
-        <a href="#" [routerLink]="['/category', 'c5004']" class="submenu-header btn btn-neutral btn-round my-2">Ohne
-          Kalorien</a>
-        <a href="#" [routerLink]="['/category', 'c5005']" class="submenu-header btn btn-neutral btn-round my-2 mb-4">Tee
-          &amp; Kaffee</a>
+        <div class="row mb-3">
+          <div class="col-xl-2 col-3 column text-center">
+            <h3><a href="#" [routerLink]="['/category', 'c5001']"
+                class="submenu-header btn btn-neutral btn-round">Protein
+                Drinks</a></h3>
+          </div>
+          <div class="col-xl-2 col-3 column text-center">
+            <h3><a href="#" [routerLink]="['/category', 'c5002']"
+                class="submenu-header btn btn-neutral btn-round">MahlzeitenersatzShakes</a></h3>
+          </div>
+          <div class="col-xl-2 col-3 column text-center">
+            <h3><a href="#" [routerLink]="['/category', 'c5003']"
+                class="submenu-header btn btn-neutral btn-round">Isotonische Getränke</a></h3>
+          </div>
+          <div class="col-xl-2 col-3 column text-center">
+            <h3><a href="#" [routerLink]="['/category', 'c5004']" class="submenu-header btn btn-neutral btn-round">Ohne
+                Kalorien</a></h3>
+          </div>
+          <div class="col-xl-2 col-3 column text-center">
+            <h3 class="d-xl-inline-block d-none"><a href="#" [routerLink]="['/category', 'c5005']"
+                class="submenu-header btn btn-neutral btn-round">Tee
+                &amp; Kaffee</a></h3>
+            <a href="#" [routerLink]="['/category', 'c5005']"
+              class="submenu-header btn btn-neutral btn-round d-xl-none d-inline-block m-0">Tee
+              &amp; Kaffee</a>
+          </div>
+        </div>
       </div>
     </div>
   </li>

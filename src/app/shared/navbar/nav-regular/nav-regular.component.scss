@@ -23,26 +23,14 @@
   cursor: context-menu;
 } 
 
-.w-600 {
-  width: 600px;
-} 
-
-.mr-6 {
-  margin-right: 7rem;
+.navbar-nav,
+.nav-item,
+.dropdown {
+  position:static !important;
 }
 
-@media screen and (max-width: 1200px) {
-  .food-drop {
-    width: 500px;
-  }
-  .supp-drop {
-    width: 700px;
-  }
-}
-
-@media screen and (min-width: 1200px) {
-  .supp-drop,
-  .food-drop {
-    width: 800px;
-  }
+.sub-drop {
+  right: 0;
+  width: 100vw;
+  transform: translate(0, 76px)!important;
 }
