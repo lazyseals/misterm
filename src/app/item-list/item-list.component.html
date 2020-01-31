@@ -1,5 +1,5 @@
-<!-- Sort options -->
 <div class="container-fluid">
+  <!-- Sort options -->
   <div class="filter-header row px-md-5 px-2">
     <div class="col-xl-6 col-12">
       <h1 *ngIf="category && !isFetching" class="my-4">{{ category.name }}</h1>
@@ -23,23 +23,19 @@
         (click)="onOpenResponsiveFilter()">Filter</button>
     </div>
   </div>
-</div>
-<!-- /. Sort options -->
+  <!-- /. Sort options -->
 
-<!-- Responsive filter panel -->
-<div class="container-fluid">
+  <!-- Responsive filter panel -->
   <div [ngClass]="{'d-block': openResponsiveFilter, 'd-none': !openResponsiveFilter}"
     class="row mb-5 px-md-5 px-4 d-xl-none">
     <app-filter-panel-responsive class="navbar-responsive" *ngIf="category" [subCategories]=subCategories
       [category]=category>
     </app-filter-panel-responsive>
   </div>
-</div>
-<!-- /. Responsive filter panel -->
+  <!-- /. Responsive filter panel -->
 
-<!-- Filter and sort options -->
-<div class="container-fluid">
-  <div class="row mb-5 px-md-5 px-2">
+  <!-- Filter and sort options -->
+  <div class="row pb-5 px-md-5 px-2">
 
     <!-- Filter panel -->
     <div class="col-xl-2 big-box d-xl-inline-block d-none">
@@ -76,5 +72,5 @@
     </div>
 
   </div>
+  <!-- /. Filter and sort options -->
 </div>
-<!-- /. Filter and sort options -->

@@ -1,29 +1,37 @@
-<ng-container *ngIf="!isFetching">
+<div class="item-detail" *ngIf="!isFetching">
   <!-- product-main -->
   <div class="container-fluid">
-    <div class="product-main row mb-5 mx-md-5 mx-2">
-
-      <!-- Header -->
-      <div class="col-12 big-box">
-        <h1 *ngIf="item">{{ item.name }}</h1>
-      </div>
-      <!-- /. Header -->
+    <div class="product-main row mb-5 px-md-5 px-4">
 
       <!-- Product image -->
-      <div class="col-lg-4 col-12 big-box text-center">
-        <img *ngIf="item" class="card-img-top img-fluid" [src]="item.img" alt="">
+      <div class="col-lg-3 col-12 bg-white pb-3 text-center product-img bg-box">
+        <img *ngIf="item" class="card-img-top img-fluid mw-100 pt-2" [src]="item.img" alt="">
+        <div class="stars d-block mt-3">
+          <h3>
+            <span class="text-warning" [innerHTML]="stars"></span>
+            <ng-container *ngIf="item && item.averageBewertung > 0">
+              {{ item.averageBewertung }} / 5.0
+            </ng-container>
+          </h3>
+        </div>
+        <p class="d-inline-block font-weight-bold mt-5">Günstigster Preis:&nbsp;</p>
+        <h4 class="text-success d-inline-block mt-5" *ngIf="item">{{ item.minPrice.toFixed(2) }}€</h4>
+        <button class="btn btn-round btn-success d-block mx-auto mt-3" (click)="onShopFlavourClick(shopsSection)">Zum
+          Shop</button>
       </div>
       <!-- /. Product image  -->
 
       <!-- Product information -->
-      <div class="col-lg-8 col-12 big-box">
+      <div class="col-lg-8 offset-lg-4 col-12 bg-white bg-box pb-3 mt-lg-0 mt-4">
+
+        <h2 *ngIf="item">{{ item.name }}</h2>
 
         <!-- Product description long -->
         <p *ngIf="item" class="mb-4 text-justify">{{item.descriptionLong}}</p>
         <!-- /. Product desciption long -->
 
         <!-- Geschmack -->
-        <form class="input-group mb-4 px-1">
+        <form class="input-group mb-4 px-1 bg-transparent">
           <select class="form-control px-1" (change)="onSelectFlavour($event)">
             <option selected>Geschmack</option>
             <ng-container *ngIf="item">
@@ -66,7 +74,7 @@
     <div class="row mt-4 pb-5 mx-md-5 mx-2">
 
       <!-- header -->
-      <div class="col-12">
+      <div class="col-lg-8 offset-lg-4 col-12 bg-white bg-box-top">
         <h2 class="w-100 d-md-inline-block d-block">Bewertungen
           <div class="stars d-md-inline-block d-block float-md-right">
             <span class="text-warning" [innerHTML]="stars"></span>
@@ -80,13 +88,14 @@
 
       <!-- bewertungen-row -->
       <ng-container *ngIf="bewertungen">
-        <div class="col-12" *ngFor="let bewertung of item.bewertungen; let lastItem = last;">
+        <div class="col-lg-8 offset-lg-4 col-12 pb-3 bg-white bg-box-bottom"
+          *ngFor="let bewertung of item.bewertungen; let lastItem = last;">
           <p>{{ bewertung.text }}</p>
           <small class="text-muted">{{ bewertung.autor }}</small>
           <hr *ngIf="!lastItem">
         </div>
       </ng-container>
-      <div class="col-12" *ngIf="!bewertungen">
+      <div class="col-lg-8 offset-lg-4 col-12 pb-3 bg-white bg-box-bottom" *ngIf="!bewertungen">
         <p>Noch keine Bewertungen vorhanden!</p>
       </div>
       <!-- /. bewertungen row -->
@@ -99,13 +108,13 @@
   <div class="container-fluid">
     <div class="naehrwerte row mt-4 pb-5 mx-md-5 mx-2">
       <!-- header -->
-      <div class="col-12">
+      <div class="col-lg-8 offset-lg-4 col-12 bg-white bg-box-top">
         <h2>Nährwerte</h2>
       </div>
       <!-- /. header -->
 
       <!-- img-row -->
-      <div class="col-12">
+      <div class="col-lg-8 offset-lg-4 col-12 pb-3 bg-white bg-box-bottom">
         <img class="img-fluid mw-100" *ngIf="item && item.nutritionImg !== ''" [src]="item.nutritionImg" alt="">
         <p *ngIf="item && item.nutritionImg === '' && item.nutritionText !== '' && item.nutritionText !== 'null'"
           class="text-justify">
@@ -123,13 +132,13 @@
     <div class="row mt-4 pb-5 mx-md-5 mx-2">
 
       <!-- header -->
-      <div class="col-12">
+      <div class="col-lg-8 offset-lg-4 col-12 bg-white bg-box-top">
         <h2>Allergene</h2>
       </div>
       <!-- /. header -->
 
       <!-- img-row -->
-      <div class="col-12">
+      <div class="col-lg-8 offset-lg-4 col-12 pb-3 bg-white bg-box-bottom">
         <ng-container
           *ngIf="item && item.allergens.length > 0 && item.allergens[0].toLowerCase() !== item.nutritionImg.toLowerCase()">
           <p *ngFor="let allergen of item.allergens">{{ allergen }}</p>
@@ -147,45 +156,46 @@
   </div>
   <!-- ./ section allergens -->
 
+  <!-- section shops -->
   <div class="shops container-fluid" #shopsSection>
-    <div class="row mt-4 pb-5 mx-md-5 mx-2">
+    <div class="row mt-4 mx-md-5 mx-2">
 
       <!-- header -->
-      <div class="col-12 big-box">
+      <div class="col-lg-8 offset-lg-4 col-12 bg-white bg-box-top big-box">
         <h2>Günstigster Preis</h2>
       </div>
       <!-- /. header -->
 
       <!-- Shop information -->
-      <div class="col-12 big-box">
+      <div class="col-lg-8 offset-lg-4 col-12 bg-white bg-box-bottom big-box">
         <ng-container *ngIf="shops && item">
           <div *ngFor="let shop of shops; let lastItem = last;">
             <div class="row">
-              <div class="col-md-2 col-4 d-md-inline-block">
+              <div class="col-xl-2 col-4 d-xl-inline-block">
                 <img class="img-fluid mini-box" [src]="shop.img" alt="">
               </div>
-              <div class="col-md-2 col-4 text-center my-auto d-md-inline-block">
+              <div class="col-xl-2 col-4 text-center my-auto d-xl-inline-block">
                 <p class="mb-0 mini-box" style="font-size:150%; font-weight:bold;">
                   {{ getShopItemPrice(shop.sid).toFixed(2) }}€ </p>
               </div>
-              <div class="col-md-3 text-md-center my-md-auto d-md-inline-block d-none">
+              <div class="col-xl-3 text-xl-center my-xl-auto d-xl-inline-block d-none">
                 <p class="mb-1 pt-1 mini-box">Versandkosten: {{ shop.shipping.toFixed(2) }}€</p>
                 <p class="mini-box">Ab {{ shop.shippingFree }}€ Bestellwert frei</p>
               </div>
-              <div class="col-md-3 text-md-center my-md-auto d-md-inline-block d-none">
+              <div class="col-xl-3 text-xl-center my-xl-auto d-xl-inline-block d-none">
                 <p class="pt-1 mini-box">Lieferzeit: {{ shop.deliveryTime }}</p>
               </div>
-              <div class="col-md-2 col-4 text-right my-auto d-md-inline-block">
+              <div class="col-xl-2 col-4 text-right my-auto d-xl-inline-block">
                 <button class="mini-box btn btn-round btn-success mt-1" (click)="onShopClick(shop.sid)">Zum
                   Shop</button>
               </div>
             </div>
             <div class="row">
-              <div class="col-6 d-md-none d-inline-block">
+              <div class="col-6 d-xl-none d-inline-block">
                 <p class="vk mb-1 pt-1 mini-box">Versandkosten: {{ shop.shipping.toFixed(2) }}€</p>
                 <p class="vk mini-box">Ab {{ shop.shippingFree }}€ Bestellwert frei</p>
               </div>
-              <div class="col-6 d-md-none d-inline-block text-right">
+              <div class="col-6 d-xl-none d-inline-block text-right">
                 <p class="vk pt-1 mini-box">Lieferzeit: {{ shop.deliveryTime }}</p>
               </div>
             </div>
@@ -198,7 +208,7 @@
     </div>
   </div>
   <!-- ./ section shops -->
-</ng-container>
+</div>
 
 <div *ngIf="isFetching" class="fetching-container">
   <div class="lds-grid">

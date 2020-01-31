@@ -3,6 +3,7 @@ General html elements
 ************************************/
 body {
   word-wrap: break-word;
+  background-color: #e9ecef;
 }
 
 /**********************************
@@ -10,10 +11,6 @@ Font weight
 ***********************************/
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, .navbar, .brand, a, .td-name, td, button, input, select, textarea {
   font-weight: 500;
-}
-
-p {
-  font-weight: 550;
 }
 
 /**********************************
@@ -177,18 +174,18 @@ Loading spinner
 Pagination
 ************************************/
 .pagination > .page-item > .page-link, .pagination > .page-item > span, .pagination > .page-item:first-child > .page-link, .pagination > .page-item:first-child > span, .pagination > .page-item:last-child > .page-link, .pagination > .page-item:last-child > span {
-  border: 2px solid #6bd098;
-  color: #6bd098;
-}
-
-.pagination > li > a:hover, .pagination > li > a:focus, .pagination > li > a:active, .pagination > li.active > a, .pagination > li.active > span, .pagination > li.active > a:hover, .pagination > li.active > span:hover, .pagination > li.active > a:focus, .pagination > li.active > span:focus {
-  background-color: #6bd098;
-  border-color: #6bd098;
+  border: 2px solid #fff;
   color: #fff;
 }
 
+.pagination > li > a:hover, .pagination > li > a:focus, .pagination > li > a:active, .pagination > li.active > a, .pagination > li.active > span, .pagination > li.active > a:hover, .pagination > li.active > span:hover, .pagination > li.active > a:focus, .pagination > li.active > span:focus {
+  background-color: #fff;
+  border-color: #fff;
+  color: #6bd098;
+}
+
 .page-item.active .page-link {
-  background-color: #6bd098;
-  border-color: #6bd098;
+  background-color: transparent;
+  border-color: #fff;
   color: #fff;
 }

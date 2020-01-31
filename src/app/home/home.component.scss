@@ -25,10 +25,11 @@ h2::after {
 ******************/
 
 .jumbotron {
-  height: 76vh;
-  background-image: url(../../assets/img/jumbotron.png); 
+  height: 90vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../../assets/img/jumbo-bg.jpg); 
   background-size: cover;
-  background-position: center;
+  background-attachment: fixed;
+  color: #fff;
 }
 
 .jumbotron h1 {
@@ -51,7 +52,10 @@ h2::after {
   }
 }
 
-@media (min-width: 576px) {
+@media (max-width: 992px) {
+  .jumbotron {
+    background-position: right;
+  }
 }
 
 /******************
@@ -71,12 +75,12 @@ h2::after {
 ******************/
 
 .features {
-  background: linear-gradient(to bottom right, #fff 0%, #fff 50%, #6bd098 50%, #6bd098 100%);
+  background: linear-gradient(to bottom right, #e9ecef 0%, #e9ecef 50%, #6bd098 50%, #6bd098 100%);
 }
 
 .features .feat-item {
   max-width: 20rem;
-  background-color: #e9ecef;
+  background-color: #fff;
   padding: 4rem 2rem 4rem 2rem;
   border-radius: 5px;
   box-shadow: 0px 12px 19px -7px rgba(0, 0, 0, 0.3);

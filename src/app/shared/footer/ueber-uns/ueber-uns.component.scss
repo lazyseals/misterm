@@ -1,6 +1,7 @@
 .container-fluid {
   padding-top: 8rem;
-  background-color: #e9ecef;
+  background: linear-gradient(to bottom right, #e9ecef 0%, #e9ecef 60%, #6bd098 40%, #6bd098 100%);
+  background-attachment: fixed;
 } 
 
 .container-fluid .img-fluid {
@@ -15,7 +16,7 @@ h2 {
 h2::after {
   display: block;
   height: 2px;
-  background-color: #6bd098;
+  background-color: #5e5e5e;
   content: " ";
   width: 100%;
   margin-top: 30px;
