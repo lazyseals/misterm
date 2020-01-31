@@ -7,44 +7,50 @@
         (mouseleave)="handleMenuClose($event, 'protein')">
         <div class="row mb-3">
           <div class="col-xl-2 col-3 column">
-            <h3><a href="#" [routerLink]="['/category', 'c2001']"
+            <h3><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c2001']"
                 class="submenu-header btn btn-neutral btn-round my-0">Milchproteine</a></h3>
             <ul class="submenu pl-1">
-              <li><a href="#" [routerLink]="['/category', 'c2002']" class="btn btn-neutral btn-round my-0">Whey
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c2002']"
+                  class="btn btn-neutral btn-round my-0">Whey
                   Protein</a></li>
-              <li><a href="#" [routerLink]="['/category', 'c2003']" class="btn btn-neutral btn-round my-0">Casein
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c2003']"
+                  class="btn btn-neutral btn-round my-0">Casein
                   Protein</a></li>
-              <li><a href="#" [routerLink]="['/category', 'c2004']" class="btn btn-neutral btn-round my-0">Protein
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c2004']"
+                  class="btn btn-neutral btn-round my-0">Protein
                   Mischungen</a>
               </li>
             </ul>
           </div>
           <div class="col-xl-2 col-3 column">
-            <h3><a href="#" [routerLink]="['/category', 'c2005']"
+            <h3><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c2005']"
                 class="submenu-header btn btn-neutral btn-round my-0">Pflanzliches
                 Protein</a></h3>
             <ul class="submenu pl-1">
-              <li><a href="#" [routerLink]="['/category', 'c2006']"
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c2006']"
                   class="btn btn-neutral btn-round my-0">Sojaprotein</a>
               </li>
-              <li><a href="#" [routerLink]="['/category', 'c2007']"
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c2007']"
                   class="btn btn-neutral btn-round my-0">Reisprotein</a>
               </li>
-              <li><a href="#" [routerLink]="['/category', 'c2008']"
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c2008']"
                   class="btn btn-neutral btn-round my-0">Erbsenprotein</a></li>
-              <li><a href="#" [routerLink]="['/category', 'c2009']" class="btn btn-neutral btn-round my-0">Veganes
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c2009']"
+                  class="btn btn-neutral btn-round my-0">Veganes
                   Protein</a></li>
-              <li><a href="#" [routerLink]="['/category', 'c2010']" class="btn btn-neutral btn-round my-0">Superfood
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c2010']"
+                  class="btn btn-neutral btn-round my-0">Superfood
                   Protein</a>
               </li>
             </ul>
           </div>
           <div class="col-xl-2 col-3 column">
-            <h3><a href="#" [routerLink]="['/category', 'c2011']"
+            <h3><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c2011']"
                 class="submenu-header btn btn-neutral btn-round my-0">Weitere Proteine</a>
             </h3>
             <ul class="submenu pl-1">
-              <li><a href="#" [routerLink]="['/category', 'c2012']" class="btn btn-neutral btn-round my-0">Eiprotein</a>
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c2012']"
+                  class="btn btn-neutral btn-round my-0">Eiprotein</a>
               </li>
             </ul>
           </div>
@@ -60,131 +66,162 @@
         (mouseleave)="handleMenuClose($event, 'supp')">
         <div class="row mb-3">
           <div class="col-2 column">
-            <h3><a href="#" [routerLink]="['/category', 'c3001']"
+            <h3><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3001']"
                 class="submenu-header btn btn-neutral btn-round my-0">Aminosäuren</a></h3>
             <ul class="submenu pl-1">
-              <li><a href="#" [routerLink]="['/category', 'c3002']" class="btn btn-neutral btn-round my-0">BCAA</a></li>
-              <li><a href="#" [routerLink]="['/category', 'c3048']"
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3002']"
+                  class="btn btn-neutral btn-round my-0">BCAA</a></li>
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3048']"
                   class="btn btn-neutral btn-round my-0 text-left">Aminosäuren <br>
                   Getränke</a>
               </li>
-              <li><a href="#" [routerLink]="['/category', 'c3003']"
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3003']"
                   class="btn btn-neutral btn-round my-0 text-left">Aminosäuren
                   <br>
                   Komplex</a>
               </li>
-              <li><a href="#" [routerLink]="['/category', 'c3004']" class="btn btn-neutral btn-round my-0">Glutamin</a>
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3004']"
+                  class="btn btn-neutral btn-round my-0">Glutamin</a>
               </li>
-              <li><a href="#" [routerLink]="['/category', 'c3005']" class="btn btn-neutral btn-round my-0">HMB</a></li>
-              <li><a href="#" [routerLink]="['/category', 'c3006']" class="btn btn-neutral btn-round my-0">Arginin</a>
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3005']"
+                  class="btn btn-neutral btn-round my-0">HMB</a></li>
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3006']"
+                  class="btn btn-neutral btn-round my-0">Arginin</a>
               </li>
-              <li><a href="#" [routerLink]="['/category', 'c3007']" class="btn btn-neutral btn-round my-0">AAKG</a></li>
-              <li><a href="#" [routerLink]="['/category', 'c3008']" class="btn btn-neutral btn-round my-0">Beta
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3007']"
+                  class="btn btn-neutral btn-round my-0">AAKG</a></li>
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3008']"
+                  class="btn btn-neutral btn-round my-0">Beta
                   Alanin</a></li>
             </ul>
           </div>
           <div class="col-2 column">
             <h3><span>&nbsp;</span></h3>
             <ul class="submenu pl-1">
-              <li><a href="#" [routerLink]="['/category', 'c3009']" class="btn btn-neutral btn-round my-0">Citrullin</a>
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3009']"
+                  class="btn btn-neutral btn-round my-0">Citrullin</a>
               </li>
-              <li><a href="#" [routerLink]="['/category', 'c3010']" class="btn btn-neutral btn-round my-0">Gaba</a></li>
-              <li><a href="#" [routerLink]="['/category', 'c3011']" class="btn btn-neutral btn-round my-0">Lysin</a>
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3010']"
+                  class="btn btn-neutral btn-round my-0">Gaba</a></li>
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3011']"
+                  class="btn btn-neutral btn-round my-0">Lysin</a>
               </li>
-              <li><a href="#" [routerLink]="['/category', 'c3012']" class="btn btn-neutral btn-round my-0">Ornithin</a>
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3012']"
+                  class="btn btn-neutral btn-round my-0">Ornithin</a>
               </li>
-              <li><a href="#" [routerLink]="['/category', 'c3013']" class="btn btn-neutral btn-round my-0">Taurin</a>
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3013']"
+                  class="btn btn-neutral btn-round my-0">Taurin</a>
               </li>
-              <li><a href="#" [routerLink]="['/category', 'c3014']" class="btn btn-neutral btn-round my-0">Tyrosin</a>
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3014']"
+                  class="btn btn-neutral btn-round my-0">Tyrosin</a>
               </li>
-              <li><a href="#" [routerLink]="['/category', 'c3015']" class="btn btn-neutral btn-round my-0">EAA</a></li>
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3015']"
+                  class="btn btn-neutral btn-round my-0">EAA</a></li>
             </ul>
           </div>
           <div class="col-2 column">
-            <h3><a href="#" [routerLink]="['/category', 'c3020']"
+            <h3><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3020']"
                 class="submenu-header btn btn-neutral btn-round my-0">Vitalstoffe</a></h3>
             <ul class="submenu pl-1">
-              <li><a href="#" [routerLink]="['/category', 'c3021']" class="btn btn-neutral btn-round my-0">Vitamin B</a>
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3021']"
+                  class="btn btn-neutral btn-round my-0">Vitamin B</a>
               </li>
-              <li><a href="#" [routerLink]="['/category', 'c3022']" class="btn btn-neutral btn-round my-0">Vitamin C</a>
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3022']"
+                  class="btn btn-neutral btn-round my-0">Vitamin C</a>
               </li>
-              <li><a href="#" [routerLink]="['/category', 'c3023']" class="btn btn-neutral btn-round my-0">Vitamin D</a>
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3023']"
+                  class="btn btn-neutral btn-round my-0">Vitamin D</a>
               </li>
-              <li><a href="#" [routerLink]="['/category', 'c3024']" class="btn btn-neutral btn-round my-0">Vitamin E</a>
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3024']"
+                  class="btn btn-neutral btn-round my-0">Vitamin E</a>
               </li>
-              <li><a href="#" [routerLink]="['/category', 'c3025']"
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3025']"
                   class="btn btn-neutral btn-round my-0">Multivitamine</a></li>
-              <li><a href="#" [routerLink]="['/category', 'c3026']"
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3026']"
                   class="btn btn-neutral btn-round my-0">Mineralstoffe</a></li>
-              <li><a href="#" [routerLink]="['/category', 'c3027']" class="btn btn-neutral btn-round my-0">Zink</a></li>
-              <li><a href="#" [routerLink]="['/category', 'c3028']" class="btn btn-neutral btn-round my-0">Magnesium</a>
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3027']"
+                  class="btn btn-neutral btn-round my-0">Zink</a></li>
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3028']"
+                  class="btn btn-neutral btn-round my-0">Magnesium</a>
               </li>
-              <li><a href="#" [routerLink]="['/category', 'c3029']" class="btn btn-neutral btn-round my-0">ZMA</a></li>
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3029']"
+                  class="btn btn-neutral btn-round my-0">ZMA</a></li>
             </ul>
           </div>
           <div class="col-2 column">
             <h3><span>&nbsp;</span></h3>
             <ul class="submenu pl-1">
-              <li><a href="#" [routerLink]="['/category', 'c3030']"
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3030']"
                   class="btn btn-neutral btn-round my-0">Antioxidantien</a></li>
-              <li><a href="#" [routerLink]="['/category', 'c3031']" class="btn btn-neutral btn-round my-0">Fischöl</a>
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3031']"
+                  class="btn btn-neutral btn-round my-0">Fischöl</a>
               </li>
-              <li><a href="#" [routerLink]="['/category', 'c3032']" class="btn btn-neutral btn-round my-0">Omega-3</a>
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3032']"
+                  class="btn btn-neutral btn-round my-0">Omega-3</a>
               </li>
-              <li><a href="#" [routerLink]="['/category', 'c3033']" class="btn btn-neutral btn-round my-0">MCT-Fette</a>
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3033']"
+                  class="btn btn-neutral btn-round my-0">MCT-Fette</a>
               </li>
-              <li><a href="#" [routerLink]="['/category', 'c3034']"
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3034']"
                   class="btn btn-neutral btn-round my-0">Glucosamin</a></li>
-              <li><a href="#" [routerLink]="['/category', 'c3035']" class="btn btn-neutral btn-round my-0">Enzyme</a>
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3035']"
+                  class="btn btn-neutral btn-round my-0">Enzyme</a>
               </li>
-              <li><a href="#" [routerLink]="['/category', 'c3036']"
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3036']"
                   class="btn btn-neutral btn-round my-0">Probiotika</a></li>
-              <li><a href="#" [routerLink]="['/category', 'c3037']"
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3037']"
                   class="btn btn-neutral btn-round my-0 text-left">Pflanzliche
                   <br>
                   Nahrungsergänzungsmittel</a></li>
             </ul>
           </div>
           <div class="col-2 column">
-            <h3><a href="#" [routerLink]="['/category', 'c3016']"
+            <h3><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3016']"
                 class="submenu-header btn btn-neutral btn-round my-0">Pre-Workout</a></h3>
             <ul class="submenu pl-1">
-              <li><a href="#" [routerLink]="['/category', 'c3017']"
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3017']"
                   class="btn btn-neutral btn-round my-0 text-left">Trainings<br>booster</a></li>
-              <li><a href="#" [routerLink]="['/category', 'c3018']" class="btn btn-neutral btn-round my-0">Energy
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3018']"
+                  class="btn btn-neutral btn-round my-0">Energy
                   Drinks</a></li>
-              <li><a href="#" [routerLink]="['/category', 'c3019']" class="btn btn-neutral btn-round my-0">Koffein</a>
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3019']"
+                  class="btn btn-neutral btn-round my-0">Koffein</a>
               </li>
             </ul>
           </div>
           <div class="col-2 column">
-            <h3><a href="#" [routerLink]="['/category', 'c3043']"
+            <h3><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3043']"
                 class="submenu-header btn btn-neutral btn-round my-0">Diätnahrung</a></h3>
             <ul class="submenu pl-1">
-              <li><a href="#" [routerLink]="['/category', 'c3044']" class="btn btn-neutral btn-round my-0">Fatburner</a>
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3044']"
+                  class="btn btn-neutral btn-round my-0">Fatburner</a>
               </li>
-              <li><a href="#" [routerLink]="['/category', 'c3045']" class="btn btn-neutral btn-round my-0">Carnitin</a>
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3045']"
+                  class="btn btn-neutral btn-round my-0">Carnitin</a>
               </li>
-              <li><a href="#" [routerLink]="['/category', 'c3046']" class="btn btn-neutral btn-round my-0">CLA</a></li>
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3046']"
+                  class="btn btn-neutral btn-round my-0">CLA</a></li>
             </ul>
           </div>
           <div class="col-2 column">
-            <h3><a href="#" [routerLink]="['/category', 'c3038']"
+            <h3><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3038']"
                 class="submenu-header btn btn-neutral btn-round my-0">Masseaufbau</a></h3>
             <ul class="submenu pl-1">
-              <li><a href="#" [routerLink]="['/category', 'c3039']" class="btn btn-neutral btn-round my-0">Weight
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3039']"
+                  class="btn btn-neutral btn-round my-0">Weight
                   Gainer</a></li>
-              <li><a href="#" [routerLink]="['/category', 'c3040']"
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3040']"
                   class="btn btn-neutral btn-round my-0">Kohlenhydratpulver</a>
               </li>
-              <li><a href="#" [routerLink]="['/category', 'c3041']"
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3041']"
                   class="btn btn-neutral btn-round my-0">Maltrodextrin</a></li>
-              <li><a href="#" [routerLink]="['/category', 'c3042']" class="btn btn-neutral btn-round my-0">Dextrose</a>
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3042']"
+                  class="btn btn-neutral btn-round my-0">Dextrose</a>
               </li>
             </ul>
           </div>
           <div class="col-2 column">
-            <h3><a href="#" [routerLink]="['/category', 'c3047']"
+            <h3><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c3047']"
                 class="submenu-header btn btn-neutral btn-round my-0">Creatin</a>
             </h3>
           </div>
@@ -199,101 +236,121 @@
       <div ngbDropdownMenu aria-labelledby="food" class="sub-drop" (mouseleave)="handleMenuClose($event, 'food')">
         <div class="row mb-3">
           <div class="col-2 column">
-            <h3><a href="#" [routerLink]="['/category', 'c4015']"
+            <h3><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c4015']"
                 class="submenu-header btn btn-neutral btn-round my-0">Alltägliche
                 Lebensmittel</a></h3>
             <ul class="submenu pl-1">
-              <li><a href="#" [routerLink]="['/category', 'c4016']" class="btn btn-neutral btn-round my-0">Butter</a>
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c4016']"
+                  class="btn btn-neutral btn-round my-0">Butter</a>
               </li>
-              <li><a href="#" [routerLink]="['/category', 'c4017']"
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c4017']"
                   class="btn btn-neutral btn-round my-0">Aufstriche</a></li>
-              <li><a href="#" [routerLink]="['/category', 'c4018']" class="btn btn-neutral btn-round my-0">Fleisch</a>
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c4018']"
+                  class="btn btn-neutral btn-round my-0">Fleisch</a>
               </li>
-              <li><a href="#" [routerLink]="['/category', 'c4019']" class="btn btn-neutral btn-round my-0">Mealprep
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c4019']"
+                  class="btn btn-neutral btn-round my-0">Mealprep
                   Boxen</a></li>
-              <li><a href="#" [routerLink]="['/category', 'c4020']" class="btn btn-neutral btn-round my-0">Gewürze &amp;
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c4020']"
+                  class="btn btn-neutral btn-round my-0">Gewürze &amp;
                   Saucen</a>
               </li>
-              <li><a href="#" [routerLink]="['/category', 'c4021']" class="btn btn-neutral btn-round my-0">Tiefkühl</a>
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c4021']"
+                  class="btn btn-neutral btn-round my-0">Tiefkühl</a>
               </li>
-              <li><a href="#" [routerLink]="['/category', 'c4022']" class="btn btn-neutral btn-round my-0">Brot</a></li>
-              <li><a href="#" [routerLink]="['/category', 'c4023']" class="btn btn-neutral btn-round my-0">Jerkey</a>
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c4022']"
+                  class="btn btn-neutral btn-round my-0">Brot</a></li>
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c4023']"
+                  class="btn btn-neutral btn-round my-0">Jerkey</a>
               </li>
             </ul>
           </div>
           <div class="col-2 column">
             <h3><span>&nbsp;</span></h3>
             <ul class="submenu pl-1">
-              <li><a href="#" [routerLink]="['/category', 'c4024']"
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c4024']"
                   class="btn btn-neutral btn-round my-0 text-left">Aromen und
                   <br>
                   Süßstoffe</a>
               </li>
-              <li><a href="#" [routerLink]="['/category', 'c4025']"
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c4025']"
                   class="btn btn-neutral btn-round my-0">Proteineis</a></li>
-              <li><a href="#" [routerLink]="['/category', 'c4026']" class="btn btn-neutral btn-round my-0">Pizza &amp;
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c4026']"
+                  class="btn btn-neutral btn-round my-0">Pizza &amp;
                   Pasta</a>
               </li>
-              <li><a href="#" [routerLink]="['/category', 'c4027']" class="btn btn-neutral btn-round my-0">Syrup</a>
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c4027']"
+                  class="btn btn-neutral btn-round my-0">Syrup</a>
               </li>
-              <li><a href="#" [routerLink]="['/category', 'c4028']" class="btn btn-neutral btn-round my-0">Speiseöle</a>
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c4028']"
+                  class="btn btn-neutral btn-round my-0">Speiseöle</a>
               </li>
-              <li><a href="#" [routerLink]="['/category', 'c4029']" class="btn btn-neutral btn-round my-0">Getreide</a>
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c4029']"
+                  class="btn btn-neutral btn-round my-0">Getreide</a>
               </li>
-              <li><a href="#" [routerLink]="['/category', 'c4020']" class="btn btn-neutral btn-round my-0">Pudding</a>
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c4020']"
+                  class="btn btn-neutral btn-round my-0">Pudding</a>
               </li>
             </ul>
           </div>
           <div class="col-2 column">
-            <h3><a href="#" [routerLink]="['/category', 'c4001']"
+            <h3><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c4001']"
                 class="submenu-header btn btn-neutral btn-round my-0">Riegel &amp;
                 Snacks</a></h3>
             <ul class="submenu pl-1">
-              <li><a href="#" [routerLink]="['/category', 'c4002']"
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c4002']"
                   class="btn btn-neutral btn-round my-0">Proteinriegel</a></li>
-              <li><a href="#" [routerLink]="['/category', 'c4003']" class="btn btn-neutral btn-round my-0">Chips</a>
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c4003']"
+                  class="btn btn-neutral btn-round my-0">Chips</a>
               </li>
-              <li><a href="#" [routerLink]="['/category', 'c4004']"
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c4004']"
                   class="btn btn-neutral btn-round my-0">Schokolade</a></li>
-              <li><a href="#" [routerLink]="['/category', 'c4005']"
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c4005']"
                   class="btn btn-neutral btn-round my-0">Energieriegel</a></li>
-              <li><a href="#" [routerLink]="['/category', 'c4006']"
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c4006']"
                   class="btn btn-neutral btn-round my-0 text-left">Cookies &amp;
                   <br>
                   Muffins</a>
               </li>
-              <li><a href="#" [routerLink]="['/category', 'c4007']"
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c4007']"
                   class="btn btn-neutral btn-round my-0">Müsliriegel</a></li>
-              <li><a href="#" [routerLink]="['/category', 'c4008']"
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c4008']"
                   class="btn btn-neutral btn-round my-0">Süßigkeiten</a></li>
             </ul>
           </div>
           <div class="col-2 column">
-            <h3><a href="#" [routerLink]="['/category', 'c4008']"
+            <h3><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c4008']"
                 class="submenu-header btn btn-neutral btn-round my-0">Superfoods</a>
             </h3>
             <ul class="submenu pl-1">
-              <li><a href="#" [routerLink]="['/category', 'c4010']" class="btn btn-neutral btn-round my-0">Chia</a></li>
-              <li><a href="#" [routerLink]="['/category', 'c4011']" class="btn btn-neutral btn-round my-0">Spirulina</a>
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c4010']"
+                  class="btn btn-neutral btn-round my-0">Chia</a></li>
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c4011']"
+                  class="btn btn-neutral btn-round my-0">Spirulina</a>
               </li>
-              <li><a href="#" [routerLink]="['/category', 'c4012']" class="btn btn-neutral btn-round my-0">Nüsse &amp;
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c4012']"
+                  class="btn btn-neutral btn-round my-0">Nüsse &amp;
                   Samen</a>
               </li>
-              <li><a href="#" [routerLink]="['/category', 'c4013']" class="btn btn-neutral btn-round my-0">Beeren</a>
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c4013']"
+                  class="btn btn-neutral btn-round my-0">Beeren</a>
               </li>
-              <li><a href="#" [routerLink]="['/category', 'c4014']" class="btn btn-neutral btn-round my-0">Bohnen</a>
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c4014']"
+                  class="btn btn-neutral btn-round my-0">Bohnen</a>
               </li>
             </ul>
           </div>
           <div class="col-2 column">
-            <h3><a href="#" [routerLink]="['/category', 'c4031']"
+            <h3><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c4031']"
                 class="submenu-header btn btn-neutral btn-round my-0">Backen</a>
             </h3>
             <ul class="submenu pl-1">
-              <li><a href="#" [routerLink]="['/category', 'c4032']" class="btn btn-neutral btn-round my-0">Mehl</a></li>
-              <li><a href="#" [routerLink]="['/category', 'c4033']"
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c4032']"
+                  class="btn btn-neutral btn-round my-0">Mehl</a></li>
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c4033']"
                   class="btn btn-neutral btn-round my-0">Backmischungen</a></li>
-              <li><a href="#" [routerLink]="['/category', 'c4034']" class="btn btn-neutral btn-round my-0">Eiklar</a>
+              <li><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c4034']"
+                  class="btn btn-neutral btn-round my-0">Eiklar</a>
               </li>
             </ul>
           </div>
@@ -310,29 +367,34 @@
         (mouseleave)="handleMenuClose($event, 'getraenke')">
         <div class="row mb-3">
           <div class="col-xl-2 col-3 column text-center">
-            <h3><a href="#" [routerLink]="['/category', 'c5001']"
+            <h3><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c5001']"
                 class="submenu-header btn btn-neutral btn-round">Protein
                 Drinks</a></h3>
           </div>
           <div class="col-xl-2 col-3 column text-center">
-            <h3><a href="#" [routerLink]="['/category', 'c5002']"
-                class="submenu-header btn btn-neutral btn-round">MahlzeitenersatzShakes</a></h3>
+            <h3><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c5002']"
+                class="submenu-header btn btn-neutral btn-round">Mahlzeitenersatz-Shakes</a></h3>
           </div>
           <div class="col-xl-2 col-3 column text-center">
-            <h3><a href="#" [routerLink]="['/category', 'c5003']"
+            <h3><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c5003']"
                 class="submenu-header btn btn-neutral btn-round">Isotonische Getränke</a></h3>
           </div>
           <div class="col-xl-2 col-3 column text-center">
-            <h3><a href="#" [routerLink]="['/category', 'c5004']" class="submenu-header btn btn-neutral btn-round">Ohne
+            <h3><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c5004']"
+                class="submenu-header btn btn-neutral btn-round">Ohne
                 Kalorien</a></h3>
           </div>
           <div class="col-xl-2 col-3 column text-center">
-            <h3 class="d-xl-inline-block d-none"><a href="#" [routerLink]="['/category', 'c5005']"
+            <h3><a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c5005']"
                 class="submenu-header btn btn-neutral btn-round">Tee
                 &amp; Kaffee</a></h3>
-            <a href="#" [routerLink]="['/category', 'c5005']"
-              class="submenu-header btn btn-neutral btn-round d-xl-none d-inline-block m-0">Tee
-              &amp; Kaffee</a>
+          </div>
+          <div class="col-xl-2 col-3 column text-center">
+            <h3 class="d-xl-inline-block d-none"><a href="#" (click)="onClickNav()"
+                [routerLink]="['/category', 'c5006']" class="submenu-header btn btn-neutral btn-round">Smoothies</a>
+            </h3>
+            <a href="#" (click)="onClickNav()" [routerLink]="['/category', 'c5006']"
+              class="submenu-header btn btn-neutral btn-round d-xl-none d-inline-block m-0">Smoothies</a>
           </div>
         </div>
       </div>

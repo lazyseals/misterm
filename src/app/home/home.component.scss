@@ -25,7 +25,7 @@ h2::after {
 ******************/
 
 .jumbotron {
-  height: 85vh;
+  height: 76vh;
   background-image: url(../../assets/img/jumbotron.png); 
   background-size: cover;
   background-position: center;
@@ -44,9 +44,10 @@ h2::after {
   transform: translate(-50%, -50%);
 }
 
-@media (max-width: 576px) {
+@media (max-width: 596px) {
   .jumbotron {
     padding: 4rem 2rem;
+    height: 85vh;
   }
 }
 

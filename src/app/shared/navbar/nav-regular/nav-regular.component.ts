@@ -142,8 +142,6 @@ export class NavRegularComponent implements OnInit {
       direction = this.translateDirection(this.getDirection(event, menuItem));
     }
 
-    console.log(direction);
-
     if (direction !== 'bottom') {
       for (let j = 0; j < this.dropdownVisible.length; j++) {
         this.dropdownVisible[j] = false;
@@ -204,5 +202,15 @@ export class NavRegularComponent implements OnInit {
       case 3: return 'left';
     }
   };
+
+  /**
+   * Closes navigation on category click
+   */
+  onClickNav() {
+    for (let j = 0; j < this.dropdownVisible.length; j++) {
+      this.dropdownVisible[j] = false;
+      this.dropdownChildren[j]._open = false;
+    }
+  }
 
 }
