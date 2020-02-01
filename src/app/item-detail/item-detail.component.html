@@ -6,7 +6,7 @@
       <!-- Product image -->
       <div class="col-lg-3 col-12 bg-white pb-3 text-center product-img bg-box">
         <img *ngIf="item" class="card-img-top img-fluid mw-100 pt-2" [src]="item.img" alt="">
-        <div class="stars d-block mt-3">
+        <div class="stars d-block mt-2">
           <h3>
             <span class="text-warning" [innerHTML]="stars"></span>
             <ng-container *ngIf="item && item.averageBewertung > 0">
@@ -14,9 +14,9 @@
             </ng-container>
           </h3>
         </div>
-        <p class="d-inline-block font-weight-bold mt-5">Günstigster Preis:&nbsp;</p>
-        <h4 class="text-success d-inline-block mt-5" *ngIf="item">{{ item.minPrice.toFixed(2) }}€</h4>
-        <button class="btn btn-round btn-success d-block mx-auto mt-3" (click)="onShopFlavourClick(shopsSection)">Zum
+        <p class="d-inline-block font-weight-bold mt-4">Günstigster Preis:&nbsp;</p>
+        <h4 class="text-success d-inline-block mt-4" *ngIf="item">{{ item.minPrice.toFixed(2) }}€</h4>
+        <button class="btn btn-round btn-success d-block mx-auto mt-2" (click)="onShopFlavourClick(shopsSection)">Zum
           Shop</button>
       </div>
       <!-- /. Product image  -->
